@@ -20,6 +20,10 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 foreach (DestinationLayer destination in destinations)
                 {
                     DestinationModel destinationForList = new DestinationModel(destination.id, destination.mapPointId, destination.destinationName, destination.MapPointStatusType.status, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime);
+
+
+
+                    destinationsForController.Add(destinationForList);
                 }
 
                 return destinationsForController;
