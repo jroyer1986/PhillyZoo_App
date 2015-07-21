@@ -18,7 +18,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
             }
             else if (destination.MapPoint.mapPointTypeId == 252)
             {
-
+                newDestination = new DestinationDiningModel();
             }
             else if (destination.MapPoint.mapPointTypeId == 253)
             {
