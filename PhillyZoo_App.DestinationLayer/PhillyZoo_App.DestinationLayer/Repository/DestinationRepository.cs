@@ -31,7 +31,20 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
         }
 
-        
+        public DestinationModel GetDestinationByID(int id)
+        {
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayerSet.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
+
+            if (destination != null)
+            {
+                DestinationModel destinationModel = _destinationModelFactory.createDestination(destination);
+                return destinationModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         #region Helpers
         public List<DestinationPhotosModel> CreatePhotoList(DestinationObjectLayer destination)
