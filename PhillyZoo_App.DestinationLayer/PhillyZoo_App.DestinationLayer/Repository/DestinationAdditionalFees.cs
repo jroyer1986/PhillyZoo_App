@@ -12,10 +12,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class MapPointStatusType
+    public partial class DestinationAdditionalFees
     {
-        public int id { get; set; }
-        public string status { get; set; }
+        public int additionalFeesId { get; set; }
+        public int destinationLayerId { get; set; }
+        public decimal fee { get; set; }
+        public string feeName { get; set; }
     
         public virtual DestinationObjectLayer DestinationObjectLayer { get; set; }
     }

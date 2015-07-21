@@ -12,16 +12,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class DestinationEnterExists
+    public partial class sysdiagrams
     {
-        public int id { get; set; }
-        public int destinationLayerId { get; set; }
-        public int typeId { get; set; }
-        public decimal latitude { get; set; }
-        public decimal longitude { get; set; }
-        public bool hadicapAccessible { get; set; }
-    
-        public virtual DestinationEnterExitType DestinationEnterExitType { get; set; }
-        public virtual DestinationObjectLayer DestinationLayer { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -16,13 +16,13 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     {
         public DestinationEnterExitType()
         {
-            this.DestinationEnterExists = new HashSet<DestinationEnterExists>();
+            this.DestinationEnterExits = new HashSet<DestinationEnterExits>();
         }
     
         public int id { get; set; }
         public int destinationEnterExitId { get; set; }
         public string type { get; set; }
     
-        public virtual ICollection<DestinationEnterExists> DestinationEnterExists { get; set; }
+        public virtual ICollection<DestinationEnterExits> DestinationEnterExits { get; set; }
     }
 }

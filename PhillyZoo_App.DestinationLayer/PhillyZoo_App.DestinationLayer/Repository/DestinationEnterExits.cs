@@ -12,11 +12,16 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class MapPointStatusType
+    public partial class DestinationEnterExits
     {
         public int id { get; set; }
-        public string status { get; set; }
+        public int destinationLayerId { get; set; }
+        public int typeId { get; set; }
+        public decimal latitude { get; set; }
+        public decimal longitude { get; set; }
+        public bool hadicapAccessible { get; set; }
     
+        public virtual DestinationEnterExitType DestinationEnterExitType { get; set; }
         public virtual DestinationObjectLayer DestinationObjectLayer { get; set; }
     }
 }

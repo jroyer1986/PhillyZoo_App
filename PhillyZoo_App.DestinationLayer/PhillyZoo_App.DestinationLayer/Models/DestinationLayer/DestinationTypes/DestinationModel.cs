@@ -13,7 +13,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get; set; }
         public string Name
         { get; set; }
-        public string Status
+        public int StatusID
         { get; set; }
         public string ShortDescription
         { get; set; }
@@ -23,17 +23,20 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get; set; }
         public DateTime ClosingTime
         { get; set; }
+        public List<DestinationPhotosModel> Photos
+        { get; set; }
   
-        public DestinationModel(int id, int mapPointId, string name, string status, string shortDescription, string longDescription, DateTime openingTime, DateTime closingTime)
+        public DestinationModel(int id, int mapPointId, string name, int statusId, string shortDescription, string longDescription, DateTime openingTime, DateTime closingTime, List<DestinationPhotosModel> photos)
         {
             ID = id;
             MapPointID = mapPointId;
             Name = name;
-            Status = status;
+            StatusID = statusId;
             ShortDescription = shortDescription;
             LongDescription = LongDescription;
             OpeningTime = openingTime;
             ClosingTime = closingTime;
+            Photos = photos;
         }
 
         public DestinationModel() { }
