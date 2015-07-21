@@ -46,6 +46,92 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
         }
 
+        public IEnumerable<DestinationModel> SearchDestinations(string name)
+        {
+            //get a list of destinations matching by name
+            var searchedDestination = _phillyZooDatabaseEntities.DestinationObjectLayerSet.Where(i => i.destinationName.Contains(name));
+
+            //create matching list of movies to be sent back 
+            List<DestinationModel> matchingList = new List<DestinationModel>();
+
+            foreach (DestinationObjectLayer dbDestination in searchedDestination)
+            {
+                DestinationModel matchingDestination = _destinationModelFactory.createDestination(dbDestination);
+                matchingList.Add(matchingDestination);
+            }
+            return matchingList;
+        }
+
+        public int CreateDatabaseDestination(DestinationModel newDestination)
+        {
+            DestinationObjectLayer dbDestination = new DestinationObjectLayer();
+            dbDestination.id = newDestination.ID;
+            dbDestination.mapPointId = newDestination.MapPointID;
+            dbDestination.statusTypeId = newDestination.StatusID;
+            dbDestination.destinationName = newDestination.Name;
+            dbDestination.shortDescription = newDestination.ShortDescription;
+            dbDestination.longDescription = newDestination.LongDescription;
+            dbDestination.openingTime = newDestination.OpeningTime;
+            dbDestination.closingTime = newDestination.ClosingTime;
+
+            _phillyZooDatabaseEntities.DestinationObjectLayerSet.Add(dbDestination);
+            _phillyZooDatabaseEntities.SaveChanges();
+
+            return newDestination.ID;
+        }
+
+        public void CreateDatabasePhotos(List<DestinationPhotosModel> photoList)
+        {
+            if(photoList != null)
+            {
+                foreach (DestinationPhotosModel photoModel in photoList)
+                {
+                    DestinationPhotos dbPhoto = new DestinationPhotos();
+                    dbPhoto.id = photoModel.ID;
+                    dbPhoto.destinationLayerId = photoModel.DestinationLayerID;
+                    dbPhoto.imagePath = photoModel.ImagePath;
+
+                    _phillyZooDatabaseEntities.DestinationPhotos.Add(dbPhoto);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+        public void CreateDatabaseMenu(List<DestinationMenuModel> menuList)
+        {
+            if (menuList != null)
+            {
+                foreach (DestinationMenuModel menuModel in menuList)
+                {
+                    DestinationMenu dbMenu = new DestinationMenu();
+                    dbMenu.id = menuModel.ID;
+                    dbMenu.destinationLayerId = menuModel.DestinationLayerID;
+                    dbMenu.menu = menuModel.Menu;
+
+                    _phillyZooDatabaseEntities.DestinationMenu.Add(dbMenu);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+        public void CreateDatabaseAdditionalFees(List<DestinationAdditionalFeesModel> additionalFeesList)
+        {
+            if(additionalFeesList != null)
+            {
+                foreach(DestinationAdditionalFeesModel feesModel in additionalFeesList)
+                {
+                    DestinationAdditionalFees dbFee = new DestinationAdditionalFees();
+                    dbFee.additionalFeesId = feesModel.ID;
+                    dbFee.destinationLayerId = feesModel.DestinationLayerID;
+                    dbFee.fee = feesModel.Fee;
+                    dbFee.feeName = feesModel.FeeName;
+
+                    _phillyZooDatabaseEntities.DestinationAdditionalFees.Add(dbFee);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
         #region Helpers
         public List<DestinationPhotosModel> CreatePhotoList(DestinationObjectLayer destination)
         {
