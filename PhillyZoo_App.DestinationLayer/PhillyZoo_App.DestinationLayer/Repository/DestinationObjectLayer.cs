@@ -31,9 +31,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public System.DateTime closingTime { get; set; }
     
         public virtual ICollection<DestinationEnterExists> DestinationEnterExists { get; set; }
-        public virtual MapPoint MapPoint { get; set; }
         public virtual ICollection<DestinationMenu> DestinationMenu { get; set; }
-        public virtual ICollection<DestinationPhotos> DestinationPhotos { get; set; }
+        public virtual MapPoint MapPoint { get; set; }
         public virtual MapPointStatusType MapPointStatusType { get; set; }
+        public virtual ICollection<DestinationPhotos> DestinationPhotos { get; set; }
     }
 }

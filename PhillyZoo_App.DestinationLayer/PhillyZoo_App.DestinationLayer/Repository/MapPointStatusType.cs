@@ -17,6 +17,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public int id { get; set; }
         public string status { get; set; }
     
-        public virtual DestinationObjectLayer DestinationLayer { get; set; }
+        public virtual DestinationObjectLayer DestinationObjectLayer { get; set; }
     }
 }

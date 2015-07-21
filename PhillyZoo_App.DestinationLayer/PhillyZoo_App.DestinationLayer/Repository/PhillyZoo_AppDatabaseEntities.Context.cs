@@ -38,7 +38,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public DbSet<Users> Users { get; set; }
         public DbSet<DestinationEnterExists> DestinationEnterExists { get; set; }
         public DbSet<DestinationEnterExitType> DestinationEnterExitType { get; set; }
-        public DbSet<DestinationObjectLayer> DestinationLayer { get; set; }
         public DbSet<DestinationMenu> DestinationMenu { get; set; }
         public DbSet<DestinationPhotos> DestinationPhotos { get; set; }
         public DbSet<MapPoint> MapPoint { get; set; }
@@ -47,5 +46,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public DbSet<MapPointType> MapPointType { get; set; }
         public DbSet<PushType> PushType { get; set; }
         public DbSet<User_PushType> User_PushType { get; set; }
+        public DbSet<DestinationObjectLayer> DestinationObjectLayerSet { get; set; }
     }
 }
