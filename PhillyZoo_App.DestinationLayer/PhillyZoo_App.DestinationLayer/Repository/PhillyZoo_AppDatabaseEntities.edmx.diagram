@@ -27,7 +27,7 @@
         <AssociationConnector Association="phillyzoo_newModel.FK_MapPoint_MapPointType" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationEnterExists" Width="1.5" PointX="11.5" PointY="12.5" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationEnterExitType" Width="1.5" PointX="13.625" PointY="12.5" />
-        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationLayer" Width="1.5" PointX="11.5" PointY="8" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationObjectLayer" Width="1.5" PointX="11.5" PointY="8" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationMenu" Width="1.5" PointX="13.625" PointY="8" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationPhotos" Width="1.5" PointX="13.625" PointY="10.25" />
         <EntityTypeShape EntityType="phillyzoo_newModel.MapPoint" Width="1.5" PointX="11.5" PointY="3.875" />

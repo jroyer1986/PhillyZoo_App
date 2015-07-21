@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhillyZoo_App.DestinationLayer.Models.DestinationLayer.DestinationTypes
+namespace PhillyZoo_App.DestinationLayer.Models
 {
     public class DestinationExhibitsModel : DestinationModel
     {

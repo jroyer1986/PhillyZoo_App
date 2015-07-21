@@ -12,9 +12,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class DestinationLayer
+    public partial class DestinationObjectLayer
     {
-        public DestinationLayer()
+        public DestinationObjectLayer()
         {
             this.DestinationEnterExists = new HashSet<DestinationEnterExists>();
             this.DestinationMenu = new HashSet<DestinationMenu>();

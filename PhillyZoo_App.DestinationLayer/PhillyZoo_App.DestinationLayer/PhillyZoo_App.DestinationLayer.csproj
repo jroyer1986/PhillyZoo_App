@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AspNetRoles.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
@@ -146,10 +147,10 @@
     <Compile Include="Repository\DestinationEnterExitType.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\DestinationLayer.cs">
+    <Compile Include="Repository\DestinationMenu.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\DestinationMenu.cs">
+    <Compile Include="Repository\DestinationObjectLayer.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\DestinationPhotos.cs">

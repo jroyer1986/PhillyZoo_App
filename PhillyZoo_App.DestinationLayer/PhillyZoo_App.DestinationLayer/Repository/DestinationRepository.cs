@@ -1,4 +1,4 @@
-﻿using PhillyZoo_App.DestinationLayer.Models.DestinationLayer.DestinationTypes;
+﻿using PhillyZoo_App.DestinationLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 {
     public class DestinationRepository
     {
+        DestinationModelFactory _destinationModelFactory = new DestinationModelFactory();
         phillyzoo_newEntities _phillyZooDatabaseEntities = new phillyzoo_newEntities();
 
         public IEnumerable<DestinationModel> GetDestinations()
@@ -17,11 +18,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             if (destinations != null)
             {
                 List<DestinationModel> destinationsForController = new List<DestinationModel>();
-                foreach (DestinationLayer destination in destinations)
+                foreach (DestinationObjectLayer destination in destinations)
                 {
-                    DestinationModel destinationForList = new DestinationModel(destination.id, destination.mapPointId, destination.destinationName, destination.MapPointStatusType.status, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime);
-
-
+                    DestinationModel destinationForList = _destinationModelFactory.createDestination(destination);
 
                     destinationsForController.Add(destinationForList);
                 }

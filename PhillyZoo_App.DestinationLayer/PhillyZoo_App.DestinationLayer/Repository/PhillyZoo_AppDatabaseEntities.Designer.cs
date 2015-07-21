@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Projects\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\Repository\PhillyZoo_AppDatabaseEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\Repository\PhillyZoo_AppDatabaseEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

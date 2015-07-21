@@ -841,7 +841,7 @@
           </AssociationSet>
           <EntitySet Name="DestinationEnterExists" EntityType="phillyzoo_newModel.DestinationEnterExists" />
           <EntitySet Name="DestinationEnterExitType" EntityType="phillyzoo_newModel.DestinationEnterExitType" />
-          <EntitySet Name="DestinationLayer" EntityType="phillyzoo_newModel.DestinationLayer" />
+          <EntitySet Name="DestinationLayer" EntityType="phillyzoo_newModel.DestinationObjectLayer" />
           <EntitySet Name="DestinationMenu" EntityType="phillyzoo_newModel.DestinationMenu" />
           <EntitySet Name="DestinationPhotos" EntityType="phillyzoo_newModel.DestinationPhotos" />
           <EntitySet Name="MapPoint" EntityType="phillyzoo_newModel.MapPoint" />
@@ -921,7 +921,7 @@
           <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DestinationEnterExists" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType" FromRole="DestinationEnterExitType" ToRole="DestinationEnterExists" />
         </EntityType>
-        <EntityType Name="DestinationLayer">
+        <EntityType Name="DestinationObjectLayer">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -1033,7 +1033,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DestinationEnterExists_DestinationLayer">
-          <End Type="phillyzoo_newModel.DestinationLayer" Role="DestinationLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationLayer" Multiplicity="1" />
           <End Type="phillyzoo_newModel.DestinationEnterExists" Role="DestinationEnterExists" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DestinationLayer">
@@ -1046,7 +1046,7 @@
         </Association>
         <Association Name="FK_DestinationLayer_MapPoint">
           <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationLayer" Role="DestinationLayer" Multiplicity="*" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationLayer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MapPoint">
               <PropertyRef Name="mapPointId" />
@@ -1057,7 +1057,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DestinationMenu_DestinationLayer">
-          <End Type="phillyzoo_newModel.DestinationLayer" Role="DestinationLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationLayer" Multiplicity="1" />
           <End Type="phillyzoo_newModel.DestinationMenu" Role="DestinationMenu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DestinationLayer">
@@ -1069,7 +1069,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DestinationPhotos_DestinationLayer">
-          <End Type="phillyzoo_newModel.DestinationLayer" Role="DestinationLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationLayer" Multiplicity="1" />
           <End Type="phillyzoo_newModel.DestinationPhotos" Role="DestinationPhotos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DestinationLayer">
@@ -1154,7 +1154,7 @@
         </Association>
         <Association Name="FK_DestinationLayer_MapPointStatusType">
           <End Type="phillyzoo_newModel.MapPointStatusType" Role="MapPointStatusType" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationLayer" Role="DestinationLayer" Multiplicity="0..1" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationLayer" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="MapPointStatusType">
               <PropertyRef Name="id" />
@@ -1325,7 +1325,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DestinationLayer">
-            <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationLayer">
+            <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
               <MappingFragment StoreEntitySet="DestinationLayer">
                 <ScalarProperty Name="closingTime" ColumnName="closingTime" />
                 <ScalarProperty Name="openingTime" ColumnName="openingTime" />

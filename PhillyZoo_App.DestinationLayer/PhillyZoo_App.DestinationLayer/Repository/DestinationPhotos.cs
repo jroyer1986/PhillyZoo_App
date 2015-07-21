@@ -18,6 +18,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public int destinationLayerId { get; set; }
         public string imagePath { get; set; }
     
-        public virtual DestinationLayer DestinationLayer { get; set; }
+        public virtual DestinationObjectLayer DestinationLayer { get; set; }
     }
 }

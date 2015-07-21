@@ -22,6 +22,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public bool hadicapAccessible { get; set; }
     
         public virtual DestinationEnterExitType DestinationEnterExitType { get; set; }
-        public virtual DestinationLayer DestinationLayer { get; set; }
+        public virtual DestinationObjectLayer DestinationLayer { get; set; }
     }
 }
