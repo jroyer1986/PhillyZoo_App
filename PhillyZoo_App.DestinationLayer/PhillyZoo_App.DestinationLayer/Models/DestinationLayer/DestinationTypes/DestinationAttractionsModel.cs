@@ -7,16 +7,17 @@ namespace PhillyZoo_App.DestinationLayer.Models
 {
     public class DestinationAttractionsModel : DestinationModel
     {
-        //add photos, additionalFees, entrances and exits
-        public List<DestinationPhotosModel> Photos
-        { get; set; }
+        //add additionalFees, entrances and exits
         public List<DestinationEnterExitsModel> EnterExits
         { get; set; }
-        public string AdditionalFees
+        public List<DestinationAdditionalFeesModel> AdditionalFees
         { get; set; }
 
 
-
-        public DestinationAttractionsModel() : base() { }
+        public DestinationAttractionsModel(int id, int mapPointId, string name, int statusId, string shortDescription, string longDescription, DateTime openingTime, DateTime closingTime, List<DestinationPhotosModel> photos, List<DestinationEnterExitsModel> enterExits, List<DestinationAdditionalFeesModel> additionalFees) : base(id, mapPointId, name, statusId, shortDescription, longDescription, openingTime, closingTime, photos)
+        {
+            EnterExits = enterExits;
+            AdditionalFees = additionalFees;
+        }
     }
 }

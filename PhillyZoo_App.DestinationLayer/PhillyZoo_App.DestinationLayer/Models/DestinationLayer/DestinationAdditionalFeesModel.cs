@@ -5,22 +5,23 @@ using System.Web;
 
 namespace PhillyZoo_App.DestinationLayer.Models
 {
-    public class DestinationPhotosModel
+    public class DestinationAdditionalFeesModel
     {
         public int ID
         { get; set; }
         public int DestinationLayerID
         { get; set; }
-        public string ImagePath
+        public decimal Fee
+        { get; set; }
+        public string FeeName
         { get; set; }
 
-        public DestinationPhotosModel(int id, int destinationLayerId, string imagePath)
+        public DestinationAdditionalFeesModel(int id, int destinationLayerId, decimal fee, string feeName)
         {
             ID = id;
             DestinationLayerID = destinationLayerId;
-            ImagePath = imagePath;
+            Fee = fee;
+            FeeName = feeName;
         }
-
-        public DestinationPhotosModel() { }
     }
 }

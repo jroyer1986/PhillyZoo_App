@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DestinationLayer\DestinationAdditionalFeesModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationEnterExitsModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationMenuModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationAttractionsModel.cs" />
@@ -141,7 +142,10 @@
     <Compile Include="Repository\C__MigrationHistory.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\DestinationEnterExists.cs">
+    <Compile Include="Repository\DestinationAdditionalFees.cs">
+      <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\DestinationEnterExits.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\DestinationEnterExitType.cs">
@@ -200,6 +204,9 @@
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\Sessions.cs">
+      <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\sysdiagrams.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\Users.cs">

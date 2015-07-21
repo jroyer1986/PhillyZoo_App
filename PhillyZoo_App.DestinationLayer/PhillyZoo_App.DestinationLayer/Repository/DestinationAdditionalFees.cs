@@ -12,17 +12,13 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class DestinationEnterExitType
+    public partial class DestinationAdditionalFees
     {
-        public DestinationEnterExitType()
-        {
-            this.DestinationEnterExits = new HashSet<DestinationEnterExits>();
-        }
+        public int additionalFeesId { get; set; }
+        public int destinationLayerId { get; set; }
+        public decimal fee { get; set; }
+        public string feeName { get; set; }
     
-        public int id { get; set; }
-        public int destinationEnterExitId { get; set; }
-        public string type { get; set; }
-    
-        public virtual ICollection<DestinationEnterExits> DestinationEnterExits { get; set; }
+        public virtual DestinationObjectLayer DestinationObjectLayer { get; set; }
     }
 }
