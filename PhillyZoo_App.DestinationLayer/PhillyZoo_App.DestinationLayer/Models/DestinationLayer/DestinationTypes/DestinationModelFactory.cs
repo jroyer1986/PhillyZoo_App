@@ -34,10 +34,15 @@ namespace PhillyZoo_App.DestinationLayer.Models
                 List<DestinationMenuModel> menu = _DestinationRepository.CreateMenu(destination);
                 newDestination = new DestinationDiningModel(destination.id, destination.mapPointId, destination.destinationName, destination.statusTypeId, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime, photoList, menu, enterExitsList);
             }
-            else if (destination.MapPoint.mapPointTypeId == 255  /*GiftsSouvenirs*/ || destination.MapPoint.mapPointTypeId == 257 /*Facilities*/ )
+            else if(destination.MapPoint.mapPointTypeId == 255  /*GiftsSouvenirs*/ )
             {
                 List<DestinationPhotosModel> photoList = _DestinationRepository.CreatePhotoList(destination);
-                newDestination = new DestinationModel(destination.id, destination.mapPointId, destination.destinationName, destination.statusTypeId, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime, photoList);
+                List<DestinationEnterExitsModel> enterExitsList = _DestinationRepository.CreateEnterExitsList(destination);
+                newDestination = new DestinationGiftSouvenirsModel(destination.id, destination.mapPointId, destination.destinationName, destination.statusTypeId, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime, photoList, enterExitsList);
+            }
+            else if (destination.MapPoint.mapPointTypeId == 257 /*Facilities*/ )
+            {
+                newDestination = new DestinationModel(destination.id, destination.mapPointId, destination.destinationName, destination.statusTypeId, destination.shortDescription, destination.longDescription, destination.openingTime, destination.closingTime);
             }
             else if (destination.MapPoint.mapPointTypeId == 251)
             {

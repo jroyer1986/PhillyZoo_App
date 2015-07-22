@@ -62,7 +62,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return matchingList;
         }
 
-        public int CreateDatabaseDestination(DestinationModel newDestination)
+        public int SaveDatabaseDestination(DestinationModel newDestination)
         {
             DestinationObjectLayer dbDestination = new DestinationObjectLayer();
             dbDestination.id = newDestination.ID;
@@ -74,17 +74,44 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbDestination.openingTime = newDestination.OpeningTime;
             dbDestination.closingTime = newDestination.ClosingTime;
 
+            if(newDestination is IMenu)
+            {
+                IMenu menuItem = (IMenu)newDestination;
+                SaveDatabaseMenu(menuItem);
+            }
+
+            if(newDestination is IPhotos)
+            {
+                IPhotos photoItem = (IPhotos)newDestination;
+                SaveDatabasePhotos(photoItem);
+            }
+
+            if(newDestination is IAdditionalFees)
+            {
+                IAdditionalFees additionalFeesItem = (IAdditionalFees)newDestination;
+                SaveDatabaseAdditionalFees(additionalFeesItem);
+            }
+
             _phillyZooDatabaseEntities.DestinationObjectLayerSet.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
 
             return newDestination.ID;
         }
 
-        public void CreateDatabasePhotos(List<DestinationPhotosModel> photoList)
+        public void DeleteDataaseDestination(string name)
+        {
+            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayerSet.FirstOrDefault(m => m.destinationName == name);
+            
+            _phillyZooDatabaseEntities.DestinationObjectLayerSet.Remove(destinationToDelete);
+            _phillyZooDatabaseEntities.SaveChanges();
+        }
+
+        #region Saving Helpers
+        public void SaveDatabasePhotos(IPhotos photoList)
         {
             if(photoList != null)
             {
-                foreach (DestinationPhotosModel photoModel in photoList)
+                foreach (DestinationPhotosModel photoModel in photoList.Photos)
                 {
                     DestinationPhotos dbPhoto = new DestinationPhotos();
                     dbPhoto.id = photoModel.ID;
@@ -97,11 +124,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
         }
 
-        public void CreateDatabaseMenu(List<DestinationMenuModel> menuList)
+        public void SaveDatabaseMenu(IMenu menuList)
         {
             if (menuList != null)
             {
-                foreach (DestinationMenuModel menuModel in menuList)
+                foreach (DestinationMenuModel menuModel in menuList.Menu)
                 {
                     DestinationMenu dbMenu = new DestinationMenu();
                     dbMenu.id = menuModel.ID;
@@ -114,11 +141,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
         }
 
-        public void CreateDatabaseAdditionalFees(List<DestinationAdditionalFeesModel> additionalFeesList)
+        public void SaveDatabaseAdditionalFees(IAdditionalFees additionalFeesList)
         {
             if(additionalFeesList != null)
             {
-                foreach(DestinationAdditionalFeesModel feesModel in additionalFeesList)
+                foreach(DestinationAdditionalFeesModel feesModel in additionalFeesList.AdditionalFees)
                 {
                     DestinationAdditionalFees dbFee = new DestinationAdditionalFees();
                     dbFee.additionalFeesId = feesModel.ID;
@@ -131,6 +158,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
+        #endregion
 
         #region Helpers
         public List<DestinationPhotosModel> CreatePhotoList(DestinationObjectLayer destination)
@@ -146,7 +174,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public List<DestinationEnterExitsModel> CreateEnterExitsList(DestinationObjectLayer destination)
         {
             List<DestinationEnterExitsModel> enterExitsList = new List<DestinationEnterExitsModel>();
-            foreach (DestinationEnterExists enterExit in destination.DestinationEnterExists)
+            foreach (DestinationEnterExits enterExit in destination.DestinationEnterExits)
             {
                 DestinationEnterExitsModel enterExitForList = new DestinationEnterExitsModel(enterExit.id, enterExit.destinationLayerId, enterExit.typeId, enterExit.latitude, enterExit.longitude, enterExit.hadicapAccessible);
                 enterExitsList.Add(enterExitForList);

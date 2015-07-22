@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="phillyzoo_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Level" Type="Byte" />
+    <Property Name="JoinDate" Type="DateTime" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_AspNetUsers" FromRole="AspNetUsers" ToRole="Users" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Feed">
+    <Key>
+      <PropertyRef Name="feedId" />
+    </Key>
+    <Property Name="feedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cacheTime" Type="Int32" Nullable="false" />
+    <Property Name="createdTS" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Itinerary">
+    <Key>
+      <PropertyRef Name="mapPointId" />
+    </Key>
+    <Property Name="mapPointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="sortOrder" Type="Int32" />
+    <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="Itinerary" ToRole="MapPoint" />
+  </EntityType>
+  <EntityType Name="JWTToken">
+    <Key>
+      <PropertyRef Name="jwttokenId" />
+    </Key>
+    <Property Name="jwttokenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jwt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="createdTS" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_JWTToken_Users" FromRole="JWTToken" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="PushMessage">
+    <Key>
+      <PropertyRef Name="pushMessageId" />
+    </Key>
+    <Property Name="pushMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdTS" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_PushMessage_Users" FromRole="PushMessage" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Sessions">
+    <Key>
+      <PropertyRef Name="sessionsId" />
+    </Key>
+    <Property Name="sessionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="startSessionTS" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endSessionTS" Type="DateTime" Precision="3" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="deviceToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Sessions_Users" FromRole="Sessions" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="last_accessed" Type="DateTime" Precision="3" />
+    <Property Name="enabled" Type="Boolean" Nullable="false" />
+    <Property Name="membershipId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdTS" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Users_AspNetUsers" FromRole="Users" ToRole="AspNetUsers" />
+    <NavigationProperty Name="JWTToken" Relationship="Self.FK_JWTToken_Users" FromRole="Users" ToRole="JWTToken" />
+    <NavigationProperty Name="PushMessage" Relationship="Self.FK_PushMessage_Users" FromRole="Users" ToRole="PushMessage" />
+    <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Users" FromRole="Users" ToRole="Sessions" />
+    <NavigationProperty Name="User_PushType" Relationship="phillyzoo_newModel.FK_User_PushType_Users" FromRole="Users" ToRole="User_PushType" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="membershipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JWTToken_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="JWTToken" Type="Self.JWTToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="JWTToken">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PushMessage_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PushMessage" Type="Self.PushMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="PushMessage">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sessions_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Sessions">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="phillyzoo_newEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="Feed" EntityType="Self.Feed" />
+    <EntitySet Name="Itinerary" EntityType="Self.Itinerary" />
+    <EntitySet Name="JWTToken" EntityType="Self.JWTToken" />
+    <EntitySet Name="PushMessage" EntityType="Self.PushMessage" />
+    <EntitySet Name="Sessions" EntityType="Self.Sessions" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_AspNetUsers" Association="Self.FK_Users_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JWTToken_Users" Association="Self.FK_JWTToken_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="JWTToken" EntitySet="JWTToken" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PushMessage_Users" Association="Self.FK_PushMessage_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PushMessage" EntitySet="PushMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sessions_Users" Association="Self.FK_Sessions_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Sessions" EntitySet="Sessions" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="DestinationEnterExitType" EntityType="phillyzoo_newModel.DestinationEnterExitType" />
+    <EntitySet Name="DestinationMenu" EntityType="phillyzoo_newModel.DestinationMenu" />
+    <EntitySet Name="DestinationPhotos" EntityType="phillyzoo_newModel.DestinationPhotos" />
+    <EntitySet Name="MapPoint" EntityType="phillyzoo_newModel.MapPoint" />
+    <EntitySet Name="MapPointEdges" EntityType="phillyzoo_newModel.MapPointEdges" />
+    <EntitySet Name="MapPointStatusType" EntityType="phillyzoo_newModel.MapPointStatusType" />
+    <EntitySet Name="MapPointType" EntityType="phillyzoo_newModel.MapPointType" />
+    <EntitySet Name="PushType" EntityType="phillyzoo_newModel.PushType" />
+    <EntitySet Name="User_PushType" EntityType="phillyzoo_newModel.User_PushType" />
+    <AssociationSet Name="FK_Itinerary_MapPoint" Association="phillyzoo_newModel.FK_Itinerary_MapPoint">
+      <End Role="MapPoint" EntitySet="MapPoint" />
+      <End Role="Itinerary" EntitySet="Itinerary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MapPoint_MapPointType" Association="phillyzoo_newModel.FK_MapPoint_MapPointType">
+      <End Role="MapPointType" EntitySet="MapPointType" />
+      <End Role="MapPoint" EntitySet="MapPoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MapPointEdges_MapPoint" Association="phillyzoo_newModel.FK_MapPointEdges_MapPoint">
+      <End Role="MapPoint" EntitySet="MapPoint" />
+      <End Role="MapPointEdges" EntitySet="MapPointEdges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MapPointEdges_MapPoint1" Association="phillyzoo_newModel.FK_MapPointEdges_MapPoint1">
+      <End Role="MapPoint" EntitySet="MapPoint" />
+      <End Role="MapPointEdges" EntitySet="MapPointEdges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_PushType_PushType" Association="phillyzoo_newModel.FK_User_PushType_PushType">
+      <End Role="PushType" EntitySet="PushType" />
+      <End Role="User_PushType" EntitySet="User_PushType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_PushType_Users" Association="phillyzoo_newModel.FK_User_PushType_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_PushType" EntitySet="User_PushType" />
+    </AssociationSet>
+    <EntitySet Name="DestinationObjectLayerSet" EntityType="phillyzoo_newModel.DestinationObjectLayer" />
+    <AssociationSet Name="FK_DestinationMenu_DestinationLayer1" Association="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1">
+      <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
+      <End Role="DestinationMenu" EntitySet="DestinationMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationLayer_MapPoint1" Association="phillyzoo_newModel.FK_DestinationLayer_MapPoint1">
+      <End Role="MapPoint" EntitySet="MapPoint" />
+      <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationLayer_MapPointStatusType1" Association="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1">
+      <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
+      <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationPhotos_DestinationLayer1" Association="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1">
+      <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
+      <End Role="DestinationPhotos" EntitySet="DestinationPhotos" />
+    </AssociationSet>
+    <EntitySet Name="DestinationEnterExits" EntityType="phillyzoo_newModel.DestinationEnterExits" />
+    <EntitySet Name="sysdiagrams" EntityType="phillyzoo_newModel.sysdiagrams" />
+    <AssociationSet Name="FK_DestinationEnterExists_DestinationEnterExitType1" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1">
+      <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
+      <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationEnterExists_DestinationLayer" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayerSet" />
+      <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
+    </AssociationSet>
+    <EntitySet Name="DestinationAdditionalFees" EntityType="phillyzoo_newModel.DestinationAdditionalFees" />
+    <AssociationSet Name="FK_DestinationAdditionalFees_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayerSet" />
+      <End Role="DestinationAdditionalFees" EntitySet="DestinationAdditionalFees" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DestinationEnterExitType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationEnterExitId" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationEnterExits" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1" FromRole="DestinationEnterExitType" ToRole="DestinationEnterExits" />
+  </EntityType>
+  <EntityType Name="DestinationMenu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="menu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1" FromRole="DestinationMenu" ToRole="DestinationObjectLayer1" />
+  </EntityType>
+  <EntityType Name="DestinationPhotos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="imagePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1" FromRole="DestinationPhotos" ToRole="DestinationObjectLayer1" />
+  </EntityType>
+  <EntityType Name="MapPoint">
+    <Key>
+      <PropertyRef Name="mapPointId" />
+    </Key>
+    <Property Name="mapPointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+    <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+    <Property Name="imageX" Type="Int32" Nullable="false" />
+    <Property Name="imageY" Type="Int32" Nullable="false" />
+    <Property Name="mapPointTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Itinerary" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="MapPoint" ToRole="Itinerary" />
+    <NavigationProperty Name="MapPointType" Relationship="phillyzoo_newModel.FK_MapPoint_MapPointType" FromRole="MapPoint" ToRole="MapPointType" />
+    <NavigationProperty Name="MapPointEdges" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPoint" ToRole="MapPointEdges" />
+    <NavigationProperty Name="MapPointEdges1" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" FromRole="MapPoint" ToRole="MapPointEdges" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPoint1" FromRole="MapPoint" ToRole="DestinationObjectLayer1" />
+  </EntityType>
+  <EntityType Name="MapPointEdges">
+    <Key>
+      <PropertyRef Name="mapPointEdgestId" />
+    </Key>
+    <Property Name="mapPointEdgestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mapPointIdA" Type="Int32" Nullable="false" />
+    <Property Name="mapPointIdB" Type="Int32" Nullable="false" />
+    <Property Name="distance" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+    <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPointEdges" ToRole="MapPoint" />
+    <NavigationProperty Name="MapPoint1" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" FromRole="MapPointEdges" ToRole="MapPoint" />
+  </EntityType>
+  <EntityType Name="MapPointStatusType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1" FromRole="MapPointStatusType" ToRole="DestinationObjectLayer1" />
+  </EntityType>
+  <EntityType Name="MapPointType">
+    <Key>
+      <PropertyRef Name="mapPointTypeId" />
+    </Key>
+    <Property Name="mapPointTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_MapPoint_MapPointType" FromRole="MapPointType" ToRole="MapPoint" />
+  </EntityType>
+  <EntityType Name="PushType">
+    <Key>
+      <PropertyRef Name="pushTypeId" />
+    </Key>
+    <Property Name="pushTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User_PushType" Relationship="phillyzoo_newModel.FK_User_PushType_PushType" FromRole="PushType" ToRole="User_PushType" />
+  </EntityType>
+  <EntityType Name="User_PushType">
+    <Key>
+      <PropertyRef Name="users_pushTypeId" />
+    </Key>
+    <Property Name="users_pushTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="pushTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PushType" Relationship="phillyzoo_newModel.FK_User_PushType_PushType" FromRole="User_PushType" ToRole="PushType" />
+    <NavigationProperty Name="Users" Relationship="phillyzoo_newModel.FK_User_PushType_Users" FromRole="User_PushType" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_Itinerary_MapPoint">
+    <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.Itinerary" Role="Itinerary" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MapPoint">
+        <PropertyRef Name="mapPointId" />
+      </Principal>
+      <Dependent Role="Itinerary">
+        <PropertyRef Name="mapPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MapPoint_MapPointType">
+    <End Type="phillyzoo_newModel.MapPointType" Role="MapPointType" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapPointType">
+        <PropertyRef Name="mapPointTypeId" />
+      </Principal>
+      <Dependent Role="MapPoint">
+        <PropertyRef Name="mapPointTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MapPointEdges_MapPoint">
+    <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.MapPointEdges" Role="MapPointEdges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapPoint">
+        <PropertyRef Name="mapPointId" />
+      </Principal>
+      <Dependent Role="MapPointEdges">
+        <PropertyRef Name="mapPointIdA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MapPointEdges_MapPoint1">
+    <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.MapPointEdges" Role="MapPointEdges" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapPoint">
+        <PropertyRef Name="mapPointId" />
+      </Principal>
+      <Dependent Role="MapPointEdges">
+        <PropertyRef Name="mapPointIdB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_PushType_PushType">
+    <End Type="phillyzoo_newModel.PushType" Role="PushType" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PushType">
+        <PropertyRef Name="pushTypeId" />
+      </Principal>
+      <Dependent Role="User_PushType">
+        <PropertyRef Name="pushTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_PushType_Users">
+    <End Type="phillyzoo_newModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="User_PushType">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DestinationObjectLayer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mapPointId" Type="Int32" Nullable="false" />
+    <Property Name="statusTypeId" Type="Int32" Nullable="false" />
+    <Property Name="destinationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="shortDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="longDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="openingTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="closingTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="DestinationMenu" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1" FromRole="DestinationObjectLayer1" ToRole="DestinationMenu" />
+    <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPoint1" FromRole="DestinationObjectLayer1" ToRole="MapPoint" />
+    <NavigationProperty Name="MapPointStatusType" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1" FromRole="DestinationObjectLayer1" ToRole="MapPointStatusType" />
+    <NavigationProperty Name="DestinationPhotos" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1" FromRole="DestinationObjectLayer1" ToRole="DestinationPhotos" />
+    <NavigationProperty Name="DestinationEnterExits" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationEnterExits" />
+    <NavigationProperty Name="DestinationAdditionalFees" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationAdditionalFees" />
+  </EntityType>
+  <Association Name="FK_DestinationMenu_DestinationLayer1">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationMenu" Role="DestinationMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer1">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationMenu">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationLayer_MapPoint1">
+    <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapPoint">
+        <PropertyRef Name="mapPointId" />
+      </Principal>
+      <Dependent Role="DestinationObjectLayer1">
+        <PropertyRef Name="mapPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationLayer_MapPointStatusType1">
+    <End Type="phillyzoo_newModel.MapPointStatusType" Role="MapPointStatusType" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MapPointStatusType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationObjectLayer1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationPhotos_DestinationLayer1">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationPhotos" Role="DestinationPhotos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer1">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationPhotos">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DestinationEnterExits">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="typeId" Type="Int32" Nullable="false" />
+    <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+    <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+    <Property Name="hadicapAccessible" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DestinationEnterExitType" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1" FromRole="DestinationEnterExits" ToRole="DestinationEnterExitType" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationEnterExits" ToRole="DestinationObjectLayer" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_DestinationEnterExists_DestinationEnterExitType1">
+    <End Type="phillyzoo_newModel.DestinationEnterExitType" Role="DestinationEnterExitType" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationEnterExitType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationEnterExits">
+        <PropertyRef Name="typeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationEnterExists_DestinationLayer">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationEnterExits">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DestinationAdditionalFees">
+    <Key>
+      <PropertyRef Name="additionalFeesId" />
+    </Key>
+    <Property Name="additionalFeesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="fee" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+    <Property Name="feeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationAdditionalFees" ToRole="DestinationObjectLayer" />
+  </EntityType>
+  <Association Name="FK_DestinationAdditionalFees_DestinationObjectLayer">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationAdditionalFees" Role="DestinationAdditionalFees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationAdditionalFees">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

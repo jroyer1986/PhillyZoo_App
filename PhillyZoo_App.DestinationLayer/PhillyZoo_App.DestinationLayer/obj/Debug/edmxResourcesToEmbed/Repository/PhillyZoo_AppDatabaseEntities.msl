@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="phillyzoo_newModelStoreContainer" CdmEntityContainer="phillyzoo_newEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.AspNetUserClaims">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.AspNetUserLogins">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feed">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.Feed">
+        <MappingFragment StoreEntitySet="Feed">
+          <ScalarProperty Name="feedId" ColumnName="feedId" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="response" ColumnName="response" />
+          <ScalarProperty Name="cacheTime" ColumnName="cacheTime" />
+          <ScalarProperty Name="createdTS" ColumnName="createdTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Itinerary">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.Itinerary">
+        <MappingFragment StoreEntitySet="Itinerary">
+          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JWTToken">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.JWTToken">
+        <MappingFragment StoreEntitySet="JWTToken">
+          <ScalarProperty Name="jwttokenId" ColumnName="jwttokenId" />
+          <ScalarProperty Name="jwt" ColumnName="jwt" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdTS" ColumnName="createdTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PushMessage">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.PushMessage">
+        <MappingFragment StoreEntitySet="PushMessage">
+          <ScalarProperty Name="pushMessageId" ColumnName="pushMessageId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="createdTS" ColumnName="createdTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sessions">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.Sessions">
+        <MappingFragment StoreEntitySet="Sessions">
+          <ScalarProperty Name="sessionsId" ColumnName="sessionsId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="startSessionTS" ColumnName="startSessionTS" />
+          <ScalarProperty Name="endSessionTS" ColumnName="endSessionTS" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="deviceToken" ColumnName="deviceToken" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="last_accessed" ColumnName="last_accessed" />
+          <ScalarProperty Name="enabled" ColumnName="enabled" />
+          <ScalarProperty Name="membershipId" ColumnName="membershipId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="createdTS" ColumnName="createdTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="phillyzoo_newModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="DestinationEnterExitType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationEnterExitType">
+        <MappingFragment StoreEntitySet="DestinationEnterExitType">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="destinationEnterExitId" ColumnName="destinationEnterExitId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationMenu">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationMenu">
+        <MappingFragment StoreEntitySet="DestinationMenu">
+          <ScalarProperty Name="menu" ColumnName="menu" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationPhotos">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationPhotos">
+        <MappingFragment StoreEntitySet="DestinationPhotos">
+          <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPoint">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPoint">
+        <MappingFragment StoreEntitySet="MapPoint">
+          <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
+          <ScalarProperty Name="imageY" ColumnName="imageY" />
+          <ScalarProperty Name="imageX" ColumnName="imageX" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPointEdges">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointEdges">
+        <MappingFragment StoreEntitySet="MapPointEdges">
+          <ScalarProperty Name="distance" ColumnName="distance" />
+          <ScalarProperty Name="mapPointIdB" ColumnName="mapPointIdB" />
+          <ScalarProperty Name="mapPointIdA" ColumnName="mapPointIdA" />
+          <ScalarProperty Name="mapPointEdgestId" ColumnName="mapPointEdgestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPointStatusType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointStatusType">
+        <MappingFragment StoreEntitySet="MapPointStatusType">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPointType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointType">
+        <MappingFragment StoreEntitySet="MapPointType">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PushType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.PushType">
+        <MappingFragment StoreEntitySet="PushType">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="pushTypeId" ColumnName="pushTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_PushType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.User_PushType">
+        <MappingFragment StoreEntitySet="User_PushType">
+          <ScalarProperty Name="pushTypeId" ColumnName="pushTypeId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="users_pushTypeId" ColumnName="users_pushTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationObjectLayerSet">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
+        <MappingFragment StoreEntitySet="DestinationObjectLayer">
+          <ScalarProperty Name="closingTime" ColumnName="closingTime" />
+          <ScalarProperty Name="openingTime" ColumnName="openingTime" />
+          <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+          <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+          <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+          <ScalarProperty Name="statusTypeId" ColumnName="statusTypeId" />
+          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationEnterExits">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationEnterExits">
+        <MappingFragment StoreEntitySet="DestinationEnterExits">
+          <ScalarProperty Name="hadicapAccessible" ColumnName="hadicapAccessible" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationAdditionalFees">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationAdditionalFees">
+        <MappingFragment StoreEntitySet="DestinationAdditionalFees">
+          <ScalarProperty Name="feeName" ColumnName="feeName" />
+          <ScalarProperty Name="fee" ColumnName="fee" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="additionalFeesId" ColumnName="additionalFeesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
