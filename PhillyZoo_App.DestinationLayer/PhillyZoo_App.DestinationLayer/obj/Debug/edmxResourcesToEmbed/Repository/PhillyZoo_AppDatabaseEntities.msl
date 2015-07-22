@@ -161,20 +161,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MapPoint">
-      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPoint">
-        <MappingFragment StoreEntitySet="MapPoint">
-          <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
-          <ScalarProperty Name="imageY" ColumnName="imageY" />
-          <ScalarProperty Name="imageX" ColumnName="imageX" />
-          <ScalarProperty Name="longitude" ColumnName="longitude" />
-          <ScalarProperty Name="latitude" ColumnName="latitude" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MapPointEdges">
       <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointEdges">
         <MappingFragment StoreEntitySet="MapPointEdges">
@@ -182,14 +168,6 @@
           <ScalarProperty Name="mapPointIdB" ColumnName="mapPointIdB" />
           <ScalarProperty Name="mapPointIdA" ColumnName="mapPointIdA" />
           <ScalarProperty Name="mapPointEdgestId" ColumnName="mapPointEdgestId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MapPointStatusType">
-      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointStatusType">
-        <MappingFragment StoreEntitySet="MapPointStatusType">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -215,20 +193,6 @@
           <ScalarProperty Name="pushTypeId" ColumnName="pushTypeId" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="users_pushTypeId" ColumnName="users_pushTypeId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DestinationObjectLayerSet">
-      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
-        <MappingFragment StoreEntitySet="DestinationObjectLayer">
-          <ScalarProperty Name="closingTime" ColumnName="closingTime" />
-          <ScalarProperty Name="openingTime" ColumnName="openingTime" />
-          <ScalarProperty Name="longDescription" ColumnName="longDescription" />
-          <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
-          <ScalarProperty Name="destinationName" ColumnName="destinationName" />
-          <ScalarProperty Name="statusTypeId" ColumnName="statusTypeId" />
-          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
-          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -262,6 +226,42 @@
           <ScalarProperty Name="fee" ColumnName="fee" />
           <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
           <ScalarProperty Name="additionalFeesId" ColumnName="additionalFeesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationObjectLayer">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
+        <MappingFragment StoreEntitySet="DestinationObjectLayer">
+          <ScalarProperty Name="closingTime" ColumnName="closingTime" />
+          <ScalarProperty Name="openingTime" ColumnName="openingTime" />
+          <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+          <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+          <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+          <ScalarProperty Name="statusTypeId" ColumnName="statusTypeId" />
+          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPoint">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPoint">
+        <MappingFragment StoreEntitySet="MapPoint">
+          <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
+          <ScalarProperty Name="imageY" ColumnName="imageY" />
+          <ScalarProperty Name="imageX" ColumnName="imageX" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapPointStatusType">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointStatusType">
+        <MappingFragment StoreEntitySet="MapPointStatusType">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

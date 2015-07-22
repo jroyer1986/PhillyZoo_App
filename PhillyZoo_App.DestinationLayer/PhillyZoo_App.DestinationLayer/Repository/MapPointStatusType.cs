@@ -14,9 +14,14 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     
     public partial class MapPointStatusType
     {
+        public MapPointStatusType()
+        {
+            this.DestinationObjectLayer = new HashSet<DestinationObjectLayer>();
+        }
+    
         public int id { get; set; }
         public string status { get; set; }
     
-        public virtual DestinationObjectLayer DestinationObjectLayer { get; set; }
+        public virtual ICollection<DestinationObjectLayer> DestinationObjectLayer { get; set; }
     }
 }

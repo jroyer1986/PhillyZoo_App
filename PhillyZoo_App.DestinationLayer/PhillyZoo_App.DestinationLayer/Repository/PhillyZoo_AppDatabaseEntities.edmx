@@ -340,27 +340,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DestinationLayer_MapPoint">
-          <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
-          <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MapPoint">
-              <PropertyRef Name="mapPointId" />
-            </Principal>
-            <Dependent Role="DestinationObjectLayer">
-              <PropertyRef Name="mapPointId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DestinationLayer_MapPointStatusType">
           <End Role="MapPointStatusType" Type="Self.MapPointStatusType" Multiplicity="1" />
-          <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="0..1" />
+          <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MapPointStatusType">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="DestinationObjectLayer">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="statusTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -373,6 +361,18 @@
             </Principal>
             <Dependent Role="DestinationMenu">
               <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DestinationObjectLayer_MapPoint">
+          <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
+          <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoint">
+              <PropertyRef Name="mapPointId" />
+            </Principal>
+            <Dependent Role="DestinationObjectLayer">
+              <PropertyRef Name="mapPointId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -562,10 +562,6 @@
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
             <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
           </AssociationSet>
-          <AssociationSet Name="FK_DestinationLayer_MapPoint" Association="Self.FK_DestinationLayer_MapPoint">
-            <End Role="MapPoint" EntitySet="MapPoint" />
-            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
-          </AssociationSet>
           <AssociationSet Name="FK_DestinationLayer_MapPointStatusType" Association="Self.FK_DestinationLayer_MapPointStatusType">
             <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
@@ -573,6 +569,10 @@
           <AssociationSet Name="FK_DestinationMenu_DestinationLayer" Association="Self.FK_DestinationMenu_DestinationLayer">
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
             <End Role="DestinationMenu" EntitySet="DestinationMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DestinationObjectLayer_MapPoint" Association="Self.FK_DestinationObjectLayer_MapPoint">
+            <End Role="MapPoint" EntitySet="MapPoint" />
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
           </AssociationSet>
           <AssociationSet Name="FK_DestinationPhotos_DestinationLayer" Association="Self.FK_DestinationPhotos_DestinationLayer">
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
@@ -879,12 +879,43 @@
           <EntitySet Name="DestinationEnterExitType" EntityType="phillyzoo_newModel.DestinationEnterExitType" />
           <EntitySet Name="DestinationMenu" EntityType="phillyzoo_newModel.DestinationMenu" />
           <EntitySet Name="DestinationPhotos" EntityType="phillyzoo_newModel.DestinationPhotos" />
-          <EntitySet Name="MapPoint" EntityType="phillyzoo_newModel.MapPoint" />
           <EntitySet Name="MapPointEdges" EntityType="phillyzoo_newModel.MapPointEdges" />
-          <EntitySet Name="MapPointStatusType" EntityType="phillyzoo_newModel.MapPointStatusType" />
           <EntitySet Name="MapPointType" EntityType="phillyzoo_newModel.MapPointType" />
           <EntitySet Name="PushType" EntityType="phillyzoo_newModel.PushType" />
           <EntitySet Name="User_PushType" EntityType="phillyzoo_newModel.User_PushType" />
+          <AssociationSet Name="FK_User_PushType_PushType" Association="phillyzoo_newModel.FK_User_PushType_PushType">
+            <End Role="PushType" EntitySet="PushType" />
+            <End Role="User_PushType" EntitySet="User_PushType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PushType_Users" Association="phillyzoo_newModel.FK_User_PushType_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_PushType" EntitySet="User_PushType" />
+          </AssociationSet>
+          <EntitySet Name="DestinationEnterExits" EntityType="phillyzoo_newModel.DestinationEnterExits" />
+          <EntitySet Name="sysdiagrams" EntityType="phillyzoo_newModel.sysdiagrams" />
+          <AssociationSet Name="FK_DestinationEnterExists_DestinationEnterExitType1" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1">
+            <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
+            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
+          </AssociationSet>
+          <EntitySet Name="DestinationAdditionalFees" EntityType="phillyzoo_newModel.DestinationAdditionalFees" />
+          <EntitySet Name="DestinationObjectLayer" EntityType="phillyzoo_newModel.DestinationObjectLayer" />
+          <EntitySet Name="MapPoint" EntityType="phillyzoo_newModel.MapPoint" />
+          <AssociationSet Name="FK_DestinationAdditionalFees_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer">
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationAdditionalFees" EntitySet="DestinationAdditionalFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DestinationEnterExists_DestinationLayer" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer">
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DestinationMenu_DestinationLayer" Association="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer">
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationMenu" EntitySet="DestinationMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DestinationPhotos_DestinationLayer" Association="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer">
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationPhotos" EntitySet="DestinationPhotos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Itinerary_MapPoint" Association="phillyzoo_newModel.FK_Itinerary_MapPoint">
             <End Role="MapPoint" EntitySet="MapPoint" />
             <End Role="Itinerary" EntitySet="Itinerary" />
@@ -901,45 +932,14 @@
             <End Role="MapPoint" EntitySet="MapPoint" />
             <End Role="MapPointEdges" EntitySet="MapPointEdges" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_PushType_PushType" Association="phillyzoo_newModel.FK_User_PushType_PushType">
-            <End Role="PushType" EntitySet="PushType" />
-            <End Role="User_PushType" EntitySet="User_PushType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_PushType_Users" Association="phillyzoo_newModel.FK_User_PushType_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="User_PushType" EntitySet="User_PushType" />
-          </AssociationSet>
-          <EntitySet Name="DestinationObjectLayerSet" EntityType="phillyzoo_newModel.DestinationObjectLayer" />
-          <AssociationSet Name="FK_DestinationMenu_DestinationLayer1" Association="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1">
-            <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
-            <End Role="DestinationMenu" EntitySet="DestinationMenu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DestinationLayer_MapPoint1" Association="phillyzoo_newModel.FK_DestinationLayer_MapPoint1">
+          <AssociationSet Name="FK_DestinationObjectLayer_MapPoint" Association="phillyzoo_newModel.FK_DestinationObjectLayer_MapPoint">
             <End Role="MapPoint" EntitySet="MapPoint" />
-            <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
           </AssociationSet>
-          <AssociationSet Name="FK_DestinationLayer_MapPointStatusType1" Association="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1">
+          <EntitySet Name="MapPointStatusType" EntityType="phillyzoo_newModel.MapPointStatusType" />
+          <AssociationSet Name="FK_DestinationLayer_MapPointStatusType" Association="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType">
             <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
-            <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DestinationPhotos_DestinationLayer1" Association="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1">
-            <End Role="DestinationObjectLayer1" EntitySet="DestinationObjectLayerSet" />
-            <End Role="DestinationPhotos" EntitySet="DestinationPhotos" />
-          </AssociationSet>
-          <EntitySet Name="DestinationEnterExits" EntityType="phillyzoo_newModel.DestinationEnterExits" />
-          <EntitySet Name="sysdiagrams" EntityType="phillyzoo_newModel.sysdiagrams" />
-          <AssociationSet Name="FK_DestinationEnterExists_DestinationEnterExitType1" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1">
-            <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
-            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DestinationEnterExists_DestinationLayer" Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer">
-            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayerSet" />
-            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
-          </AssociationSet>
-          <EntitySet Name="DestinationAdditionalFees" EntityType="phillyzoo_newModel.DestinationAdditionalFees" />
-          <AssociationSet Name="FK_DestinationAdditionalFees_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer">
-            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayerSet" />
-            <End Role="DestinationAdditionalFees" EntitySet="DestinationAdditionalFees" />
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="DestinationEnterExitType">
@@ -958,7 +958,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
           <Property Name="menu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1" FromRole="DestinationMenu" ToRole="DestinationObjectLayer1" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer" FromRole="DestinationMenu" ToRole="DestinationObjectLayer" />
         </EntityType>
         <EntityType Name="DestinationPhotos">
           <Key>
@@ -967,25 +967,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
           <Property Name="imagePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1" FromRole="DestinationPhotos" ToRole="DestinationObjectLayer1" />
-        </EntityType>
-        <EntityType Name="MapPoint">
-          <Key>
-            <PropertyRef Name="mapPointId" />
-          </Key>
-          <Property Name="mapPointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
-          <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
-          <Property Name="imageX" Type="Int32" Nullable="false" />
-          <Property Name="imageY" Type="Int32" Nullable="false" />
-          <Property Name="mapPointTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Itinerary" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="MapPoint" ToRole="Itinerary" />
-          <NavigationProperty Name="MapPointType" Relationship="phillyzoo_newModel.FK_MapPoint_MapPointType" FromRole="MapPoint" ToRole="MapPointType" />
-          <NavigationProperty Name="MapPointEdges" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPoint" ToRole="MapPointEdges" />
-          <NavigationProperty Name="MapPointEdges1" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" FromRole="MapPoint" ToRole="MapPointEdges" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPoint1" FromRole="MapPoint" ToRole="DestinationObjectLayer1" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer" FromRole="DestinationPhotos" ToRole="DestinationObjectLayer" />
         </EntityType>
         <EntityType Name="MapPointEdges">
           <Key>
@@ -997,15 +979,7 @@
           <Property Name="distance" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
           <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPointEdges" ToRole="MapPoint" />
           <NavigationProperty Name="MapPoint1" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" FromRole="MapPointEdges" ToRole="MapPoint" />
-        </EntityType>
-        <EntityType Name="MapPointStatusType">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1" FromRole="MapPointStatusType" ToRole="DestinationObjectLayer1" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="MapPointType">
           <Key>
             <PropertyRef Name="mapPointTypeId" />
@@ -1032,6 +1006,160 @@
           <NavigationProperty Name="PushType" Relationship="phillyzoo_newModel.FK_User_PushType_PushType" FromRole="User_PushType" ToRole="PushType" />
           <NavigationProperty Name="Users" Relationship="phillyzoo_newModel.FK_User_PushType_Users" FromRole="User_PushType" ToRole="Users" />
         </EntityType>
+        <Association Name="FK_User_PushType_PushType">
+          <End Type="phillyzoo_newModel.PushType" Role="PushType" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PushType">
+              <PropertyRef Name="pushTypeId" />
+            </Principal>
+            <Dependent Role="User_PushType">
+              <PropertyRef Name="pushTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_PushType_Users">
+          <End Type="phillyzoo_newModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="User_PushType">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DestinationEnterExits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="hadicapAccessible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DestinationEnterExitType" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1" FromRole="DestinationEnterExits" ToRole="DestinationEnterExitType" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationEnterExits" ToRole="DestinationObjectLayer" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DestinationEnterExists_DestinationEnterExitType1">
+          <End Type="phillyzoo_newModel.DestinationEnterExitType" Role="DestinationEnterExitType" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationEnterExitType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationEnterExits">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DestinationAdditionalFees">
+          <Key>
+            <PropertyRef Name="additionalFeesId" />
+          </Key>
+          <Property Name="additionalFeesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+          <Property Name="fee" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="feeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationAdditionalFees" ToRole="DestinationObjectLayer" />
+        </EntityType>
+        <EntityType Name="DestinationObjectLayer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mapPointId" Type="Int32" Nullable="false" />
+          <Property Name="statusTypeId" Type="Int32" Nullable="false" />
+          <Property Name="destinationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="openingTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="closingTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DestinationAdditionalFees" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationAdditionalFees" />
+          <NavigationProperty Name="DestinationEnterExits" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationEnterExits" />
+          <NavigationProperty Name="DestinationMenu" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationMenu" />
+          <NavigationProperty Name="DestinationPhotos" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationPhotos" />
+          <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_DestinationObjectLayer_MapPoint" FromRole="DestinationObjectLayer" ToRole="MapPoint" />
+          <NavigationProperty Name="MapPointStatusType" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType" FromRole="DestinationObjectLayer" ToRole="MapPointStatusType" />
+        </EntityType>
+        <EntityType Name="MapPoint">
+          <Key>
+            <PropertyRef Name="mapPointId" />
+          </Key>
+          <Property Name="mapPointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="imageX" Type="Int32" Nullable="false" />
+          <Property Name="imageY" Type="Int32" Nullable="false" />
+          <Property Name="mapPointTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Itinerary" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="MapPoint" ToRole="Itinerary" />
+          <NavigationProperty Name="MapPointType" Relationship="phillyzoo_newModel.FK_MapPoint_MapPointType" FromRole="MapPoint" ToRole="MapPointType" />
+          <NavigationProperty Name="MapPointEdges" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPoint" ToRole="MapPointEdges" />
+          <NavigationProperty Name="MapPointEdges1" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" FromRole="MapPoint" ToRole="MapPointEdges" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationObjectLayer_MapPoint" FromRole="MapPoint" ToRole="DestinationObjectLayer" />
+        </EntityType>
+        <Association Name="FK_DestinationAdditionalFees_DestinationObjectLayer">
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationAdditionalFees" Role="DestinationAdditionalFees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationObjectLayer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationAdditionalFees">
+              <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DestinationEnterExists_DestinationLayer">
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationObjectLayer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationEnterExits">
+              <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DestinationMenu_DestinationLayer">
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationMenu" Role="DestinationMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationObjectLayer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationMenu">
+              <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DestinationPhotos_DestinationLayer">
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationPhotos" Role="DestinationPhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationObjectLayer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationPhotos">
+              <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Itinerary_MapPoint">
           <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
           <End Type="phillyzoo_newModel.Itinerary" Role="Itinerary" Multiplicity="0..1" />
@@ -1080,163 +1208,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_PushType_PushType">
-          <End Type="phillyzoo_newModel.PushType" Role="PushType" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PushType">
-              <PropertyRef Name="pushTypeId" />
-            </Principal>
-            <Dependent Role="User_PushType">
-              <PropertyRef Name="pushTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_PushType_Users">
-          <End Type="phillyzoo_newModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.User_PushType" Role="User_PushType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="userID" />
-            </Principal>
-            <Dependent Role="User_PushType">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DestinationObjectLayer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="mapPointId" Type="Int32" Nullable="false" />
-          <Property Name="statusTypeId" Type="Int32" Nullable="false" />
-          <Property Name="destinationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="shortDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="longDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="openingTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="closingTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DestinationMenu" Relationship="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer1" FromRole="DestinationObjectLayer1" ToRole="DestinationMenu" />
-          <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPoint1" FromRole="DestinationObjectLayer1" ToRole="MapPoint" />
-          <NavigationProperty Name="MapPointStatusType" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType1" FromRole="DestinationObjectLayer1" ToRole="MapPointStatusType" />
-          <NavigationProperty Name="DestinationPhotos" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer1" FromRole="DestinationObjectLayer1" ToRole="DestinationPhotos" />
-          <NavigationProperty Name="DestinationEnterExits" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationEnterExits" />
-          <NavigationProperty Name="DestinationAdditionalFees" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationAdditionalFees" />
-        </EntityType>
-        <Association Name="FK_DestinationMenu_DestinationLayer1">
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationMenu" Role="DestinationMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DestinationObjectLayer1">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationMenu">
-              <PropertyRef Name="destinationLayerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DestinationLayer_MapPoint1">
+        <Association Name="FK_DestinationObjectLayer_MapPoint">
           <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="*" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MapPoint">
               <PropertyRef Name="mapPointId" />
             </Principal>
-            <Dependent Role="DestinationObjectLayer1">
+            <Dependent Role="DestinationObjectLayer">
               <PropertyRef Name="mapPointId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DestinationLayer_MapPointStatusType1">
-          <End Type="phillyzoo_newModel.MapPointStatusType" Role="MapPointStatusType" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MapPointStatusType">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationObjectLayer1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DestinationPhotos_DestinationLayer1">
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer1" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationPhotos" Role="DestinationPhotos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DestinationObjectLayer1">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationPhotos">
-              <PropertyRef Name="destinationLayerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DestinationEnterExits">
+        <EntityType Name="MapPointStatusType">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
-          <Property Name="typeId" Type="Int32" Nullable="false" />
-          <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
-          <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
-          <Property Name="hadicapAccessible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DestinationEnterExitType" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1" FromRole="DestinationEnterExits" ToRole="DestinationEnterExitType" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" FromRole="DestinationEnterExits" ToRole="DestinationObjectLayer" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType" FromRole="MapPointStatusType" ToRole="DestinationObjectLayer" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_DestinationEnterExists_DestinationEnterExitType1">
-          <End Type="phillyzoo_newModel.DestinationEnterExitType" Role="DestinationEnterExitType" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
+        <Association Name="FK_DestinationLayer_MapPointStatusType">
+          <End Type="phillyzoo_newModel.MapPointStatusType" Role="MapPointStatusType" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DestinationEnterExitType">
+            <Principal Role="MapPointStatusType">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="DestinationEnterExits">
-              <PropertyRef Name="typeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DestinationEnterExists_DestinationLayer">
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationEnterExits" Role="DestinationEnterExits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DestinationObjectLayer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationEnterExits">
-              <PropertyRef Name="destinationLayerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DestinationAdditionalFees">
-          <Key>
-            <PropertyRef Name="additionalFeesId" />
-          </Key>
-          <Property Name="additionalFeesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
-          <Property Name="fee" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
-          <Property Name="feeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationAdditionalFees" ToRole="DestinationObjectLayer" />
-        </EntityType>
-        <Association Name="FK_DestinationAdditionalFees_DestinationObjectLayer">
-          <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.DestinationAdditionalFees" Role="DestinationAdditionalFees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DestinationObjectLayer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationAdditionalFees">
-              <PropertyRef Name="destinationLayerId" />
+            <Dependent Role="DestinationObjectLayer">
+              <PropertyRef Name="statusTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1406,20 +1406,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MapPoint">
-            <EntityTypeMapping TypeName="phillyzoo_newModel.MapPoint">
-              <MappingFragment StoreEntitySet="MapPoint">
-                <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
-                <ScalarProperty Name="imageY" ColumnName="imageY" />
-                <ScalarProperty Name="imageX" ColumnName="imageX" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MapPointEdges">
             <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointEdges">
               <MappingFragment StoreEntitySet="MapPointEdges">
@@ -1427,14 +1413,6 @@
                 <ScalarProperty Name="mapPointIdB" ColumnName="mapPointIdB" />
                 <ScalarProperty Name="mapPointIdA" ColumnName="mapPointIdA" />
                 <ScalarProperty Name="mapPointEdgestId" ColumnName="mapPointEdgestId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MapPointStatusType">
-            <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointStatusType">
-              <MappingFragment StoreEntitySet="MapPointStatusType">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1460,20 +1438,6 @@
                 <ScalarProperty Name="pushTypeId" ColumnName="pushTypeId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="users_pushTypeId" ColumnName="users_pushTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DestinationObjectLayerSet">
-            <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
-              <MappingFragment StoreEntitySet="DestinationObjectLayer">
-                <ScalarProperty Name="closingTime" ColumnName="closingTime" />
-                <ScalarProperty Name="openingTime" ColumnName="openingTime" />
-                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
-                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
-                <ScalarProperty Name="destinationName" ColumnName="destinationName" />
-                <ScalarProperty Name="statusTypeId" ColumnName="statusTypeId" />
-                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1507,6 +1471,42 @@
                 <ScalarProperty Name="fee" ColumnName="fee" />
                 <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
                 <ScalarProperty Name="additionalFeesId" ColumnName="additionalFeesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DestinationObjectLayer">
+            <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationObjectLayer">
+              <MappingFragment StoreEntitySet="DestinationObjectLayer">
+                <ScalarProperty Name="closingTime" ColumnName="closingTime" />
+                <ScalarProperty Name="openingTime" ColumnName="openingTime" />
+                <ScalarProperty Name="longDescription" ColumnName="longDescription" />
+                <ScalarProperty Name="shortDescription" ColumnName="shortDescription" />
+                <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+                <ScalarProperty Name="statusTypeId" ColumnName="statusTypeId" />
+                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapPoint">
+            <EntityTypeMapping TypeName="phillyzoo_newModel.MapPoint">
+              <MappingFragment StoreEntitySet="MapPoint">
+                <ScalarProperty Name="mapPointTypeId" ColumnName="mapPointTypeId" />
+                <ScalarProperty Name="imageY" ColumnName="imageY" />
+                <ScalarProperty Name="imageX" ColumnName="imageX" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapPointStatusType">
+            <EntityTypeMapping TypeName="phillyzoo_newModel.MapPointStatusType">
+              <MappingFragment StoreEntitySet="MapPointStatusType">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

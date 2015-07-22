@@ -1,0 +1,105 @@
+﻿@model PhillyZoo_App.DestinationLayer.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MapPointID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MapPointTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LongDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpeningTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasMenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasAdditionalFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasPhotos)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.DestinationsList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MapPointID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MapPointTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LongDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpeningTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasMenu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasAdditionalFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasPhotos)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

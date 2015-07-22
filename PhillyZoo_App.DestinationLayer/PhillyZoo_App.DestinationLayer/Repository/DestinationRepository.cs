@@ -8,19 +8,20 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 {
     public class DestinationRepository
     {
-        DestinationModelFactory _destinationModelFactory = new DestinationModelFactory();
         phillyzoo_newEntities _phillyZooDatabaseEntities = new phillyzoo_newEntities();
-
+        protected DestinationModelFactory _DestinationModelFactory
+        { get; set; }
+        
         public IEnumerable<DestinationModel> GetDestinations()
         {
-            var destinations = _phillyZooDatabaseEntities.DestinationObjectLayerSet.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").AsEnumerable();
+            var destinations = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").AsEnumerable();
 
             if (destinations != null)
             {
                 List<DestinationModel> destinationsForController = new List<DestinationModel>();
                 foreach (DestinationObjectLayer destination in destinations)
                 {
-                    DestinationModel destinationForList = _destinationModelFactory.createDestination(destination);
+                    DestinationModel destinationForList = _DestinationModelFactory.createDestination(destination);
                     destinationsForController.Add(destinationForList);
                 }
                 return destinationsForController;
@@ -33,11 +34,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public DestinationModel GetDestinationByID(int id)
         {
-            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayerSet.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
 
             if (destination != null)
             {
-                DestinationModel destinationModel = _destinationModelFactory.createDestination(destination);
+                DestinationModel destinationModel = _DestinationModelFactory.createDestination(destination);
                 return destinationModel;
             }
             else
@@ -49,14 +50,14 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public IEnumerable<DestinationModel> SearchDestinations(string name)
         {
             //get a list of destinations matching by name
-            var searchedDestination = _phillyZooDatabaseEntities.DestinationObjectLayerSet.Where(i => i.destinationName.Contains(name));
+            var searchedDestination = _phillyZooDatabaseEntities.DestinationObjectLayer.Where(i => i.destinationName.Contains(name));
 
             //create matching list of movies to be sent back 
             List<DestinationModel> matchingList = new List<DestinationModel>();
 
             foreach (DestinationObjectLayer dbDestination in searchedDestination)
             {
-                DestinationModel matchingDestination = _destinationModelFactory.createDestination(dbDestination);
+                DestinationModel matchingDestination = _DestinationModelFactory.createDestination(dbDestination);
                 matchingList.Add(matchingDestination);
             }
             return matchingList;
@@ -64,13 +65,27 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public int SaveDatabaseDestination(DestinationModel newDestination)
         {
+            MapPoint dbMapPoint = new MapPoint();
+            dbMapPoint.mapPointId = newDestination.MapPointID;
+            dbMapPoint.name = newDestination.Name;
+            dbMapPoint.description = newDestination.LongDescription;
+            dbMapPoint.latitude = newDestination.Latitude;
+            dbMapPoint.longitude = newDestination.Longitude;
+            dbMapPoint.mapPointTypeId = newDestination.MapPointTypeID;
+            //obsolete columns
+            dbMapPoint.imageX = 1;
+            dbMapPoint.imageY = 1;
+
+            _phillyZooDatabaseEntities.MapPoint.Add(dbMapPoint);
+            _phillyZooDatabaseEntities.SaveChanges();
+
             DestinationObjectLayer dbDestination = new DestinationObjectLayer();
             dbDestination.id = newDestination.ID;
-            dbDestination.mapPointId = newDestination.MapPointID;
+            dbDestination.mapPointId = dbMapPoint.mapPointId;
             dbDestination.statusTypeId = newDestination.StatusID;
-            dbDestination.destinationName = newDestination.Name;
+            dbDestination.destinationName = dbMapPoint.name;
             dbDestination.shortDescription = newDestination.ShortDescription;
-            dbDestination.longDescription = newDestination.LongDescription;
+            dbDestination.longDescription = dbMapPoint.description;
             dbDestination.openingTime = newDestination.OpeningTime;
             dbDestination.closingTime = newDestination.ClosingTime;
 
@@ -92,7 +107,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 SaveDatabaseAdditionalFees(additionalFeesItem);
             }
 
-            _phillyZooDatabaseEntities.DestinationObjectLayerSet.Add(dbDestination);
+            _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
 
             return newDestination.ID;
@@ -100,9 +115,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public void DeleteDataaseDestination(string name)
         {
-            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayerSet.FirstOrDefault(m => m.destinationName == name);
+            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayer.FirstOrDefault(m => m.destinationName == name);
             
-            _phillyZooDatabaseEntities.DestinationObjectLayerSet.Remove(destinationToDelete);
+            _phillyZooDatabaseEntities.DestinationObjectLayer.Remove(destinationToDelete);
             _phillyZooDatabaseEntities.SaveChanges();
         }
 
@@ -200,6 +215,13 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 feesList.Add(feeForList);
             }
             return feesList;
+        }
+        #endregion
+
+        #region Constructors
+        public DestinationRepository()
+        {
+            _DestinationModelFactory = new DestinationModelFactory(this);
         }
         #endregion
     }

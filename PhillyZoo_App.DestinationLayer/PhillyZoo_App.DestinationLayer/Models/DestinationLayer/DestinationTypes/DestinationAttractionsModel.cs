@@ -20,7 +20,8 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get { return Photos != null && Photos.Any(); } }
 
 
-        public DestinationAttractionsModel(int id, int mapPointId, string name, int statusId, string shortDescription, string longDescription, DateTime openingTime, DateTime closingTime, List<DestinationPhotosModel> photos, List<DestinationEnterExitsModel> enterExits, List<DestinationAdditionalFeesModel> additionalFees) : base(id, mapPointId, name, statusId, shortDescription, longDescription, openingTime, closingTime)
+        public DestinationAttractionsModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime, List<DestinationPhotosModel> photos, List<DestinationEnterExitsModel> enterExits, List<DestinationAdditionalFeesModel> additionalFees)
+            : base(id, mapPointId, name, statusId, mapPointTypeId, shortDescription, longDescription, latitude, longitude, openingTime, closingTime)
         {
             Photos = photos;
             EnterExits = enterExits;

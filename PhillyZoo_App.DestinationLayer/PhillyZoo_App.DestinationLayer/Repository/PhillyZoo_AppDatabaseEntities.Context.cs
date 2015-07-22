@@ -39,15 +39,15 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public DbSet<DestinationEnterExitType> DestinationEnterExitType { get; set; }
         public DbSet<DestinationMenu> DestinationMenu { get; set; }
         public DbSet<DestinationPhotos> DestinationPhotos { get; set; }
-        public DbSet<MapPoint> MapPoint { get; set; }
         public DbSet<MapPointEdges> MapPointEdges { get; set; }
-        public DbSet<MapPointStatusType> MapPointStatusType { get; set; }
         public DbSet<MapPointType> MapPointType { get; set; }
         public DbSet<PushType> PushType { get; set; }
         public DbSet<User_PushType> User_PushType { get; set; }
-        public DbSet<DestinationObjectLayer> DestinationObjectLayerSet { get; set; }
         public DbSet<DestinationEnterExits> DestinationEnterExits { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<DestinationAdditionalFees> DestinationAdditionalFees { get; set; }
+        public DbSet<DestinationObjectLayer> DestinationObjectLayer { get; set; }
+        public DbSet<MapPoint> MapPoint { get; set; }
+        public DbSet<MapPointStatusType> MapPointStatusType { get; set; }
     }
 }

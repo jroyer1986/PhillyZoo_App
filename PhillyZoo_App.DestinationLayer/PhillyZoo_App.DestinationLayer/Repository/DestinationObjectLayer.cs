@@ -16,10 +16,10 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     {
         public DestinationObjectLayer()
         {
+            this.DestinationAdditionalFees = new HashSet<DestinationAdditionalFees>();
+            this.DestinationEnterExits = new HashSet<DestinationEnterExits>();
             this.DestinationMenu = new HashSet<DestinationMenu>();
             this.DestinationPhotos = new HashSet<DestinationPhotos>();
-            this.DestinationEnterExits = new HashSet<DestinationEnterExits>();
-            this.DestinationAdditionalFees = new HashSet<DestinationAdditionalFees>();
         }
     
         public int id { get; set; }
@@ -31,11 +31,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public System.DateTime openingTime { get; set; }
         public System.DateTime closingTime { get; set; }
     
+        public virtual ICollection<DestinationAdditionalFees> DestinationAdditionalFees { get; set; }
+        public virtual ICollection<DestinationEnterExits> DestinationEnterExits { get; set; }
         public virtual ICollection<DestinationMenu> DestinationMenu { get; set; }
+        public virtual ICollection<DestinationPhotos> DestinationPhotos { get; set; }
         public virtual MapPoint MapPoint { get; set; }
         public virtual MapPointStatusType MapPointStatusType { get; set; }
-        public virtual ICollection<DestinationPhotos> DestinationPhotos { get; set; }
-        public virtual ICollection<DestinationEnterExits> DestinationEnterExits { get; set; }
-        public virtual ICollection<DestinationAdditionalFees> DestinationAdditionalFees { get; set; }
     }
 }

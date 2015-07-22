@@ -15,9 +15,15 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get; set; }
         public int StatusID
         { get; set; }
+        public int MapPointTypeID
+        { get; set; }
         public string ShortDescription
         { get; set; }
         public string LongDescription
+        { get; set; }
+        public decimal Latitude
+        { get; set; }
+        public decimal Longitude
         { get; set; }
         public DateTime OpeningTime
         { get; set; }
@@ -30,14 +36,17 @@ namespace PhillyZoo_App.DestinationLayer.Models
         public virtual bool HasPhotos
         { get { return false; } }
   
-        public DestinationModel(int id, int mapPointId, string name, int statusId, string shortDescription, string longDescription, DateTime openingTime, DateTime closingTime)
+        public DestinationModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime)
         {
             ID = id;
             MapPointID = mapPointId;
             Name = name;
             StatusID = statusId;
+            MapPointTypeID = mapPointTypeId;
             ShortDescription = shortDescription;
             LongDescription = LongDescription;
+            Latitude = latitude;
+            Longitude = longitude;
             OpeningTime = openingTime;
             ClosingTime = closingTime;
         }
