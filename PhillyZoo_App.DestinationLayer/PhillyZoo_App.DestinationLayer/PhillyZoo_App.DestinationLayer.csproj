@@ -120,12 +120,16 @@
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationAttractionsModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationDiningModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationExhibitsModel.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationGiftSouvenirsModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationPhotosModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationModelFactory.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationTypes\IAdditionalFees.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationTypes\IMenu.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationTypes\IPhotos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AspNetRoles.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
