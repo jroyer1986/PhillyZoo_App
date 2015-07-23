@@ -137,7 +137,25 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
         }
 
+        public List<MapPointType> ListOfMapPointTypes()
+        {
+            List<MapPointType> listForController = new List<MapPointType>();
+            foreach(var mapPointType in _phillyZooDatabaseEntities.MapPointType)
+            {
+                listForController.Add(mapPointType);
+            }
+            return listForController;
+        }
 
+        public List<MapPointStatusType> ListOfMapPointStatusTypes()
+        {
+            List<MapPointStatusType> listForController = new List<MapPointStatusType>();
+            foreach(var mapPointStatusType in _phillyZooDatabaseEntities.MapPointStatusType)
+            {
+                listForController.Add(mapPointStatusType);
+            }
+            return listForController;
+        }
 
 
         #region Saving Helpers
