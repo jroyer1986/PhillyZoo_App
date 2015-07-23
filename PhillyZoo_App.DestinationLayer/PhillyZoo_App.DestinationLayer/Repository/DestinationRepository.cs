@@ -6,12 +6,13 @@ using System.Web;
 
 namespace PhillyZoo_App.DestinationLayer.Repository
 {
-    public class DestinationRepository
+    public class DestinationRepository : IDestinationRepository
     {
         phillyzoo_newEntities _phillyZooDatabaseEntities = new phillyzoo_newEntities();
         protected DestinationModelFactory _DestinationModelFactory
         { get; set; }
         
+
         public IEnumerable<DestinationModel> GetDestinations()
         {
             var destinations = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").AsEnumerable();
@@ -63,7 +64,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return matchingList;
         }
 
-        public int SaveDatabaseDestination(DestinationModel newDestination)
+        public void SaveDatabaseDestination(DestinationModel newDestination)
         {
             MapPoint dbMapPoint = new MapPoint();
             dbMapPoint.mapPointId = newDestination.MapPointID;
@@ -109,8 +110,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
-
-            return newDestination.ID;
         }
 
         public void DeleteDataaseDestination(string name)

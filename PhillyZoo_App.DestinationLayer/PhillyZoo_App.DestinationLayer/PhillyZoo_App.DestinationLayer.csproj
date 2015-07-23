@@ -169,10 +169,12 @@
     <Compile Include="Repository\DestinationPhotos.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\FakeDestinationRepository.cs" />
     <Compile Include="Repository\DestinationRepository.cs" />
     <Compile Include="Repository\Feed.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\IDestinationRepository.cs" />
     <Compile Include="Repository\Itinerary.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
@@ -248,7 +250,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\CreateDestination.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -48,3 +48,5 @@ C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.Destinati
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.csprojResolveAssemblyReference.cache
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb

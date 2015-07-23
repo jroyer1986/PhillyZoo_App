@@ -11,29 +11,33 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 {
     public class HomeController : Controller
     {
-        DestinationRepository _destinationRepository = new DestinationRepository();
+        IDestinationRepository _destinationRepository = new FakeDestinationRepository();
         //
         // GET: /Home/
 
         public ActionResult Index()
         {
-            //get a list of destinations from repository
             IEnumerable<DestinationModel> destinations = _destinationRepository.GetDestinations();
 
             IndexViewModel viewIndex = new IndexViewModel(destinations);
             return View(viewIndex);
         }
 
+        public ActionResult DestinationDetails(int id)
+        {
+            DestinationModel destinationToDetail = _destinationRepository.GetDestinationByID(id);
+            return View(destinationToDetail);
+        }
+
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult CreateDestination()
         {
             DestinationModel destination = new DestinationModel();
-
             return View(destination);
         }
 
         [HttpPost]
-        public ActionResult Create(DestinationModel newDestination)
+        public ActionResult CreateDestination(DestinationModel newDestination)
         {
             _destinationRepository.SaveDatabaseDestination(newDestination);
             return RedirectToAction("Index");
