@@ -112,13 +112,33 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             _phillyZooDatabaseEntities.SaveChanges();
         }
 
-        public void DeleteDataaseDestination(string name)
+        public void DeleteDatabaseDestination(int id)
         {
-            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayer.FirstOrDefault(m => m.destinationName == name);
+            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayer.FirstOrDefault(m => m.id == id);
             
             _phillyZooDatabaseEntities.DestinationObjectLayer.Remove(destinationToDelete);
             _phillyZooDatabaseEntities.SaveChanges();
         }
+
+        public void EditDatabaseDestination(DestinationModel editedDestination)
+        {
+            DestinationObjectLayer destinationToEdit = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint").Include("MapPointStatusType").FirstOrDefault(m => m.id == editedDestination.ID);
+
+            if (destinationToEdit != null)
+            {
+                destinationToEdit.statusTypeId = editedDestination.StatusID;
+                destinationToEdit.destinationName = editedDestination.Name;
+                destinationToEdit.shortDescription = editedDestination.ShortDescription;
+                destinationToEdit.longDescription = editedDestination.LongDescription;
+                destinationToEdit.openingTime = editedDestination.OpeningTime;
+                destinationToEdit.closingTime = editedDestination.ClosingTime;
+
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+
+
 
         #region Saving Helpers
         public void SaveDatabasePhotos(IPhotos photoList)

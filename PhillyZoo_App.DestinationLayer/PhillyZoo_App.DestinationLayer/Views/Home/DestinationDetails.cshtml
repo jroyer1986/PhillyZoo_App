@@ -1,0 +1,106 @@
+﻿@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
+
+@{
+    ViewBag.Title = "DestinationDetails";
+}
+
+<h2>DestinationDetails</h2>
+
+<fieldset>
+    <legend>DestinationModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MapPointID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MapPointID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StatusID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MapPointTypeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MapPointTypeID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LongDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LongDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Latitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Latitude)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Longitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Longitude)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpeningTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpeningTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ClosingTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClosingTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HasMenu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HasMenu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HasAdditionalFees)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HasAdditionalFees)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HasPhotos)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HasPhotos)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

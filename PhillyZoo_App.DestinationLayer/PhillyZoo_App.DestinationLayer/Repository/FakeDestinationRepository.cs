@@ -46,7 +46,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             throw new NotImplementedException();
         }
 
-        void IDestinationRepository.DeleteDataaseDestination(string name)
+        void IDestinationRepository.DeleteDatabaseDestination(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination)
         {
             throw new NotImplementedException();
         }

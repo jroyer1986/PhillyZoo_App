@@ -5,10 +5,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 {
     interface IDestinationRepository
     {
-        void DeleteDataaseDestination(string name);
+        void DeleteDatabaseDestination(int id);
         DestinationModel GetDestinationByID(int id);
         IEnumerable<DestinationModel> GetDestinations();
         void SaveDatabaseDestination(DestinationModel newDestination);
         IEnumerable<DestinationModel> SearchDestinations(string name);
+        void EditDatabaseDestination(DestinationModel editedDestination);
     }
 }

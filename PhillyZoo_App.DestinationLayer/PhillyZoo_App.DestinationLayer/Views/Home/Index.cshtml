@@ -4,10 +4,18 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".confirmAction").click(function (e) {
+            if (!confirm('Are you sure you want to delete this Destination?')) { e.preventDefault() }
+        });
+    });
+</script>
+
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateDestination")
 </p>
 <table>
     <tr>
@@ -95,9 +103,9 @@
             @Html.DisplayFor(modelItem => item.HasPhotos)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "EditDestination", new { id=item.ID }) |
+            @Html.ActionLink("Details", "DestinationDetails", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "DeleteDestination", "Home", new { id = item.ID }, new { @class = "confirmAction" })
         </td>
     </tr>
 }

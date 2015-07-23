@@ -11,7 +11,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 {
     public class HomeController : Controller
     {
-        IDestinationRepository _destinationRepository = new FakeDestinationRepository();
+        IDestinationRepository _destinationRepository = new DestinationRepository();
         //
         // GET: /Home/
 
@@ -41,6 +41,46 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         {
             _destinationRepository.SaveDatabaseDestination(newDestination);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteDestination(int id)
+        {
+            _destinationRepository.DeleteDatabaseDestination(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult EditDestination(int id)
+        {
+            DestinationModel destination = _destinationRepository.GetDestinationByID(id);
+            if (destination != null)
+            {
+                return View(destination);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+        public ActionResult EditDestination(DestinationModel updatedDestination)
+        {
+            _destinationRepository.EditDatabaseDestination(updatedDestination);
+            return RedirectToAction("DestinationDetails", new { id = updatedDestination.ID });
+        }
+
+        public ActionResult DetailDestination(int id)
+        {
+            DestinationModel destination = _destinationRepository.GetDestinationByID(id);
+            if (destination != null)
+            {
+                return View(destination);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "That Destination Does Not Exist!";
+                return View("Error");
+            } 
         }
 
     }

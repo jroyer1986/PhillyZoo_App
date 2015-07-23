@@ -44,7 +44,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
             StatusID = statusId;
             MapPointTypeID = mapPointTypeId;
             ShortDescription = shortDescription;
-            LongDescription = LongDescription;
+            LongDescription = longDescription;
             Latitude = latitude;
             Longitude = longitude;
             OpeningTime = openingTime;
