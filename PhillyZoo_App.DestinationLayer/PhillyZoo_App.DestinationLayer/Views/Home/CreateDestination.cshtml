@@ -14,20 +14,43 @@
     {
         var dropDownList = (IEnumerable<SelectListItem>)ViewBag.MapPointTypeList;
         var list = Html.DropDownListFor(m => m.MapPointTypeID, dropDownList);
-        @list;     
+        @list;
     }
     else
     {
         throw new NotImplementedException();
     }
+
 <script>
     var mySelectedMapPointType = document.getElementById("MapPointTypeID");
-    console.log(mySelectedMapPointType);
     mySelectedMapPointType.onchange = function()
     {
+        document.getElementsByClassName("optionalForms").style.visibility = 'hidden';
         var selectedIndex = mySelectedMapPointType.options.selectedIndex;
         var mapPointTypeId = mySelectedMapPointType[selectedIndex].value;
         document.getElementById('mapPointTypeIdField').value = mapPointTypeId;
+
+        if(mapPointTypeId == 252 || mapPointTypeId == 253 /*Exhibits and Zoo360*/)
+        {
+            document.getElementById("addPhotos").style.visibility = 'visible';
+            document.getElementById("addEnterExits").styel.visibility = 'visible';
+        }
+        if (mapPointTypeId == 254 /*Attractions*/)
+        {
+
+        }
+        if (mapPointTypeId == 255 /*GiftsSouvenirs*/)
+        {
+
+        }
+        if (mapPointTypeId == 256 /*Dining*/)
+        {
+
+        }
+        if (mapPointTypeId == 257 /*Facilities*/)
+        {
+
+        }
     }
 </script>
 
@@ -96,6 +119,24 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.ClosingTime)
             @Html.ValidationMessageFor(model => model.ClosingTime)
+        </div>
+
+
+
+        <div id="addPhotos" class="optionalForms">
+            Photo Addition is Here
+        </div>
+
+        <div id="addMenus" class="optionalForms">
+            Menu Addition is Here
+        </div>
+
+        <div id="addAdditionalFees" class="optionalForms">
+            AdditionalFees Addition is Here
+        </div>
+
+        <div id="addEnterExits" class="optionalForms">
+            Enter/Exit Addition is Here
         </div>
 
         <p>
