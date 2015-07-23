@@ -55,5 +55,15 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         {
             throw new NotImplementedException();
         }
+
+        List<MapPointType> IDestinationRepository.ListOfMapPointTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<MapPointStatusType> IDestinationRepository.ListOfMapPointStatusTypes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

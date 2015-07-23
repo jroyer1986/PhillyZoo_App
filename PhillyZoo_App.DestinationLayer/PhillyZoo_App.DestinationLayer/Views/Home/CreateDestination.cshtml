@@ -9,17 +9,30 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    
+    if(@Model.MapPointTypeID == 0)
+    {
+        var dropDownList = (IEnumerable<SelectListItem>)ViewBag.MapPointTypeList;
+        var list = Html.DropDownListFor(m => m.MapPointTypeID, dropDownList);
+        @list;     
+    }
+    else
+    {
+        throw new NotImplementedException();
+    }
+<script>
+    var mySelectedMapPointType = document.getElementById("MapPointTypeID");
+    console.log(mySelectedMapPointType);
+    mySelectedMapPointType.onchange = function()
+    {
+        var selectedIndex = mySelectedMapPointType.options.selectedIndex;
+        var mapPointTypeId = mySelectedMapPointType[selectedIndex].value;
+        document.getElementById('mapPointTypeIdField').value = mapPointTypeId;
+    }
+</script>
 
     <fieldset>
         <legend>DestinationModel</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MapPointID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MapPointID)
-            @Html.ValidationMessageFor(model => model.MapPointID)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -35,14 +48,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.StatusID)
             @Html.ValidationMessageFor(model => model.StatusID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MapPointTypeID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MapPointTypeID)
-            @Html.ValidationMessageFor(model => model.MapPointTypeID)
         </div>
 
         <div class="editor-label">
