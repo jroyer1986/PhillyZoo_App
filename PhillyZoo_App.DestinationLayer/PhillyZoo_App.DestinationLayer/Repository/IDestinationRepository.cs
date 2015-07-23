@@ -11,5 +11,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         void SaveDatabaseDestination(DestinationModel newDestination);
         IEnumerable<DestinationModel> SearchDestinations(string name);
         void EditDatabaseDestination(DestinationModel editedDestination);
+        List<MapPointType> ListOfMapPointTypes();
+        List<MapPointStatusType> ListOfMapPointStatusTypes();
     }
 }

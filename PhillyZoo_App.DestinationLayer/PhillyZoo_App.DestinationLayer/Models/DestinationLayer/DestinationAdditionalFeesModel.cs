@@ -23,5 +23,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
             Fee = fee;
             FeeName = feeName;
         }
+
+        public DestinationAdditionalFeesModel() { }
     }
 }

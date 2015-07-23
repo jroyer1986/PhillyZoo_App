@@ -32,6 +32,17 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         [HttpGet]
         public ActionResult CreateDestination()
         {
+            IEnumerable<MapPointStatusType> listOfMapPointStatusTypes = _destinationRepository.ListOfMapPointStatusTypes();
+            IEnumerable<SelectListItem> mapPointStatusTypeDropDownList = new List<SelectListItem>();
+            mapPointStatusTypeDropDownList = listOfMapPointStatusTypes.Select(m => new SelectListItem() { Value = m.id.ToString(), Text = m.status });
+
+            IEnumerable<MapPointType> listOfMapPointTypes = _destinationRepository.ListOfMapPointTypes();
+            IEnumerable<SelectListItem> mapPointTypeDropDownList = new List<SelectListItem>();
+            mapPointTypeDropDownList = listOfMapPointTypes.Select(m => new SelectListItem() { Value = m.mapPointTypeId.ToString(), Text = m.type });
+
+            ViewBag.MapPointTypeList = mapPointTypeDropDownList;
+            ViewBag.MapPointStatusTypeList = mapPointStatusTypeDropDownList;
+
             DestinationModel destination = new DestinationModel();
             return View(destination);
         }
@@ -83,5 +94,31 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             } 
         }
 
+        [HttpGet]
+        public ActionResult CreatePhotos(int destinationLayerId)
+        {
+            DestinationPhotosModel photos = new DestinationPhotosModel();
+            photos.DestinationLayerID = destinationLayerId;
+
+            return View(photos);
+        }
+
+        [HttpGet]
+        public ActionResult CreateMenu(int destinationLayerId)
+        {
+            DestinationMenuModel menus = new DestinationMenuModel();
+            menus.DestinationLayerID = destinationLayerId;
+
+            return View(menus);
+        }
+
+        [HttpGet]
+        public ActionResult CreateAdditionalFees(int destinationLayerId)
+        {
+            DestinationAdditionalFeesModel additionalFees = new DestinationAdditionalFeesModel();
+            additionalFees.DestinationLayerID = destinationLayerId;
+
+            return View(additionalFees);
+        }
     }
 }

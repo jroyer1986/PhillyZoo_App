@@ -20,5 +20,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
             DestinationLayerID = destinationLayerId;
             Menu = menu;
         }
+
+        public DestinationMenuModel() { }
     }
 }
