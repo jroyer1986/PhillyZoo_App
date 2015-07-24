@@ -29,12 +29,7 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get; set; }
         public DateTime ClosingTime
         { get; set; }
-        public virtual bool HasMenu
-        { get { return false; } }
-        public virtual bool HasAdditionalFees
-        { get { return false; } }
-        public virtual bool HasPhotos
-        { get { return false; } }
+
   
         public DestinationModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime)
         {

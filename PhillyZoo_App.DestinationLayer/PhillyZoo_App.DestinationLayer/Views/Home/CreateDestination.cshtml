@@ -1,4 +1,5 @@
-﻿@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
+﻿@using PhillyZoo_App.DestinationLayer.Models;
+@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,31 +7,21 @@
 
 <h2>Create Destination</h2>
 
-@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     
-    if(@Model.MapPointTypeID == 0)
+    @if(Model.MapPointTypeID == 0)
     {
-        var dropDownList = (IEnumerable<SelectListItem>)ViewBag.MapPointTypeList;
-        var list = Html.DropDownListFor(m => m.MapPointTypeID, dropDownList);
-        @list;     
+        using (Html.BeginForm("CreateType", "Home"))
+        {
+               @Html.LabelFor(m=>m.MapPointTypeID)
+               @Html.DropDownListFor(m => m.MapPointTypeID, (IEnumerable<SelectListItem>)ViewBag.MapPointTypeList)
+               <input type="submit" value="select type" />
+        }
     }
     else
     {
-        throw new NotImplementedException();
-    }
-<script>
-    var mySelectedMapPointType = document.getElementById("MapPointTypeID");
-    console.log(mySelectedMapPointType);
-    mySelectedMapPointType.onchange = function()
-    {
-        var selectedIndex = mySelectedMapPointType.options.selectedIndex;
-        var mapPointTypeId = mySelectedMapPointType[selectedIndex].value;
-        document.getElementById('mapPointTypeIdField').value = mapPointTypeId;
-    }
-</script>
-
+    
     <fieldset>
         <legend>DestinationModel</legend>
 
@@ -98,6 +89,29 @@
             @Html.ValidationMessageFor(model => model.ClosingTime)
         </div>
 
+
+
+        @{if (Model is IPhotos) { 
+            <div id="addPhotos" class="optionalForms">
+                Photo Addition is Here
+            </div>
+        }
+        if (Model is IMenu){
+            <div id="addMenus" class="optionalForms">
+                Menu Addition is Here
+            </div>
+        }
+        if (Model is IAdditionalFees){
+            <div id="addAdditionalFees" class="optionalForms">
+                AdditionalFees Addition is Here
+            </div>
+        }
+        if (Model is IEnterExits){
+            <div id="addEnterExits" class="optionalForms">
+                Enter/Exit Addition is Here
+            </div>
+        }
+        }
         <p>
             <input type="submit" value="Create" />
         </p>

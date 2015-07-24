@@ -49,15 +49,6 @@
         <th>
             @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().ClosingTime)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().HasMenu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().HasAdditionalFees)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().HasPhotos)
-        </th>
         <th></th>
     </tr>
 
@@ -92,15 +83,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ClosingTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HasMenu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HasAdditionalFees)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HasPhotos)
         </td>
         <td>
             @Html.ActionLink("Edit", "EditDestination", new { id=item.ID }) |

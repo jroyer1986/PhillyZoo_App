@@ -11,7 +11,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 {
     public class HomeController : Controller
     {
-        IDestinationRepository _destinationRepository = new DestinationRepository();
+        IDestinationRepository _destinationRepository = new FakeDestinationRepository();
         //
         // GET: /Home/
 
@@ -29,6 +29,37 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(destinationToDetail);
         }
 
+        [HttpPost]
+        public ActionResult CreateType(DestinationModel postedType)
+        {
+            DestinationModel model = null;
+            switch (postedType.MapPointTypeID)
+            {
+                case 252:
+                    model =  new DestinationExhibitsModel();
+                    break;
+                case 253:
+                    model = new DestinationExhibitsModel();
+                    break;
+                case 254:
+                    model = new DestinationAttractionsModel();
+                    break;
+                case 255:
+                    model = new DestinationGiftSouvenirsModel();
+                    break;
+                case 256:
+                    model = new DestinationDiningModel();
+                    break;
+                case 257:
+                    model = new DestinationModel();
+                    break;
+                default:
+                    model = new DestinationModel();
+                    break;
+            }
+            model.MapPointTypeID = postedType.MapPointTypeID;
+            return View("CreateDestination", model);
+        }
         [HttpGet]
         public ActionResult CreateDestination()
         {
@@ -49,7 +80,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 
         [HttpPost]
         public ActionResult CreateDestination(DestinationModel newDestination)
-        {
+        {   
             _destinationRepository.SaveDatabaseDestination(newDestination);
             return RedirectToAction("Index");
         }
