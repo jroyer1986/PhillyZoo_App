@@ -53,3 +53,6 @@ C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\Phi
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml

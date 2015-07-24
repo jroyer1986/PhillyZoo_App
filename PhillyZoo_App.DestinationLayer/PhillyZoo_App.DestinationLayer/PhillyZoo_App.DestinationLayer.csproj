@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationModelFactory.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\IAdditionalFees.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationTypes\IEnterExits.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\IMenu.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\IPhotos.cs" />
     <Compile Include="Models\Enums\MapPointType.cs" />

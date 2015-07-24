@@ -8,7 +8,8 @@ namespace PhillyZoo_App.DestinationLayer.Models.Enums
     public enum MapPointType
     {
         NavigationPoint, 
-        Exhibits, Zoo360, 
+        Exhibits, 
+        Zoo360, 
         Attractions, 
         Gifts_Souvenirs, 
         Dining, 

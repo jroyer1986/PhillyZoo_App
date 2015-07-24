@@ -43,12 +43,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         void IDestinationRepository.SaveDatabaseDestination(DestinationModel newDestination)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Saved!");
         }
 
         void IDestinationRepository.DeleteDatabaseDestination(int id)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("deleted!");
         }
 
         void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination)
@@ -58,12 +58,54 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         List<MapPointType> IDestinationRepository.ListOfMapPointTypes()
         {
-            throw new NotImplementedException();
+            List<MapPointType> list = new List<MapPointType>();
+            MapPointType newMapPointType1 = new MapPointType();
+            newMapPointType1.mapPointTypeId = 251;
+            newMapPointType1.type = "NavPoint";
+            MapPointType newMapPointType2 = new MapPointType();
+            newMapPointType2.mapPointTypeId = 252;
+            newMapPointType2.type = "Exhibit";
+            MapPointType newMapPointType3 = new MapPointType();
+            newMapPointType3.mapPointTypeId = 253;
+            newMapPointType3.type = "Zoo360";
+            MapPointType newMapPointType4 = new MapPointType();
+            newMapPointType4.mapPointTypeId = 254;
+            newMapPointType4.type = "Attractions";
+            MapPointType newMapPointType5 = new MapPointType();
+            newMapPointType5.mapPointTypeId = 255;
+            newMapPointType5.type = "Gifts_Souvenirs";
+            MapPointType newMapPointType6 = new MapPointType();
+            newMapPointType6.mapPointTypeId = 256;
+            newMapPointType6.type = "Dining";
+            MapPointType newMapPointType7 = new MapPointType();
+            newMapPointType7.mapPointTypeId = 257;
+            newMapPointType7.type = "Facilities";
+            list.Add(newMapPointType1);
+            list.Add(newMapPointType2);
+            list.Add(newMapPointType3);
+            list.Add(newMapPointType4);
+            list.Add(newMapPointType5);
+            list.Add(newMapPointType6);
+            list.Add(newMapPointType7);
+            return list;
         }
 
         List<MapPointStatusType> IDestinationRepository.ListOfMapPointStatusTypes()
         {
-            throw new NotImplementedException();
+            List<MapPointStatusType> list = new List<MapPointStatusType>();
+            MapPointStatusType mapPointType1 = new MapPointStatusType();
+            mapPointType1.id = 0;
+            mapPointType1.status = "Not Applicable";
+            MapPointStatusType mapPointType2 = new MapPointStatusType();
+            mapPointType2.id = 1;
+            mapPointType2.status = "Open";
+            MapPointStatusType mapPointType3 = new MapPointStatusType();
+            mapPointType3.id = 2;
+            mapPointType3.status = "Closed";
+            list.Add(mapPointType1);
+            list.Add(mapPointType2);
+            list.Add(mapPointType3);
+            return list;
         }
     }
 }
