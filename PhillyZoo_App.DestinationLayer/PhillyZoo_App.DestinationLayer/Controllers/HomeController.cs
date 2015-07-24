@@ -3,6 +3,7 @@ using PhillyZoo_App.DestinationLayer.Repository;
 using PhillyZoo_App.DestinationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 {
     public class HomeController : Controller
     {
-        IDestinationRepository _destinationRepository = new FakeDestinationRepository();
+        IDestinationRepository _destinationRepository = new DestinationRepository();
         //
         // GET: /Home/
 
@@ -60,6 +61,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             model.MapPointTypeID = postedType.MapPointTypeID;
             return View("CreateDestination", model);
         }
+
         [HttpGet]
         public ActionResult CreateDestination()
         {
@@ -79,8 +81,15 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateDestination(DestinationModel newDestination)
-        {   
+        public ActionResult CreateDestination(DestinationModel newDestination, HttpPostedFileBase thumbnailPhoto, HttpPostedFileBase previewPhoto)
+        {
+            var thumbnailPhotoFileName = newDestination.ID.ToString() + "thumbnail" + Path.GetFileName(thumbnailPhoto.FileName);
+            var previewPhotoFileName = newDestination.ID.ToString() + "preview" + Path.GetFileName(previewPhoto.FileName);
+            var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoFileName);
+            var pathForPreview = Path.Combine(Server.MapPath("~TempPreviewThumbs"), previewPhotoFileName);
+            thumbnailPhoto.SaveAs(pathForThumb);
+            previewPhoto.SaveAs(pathForPreview);
+
             _destinationRepository.SaveDatabaseDestination(newDestination);
             return RedirectToAction("Index");
         }
@@ -151,5 +160,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 
             return View(additionalFees);
         }
+
     }
 }

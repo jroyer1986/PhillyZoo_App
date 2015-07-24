@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Drawing;
 
 namespace PhillyZoo_App.DestinationLayer.Models
 {
@@ -16,8 +17,8 @@ namespace PhillyZoo_App.DestinationLayer.Models
 
 
         public DestinationDiningModel() { }
-        public DestinationDiningModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime, List<DestinationPhotosModel> photos, List<DestinationMenuModel> menu, List<DestinationEnterExitsModel> enterExits)
-            : base(id, mapPointId, name, statusId, mapPointTypeId, shortDescription, longDescription, latitude, longitude, openingTime, closingTime)
+        public DestinationDiningModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime, string previewPhoto, string thumbnailPhoto, List<DestinationPhotosModel> photos, List<DestinationMenuModel> menu, List<DestinationEnterExitsModel> enterExits)
+            : base(id, mapPointId, name, statusId, mapPointTypeId, shortDescription, longDescription, latitude, longitude, openingTime, closingTime, previewPhoto, thumbnailPhoto)
         {
             Menu = menu;
             EnterExits = enterExits;

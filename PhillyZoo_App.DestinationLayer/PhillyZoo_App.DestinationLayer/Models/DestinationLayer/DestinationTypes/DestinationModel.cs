@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Drawing;
 
 namespace PhillyZoo_App.DestinationLayer.Models
 {
@@ -29,9 +30,13 @@ namespace PhillyZoo_App.DestinationLayer.Models
         { get; set; }
         public DateTime ClosingTime
         { get; set; }
+        public string PreviewPhoto
+        { get; set; }
+        public string ThumbnailPhoto
+        { get; set; }
 
   
-        public DestinationModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime)
+        public DestinationModel(int id, int mapPointId, string name, int statusId, int mapPointTypeId, string shortDescription, string longDescription, decimal latitude, decimal longitude, DateTime openingTime, DateTime closingTime, string previewPhoto, string thumbnailPhoto)
         {
             ID = id;
             MapPointID = mapPointId;
@@ -44,6 +49,8 @@ namespace PhillyZoo_App.DestinationLayer.Models
             Longitude = longitude;
             OpeningTime = openingTime;
             ClosingTime = closingTime;
+            PreviewPhoto = previewPhoto;
+            ThumbnailPhoto = thumbnailPhoto;
         }
 
         public DestinationModel() { }

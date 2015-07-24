@@ -1,8 +1,10 @@
 ﻿using PhillyZoo_App.DestinationLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace PhillyZoo_App.DestinationLayer.Repository
 {
@@ -73,6 +75,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbMapPoint.latitude = newDestination.Latitude;
             dbMapPoint.longitude = newDestination.Longitude;
             dbMapPoint.mapPointTypeId = newDestination.MapPointTypeID;
+
+            string targetFolder = HttpContext.Current.Server.MapPath("~/TempPreviewThumbs");
+            string targetPath1 = Path.Combine(targetFolder, newDestination.PreviewPhoto);
+            string targetPath2 = Path.Combine(targetFolder, newDestination.ThumbnailPhoto);
+            
+
             //obsolete columns
             dbMapPoint.imageX = 1;
             dbMapPoint.imageY = 1;
