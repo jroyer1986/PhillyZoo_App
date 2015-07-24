@@ -95,6 +95,20 @@
             @Html.ValidationMessageFor(model => model.ClosingTime)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PreviewPhoto)
+        </div>
+        <div class="editor-field">
+            <input name="previewPhoto" type="file" id="previewPhoto" value="Upload Picture" />
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThumbnailPhoto)
+        </div>
+        <div class="editor-field">
+            <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>

@@ -262,12 +262,11 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Home\CreateDestination.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\DestinationDetails.cshtml" />
-    <Content Include="Views\Home\EditDestination.cshtml" />
     <Content Include="Views\Home\CreatePhotos.cshtml" />
     <Content Include="Views\Home\CreateMenu.cshtml" />
     <Content Include="Views\Home\CreateAdditionalFees.cshtml" />
-    <Content Include="Views\Home\CreateDestination2.cshtml" />
+    <Content Include="Views\Home\EditDestination.cshtml" />
+    <Content Include="Views\Home\DetailDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

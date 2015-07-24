@@ -66,7 +66,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return matchingList;
         }
 
-        public void SaveDatabaseDestination(DestinationModel newDestination)
+        public int SaveDatabaseDestination(DestinationModel newDestination)
         {
             MapPoint dbMapPoint = new MapPoint();
             dbMapPoint.mapPointId = newDestination.MapPointID;
@@ -118,6 +118,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
+            return dbDestination.id;
         }
 
         public void DeleteDatabaseDestination(int id)

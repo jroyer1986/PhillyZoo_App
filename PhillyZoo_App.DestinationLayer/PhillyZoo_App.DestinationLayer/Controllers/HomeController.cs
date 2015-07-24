@@ -24,12 +24,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(viewIndex);
         }
 
-        public ActionResult DestinationDetails(int id)
-        {
-            DestinationModel destinationToDetail = _destinationRepository.GetDestinationByID(id);
-            return View(destinationToDetail);
-        }
-
         [HttpPost]
         public ActionResult CreateType(DestinationModel postedType)
         {
@@ -83,14 +77,14 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         [HttpPost]
         public ActionResult CreateDestination(DestinationModel newDestination, HttpPostedFileBase thumbnailPhoto, HttpPostedFileBase previewPhoto)
         {
-            var thumbnailPhotoFileName = newDestination.ID.ToString() + "thumbnail" + Path.GetFileName(thumbnailPhoto.FileName);
-            var previewPhotoFileName = newDestination.ID.ToString() + "preview" + Path.GetFileName(previewPhoto.FileName);
+            int dbInt = _destinationRepository.SaveDatabaseDestination(newDestination);
+            var thumbnailPhotoFileName = dbInt.ToString() + "_thumbnail_" + Path.GetFileName(thumbnailPhoto.FileName);
+            var previewPhotoFileName = dbInt.ToString() + "_preview_" + Path.GetFileName(previewPhoto.FileName);
             var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoFileName);
-            var pathForPreview = Path.Combine(Server.MapPath("~TempPreviewThumbs"), previewPhotoFileName);
+            var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoFileName);
             thumbnailPhoto.SaveAs(pathForThumb);
             previewPhoto.SaveAs(pathForPreview);
 
-            _destinationRepository.SaveDatabaseDestination(newDestination);
             return RedirectToAction("Index");
         }
 
@@ -125,6 +119,10 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel destination = _destinationRepository.GetDestinationByID(id);
             if (destination != null)
             {
+                var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_thumbnail_");
+                var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_preview_");
+                ViewBag.DestinationPreviewImage = pathForPreview;
+                ViewBag.DestinationThumbnailImage = pathForThumb;
                 return View(destination);
             }
             else

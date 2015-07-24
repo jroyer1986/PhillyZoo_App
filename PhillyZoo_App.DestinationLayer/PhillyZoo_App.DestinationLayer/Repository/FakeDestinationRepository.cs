@@ -41,9 +41,10 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return listToReturn;
         }
 
-        void IDestinationRepository.SaveDatabaseDestination(DestinationModel newDestination)
+        int IDestinationRepository.SaveDatabaseDestination(DestinationModel newDestination)
         {
             Console.WriteLine("Saved!");
+            return 1;
         }
 
         void IDestinationRepository.DeleteDatabaseDestination(int id)

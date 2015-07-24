@@ -1,10 +1,10 @@
 ﻿@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
 
 @{
-    ViewBag.Title = "DestinationDetails";
+    ViewBag.Title = "DetailDestination";
 }
 
-<h2>DestinationDetails</h2>
+<h2>DetailDestination</h2>
 
 <fieldset>
     <legend>DestinationModel</legend>
@@ -77,6 +77,20 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ClosingTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PreviewPhoto)
+    </div>
+    <div class="display-field">
+        @ViewBag.DestinationPreviewImage;
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThumbnailPhoto)
+    </div>
+    <div class="display-field">
+        @ViewBag.DestinationThumbnailImage;
     </div>
 </fieldset>
 <p>

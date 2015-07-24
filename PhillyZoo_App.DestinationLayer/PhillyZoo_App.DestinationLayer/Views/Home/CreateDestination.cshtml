@@ -21,7 +21,7 @@
     }
     else
     {
-    using (Html.BeginForm("CreateType", "Home"))
+        using (Html.BeginForm("CreateDestination", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
     <fieldset>
         <legend>DestinationModel</legend>
@@ -98,17 +98,14 @@
             @Html.LabelFor(model => model.PreviewPhoto)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PreviewPhoto)
-            @Html.ValidationMessageFor(model => model.PreviewPhoto)
+            <input name="previewPhoto" type="file" id="previewPhoto" value="Upload Picture" />
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ThumbnailPhoto)
-            <input name="thumbnailPhoto" type="file" id="picture" value="Upload Picture" />
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ThumbnailPhoto)
-            <input name="previewPhoto" type="file" id="picture" value="Upload Picture" />
+            <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
         </div>
 
         @*@{if (Model is IPhotos) { 
