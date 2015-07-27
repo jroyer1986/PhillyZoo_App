@@ -37,11 +37,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public DestinationModel GetDestinationByID(int id)
         {
-            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == id);
 
             if (destination != null)
             {
                 DestinationModel destinationModel = _DestinationModelFactory.createDestination(destination);
+                
                 return destinationModel;
             }
             else

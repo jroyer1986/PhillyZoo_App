@@ -84,8 +84,8 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
             var previewSuffix = Path.GetExtension(previewPhotoFileName);
 
-            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail_" + thumbnailSuffix;
-            var previewPhotoPath = dbInt.ToString() + "_preview_" + previewSuffix;
+            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail_" + thumbnailSuffix.ToString();
+            var previewPhotoPath = dbInt.ToString() + "_preview_" + previewSuffix.ToString();
 
             //declare local folder for storing Previews and Thumbs  **May Change Later**
             var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoPath);
@@ -133,6 +133,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel destination = _destinationRepository.GetDestinationByID(id);
             if (destination != null)
             {
+                
                 var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_thumbnail_");
                 var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_preview_");
                 ViewBag.DestinationPreviewImage = pathForPreview;
@@ -154,12 +155,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 
             return View(photos);
         }
-
-        //[HttpPost]
-        //public ActionResult CreatePhotos(DestinationPhotosModel newPhotos)
-        //{
-        //    var x = 0;
-        //}
 
         [HttpGet]
         public ActionResult CreateMenu(int destinationLayerId)

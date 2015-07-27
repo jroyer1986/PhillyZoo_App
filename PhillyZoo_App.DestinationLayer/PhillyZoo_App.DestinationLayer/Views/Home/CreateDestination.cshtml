@@ -108,7 +108,7 @@
             <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
         </div>
   
-        @{if (Model is IPhotos) { 
+        @*@{if (Model is IPhotos) { 
             <div id="addPhotos" class="optionalForms">
                 @Html.Partial("CreatePhotos", new DestinationPhotosModel() {DestinationLayerID = Model.ID })
             </div>
@@ -128,7 +128,7 @@
                 @Html.Partial("CreateEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
             </div>
         }
-        }
+        }*@
         <p>
             <input type="submit" value="Create" />
         </p>
