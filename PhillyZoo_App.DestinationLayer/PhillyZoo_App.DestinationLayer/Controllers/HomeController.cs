@@ -87,8 +87,13 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail_" + thumbnailSuffix;
             var previewPhotoPath = dbInt.ToString() + "_preview_" + previewSuffix;
 
+            //declare local folder for storing Previews and Thumbs  **May Change Later**
             var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoPath);
             var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoPath);
+
+            //check to see if it already exists.  If so, delete the existing one and replace it
+            
+
             thumbnailPhoto.SaveAs(pathForThumb);
             previewPhoto.SaveAs(pathForPreview);
             _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb);
@@ -150,6 +155,12 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(photos);
         }
 
+        //[HttpPost]
+        //public ActionResult CreatePhotos(DestinationPhotosModel newPhotos)
+        //{
+        //    var x = 0;
+        //}
+
         [HttpGet]
         public ActionResult CreateMenu(int destinationLayerId)
         {
@@ -166,6 +177,15 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             additionalFees.DestinationLayerID = destinationLayerId;
 
             return View(additionalFees);
+        }
+
+        [HttpGet]
+        public ActionResult CreateEnterExits(int destinationLayerId)
+        {
+            DestinationEnterExitsModel enterExits = new DestinationEnterExitsModel();
+            enterExits.DestinationLayerID = destinationLayerId;
+
+            return View(enterExits);
         }
 
     }

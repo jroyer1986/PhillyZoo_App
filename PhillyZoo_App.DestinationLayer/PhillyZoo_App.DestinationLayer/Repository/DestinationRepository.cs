@@ -110,6 +110,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 SaveDatabaseAdditionalFees(additionalFeesItem);
             }
 
+            if(newDestination is IEnterExits)
+            {
+                IEnterExits enterExits = (IEnterExits)newDestination;
+                SaveDatabaseEnterExits(enterExits);
+            }
+
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
             return dbDestination.id;
@@ -146,8 +152,33 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public void DeleteDatabaseDestination(int id)
         {
-            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayer.FirstOrDefault(m => m.id == id);
+            DestinationObjectLayer destinationToDelete = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationAdditionalFees").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
             
+            if(destinationToDelete.DestinationPhotos.Count() != 0)
+            {
+                DeleteDatabasePhotos(destinationToDelete.id);
+            }
+            if(destinationToDelete.DestinationMenu.Count() != 0)
+            {
+                DeleteDatabaseMenu(destinationToDelete.id);
+            }
+            if(destinationToDelete.DestinationAdditionalFees.Count() != 0)
+            {
+                DeleteDatabaseAdditionalFees(destinationToDelete.id);
+            }
+            if(destinationToDelete.DestinationEnterExits.Count() != 0)
+            {
+                DeleteDatabaseEnterExits(destinationToDelete.id);
+            }
+            if(destinationToDelete.DestinationPreview.Count() != 0)
+            {
+                DeleteDatabasePreviewImage(destinationToDelete.id);
+            }
+            if(destinationToDelete.DestinationThumb.Count() != 0)
+            {
+                DeleteDatabaseThumbImage(destinationToDelete.id);
+            }
+
             _phillyZooDatabaseEntities.DestinationObjectLayer.Remove(destinationToDelete);
             _phillyZooDatabaseEntities.SaveChanges();
         }
@@ -238,6 +269,101 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                     dbFee.feeName = feesModel.FeeName;
 
                     _phillyZooDatabaseEntities.DestinationAdditionalFees.Add(dbFee);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+        public void SaveDatabaseEnterExits(IEnterExits enterExitList)
+        {
+            if(enterExitList != null)
+            {
+                foreach(DestinationEnterExitsModel enterExit in enterExitList.EnterExits)
+                {
+                    DestinationEnterExits dbEnterExit = new DestinationEnterExits();
+                    dbEnterExit.id = enterExit.ID;
+                    dbEnterExit.destinationLayerId = enterExit.DestinationLayerID;
+                    dbEnterExit.typeId = enterExit.TypeID;
+                    dbEnterExit.latitude = enterExit.Latitude;
+                    dbEnterExit.longitude = enterExit.Longitude;
+                    dbEnterExit.hadicapAccessible = enterExit.IsHandicapAccessible;
+
+                    _phillyZooDatabaseEntities.DestinationEnterExits.Add(dbEnterExit);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Deleting Helpers
+        public void DeleteDatabasePhotos(int destinationLayerId)
+        {
+            var databasePhotosToDelete = _phillyZooDatabaseEntities.DestinationPhotos.Where(m => m.destinationLayerId == destinationLayerId);
+            if(databasePhotosToDelete != null)
+            {
+                foreach (var databasePhoto in databasePhotosToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationPhotos.Remove(databasePhoto);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        public void DeleteDatabaseMenu(int destinationLayerId)
+        {
+            var databaseMenuToDelete = _phillyZooDatabaseEntities.DestinationMenu.Where(m => m.destinationLayerId == destinationLayerId);
+            if (databaseMenuToDelete != null)
+            {
+                foreach (var databaseMenu in databaseMenuToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationMenu.Remove(databaseMenu);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        public void DeleteDatabaseAdditionalFees(int destinationLayerId)
+        {
+            var databaseAdditionalFeesToDelete = _phillyZooDatabaseEntities.DestinationAdditionalFees.Where(m => m.destinationLayerId == destinationLayerId);
+            if (databaseAdditionalFeesToDelete != null)
+            {
+                foreach (var databaseAdditionalFee in databaseAdditionalFeesToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationAdditionalFees.Remove(databaseAdditionalFee);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        public void DeleteDatabaseEnterExits(int destinationLayerId)
+        {
+            var databaseEnterExitsToDelete = _phillyZooDatabaseEntities.DestinationEnterExits.Where(m => m.destinationLayerId == destinationLayerId);
+            if (databaseEnterExitsToDelete != null)
+            {
+                foreach (var databaseEnterExit in databaseEnterExitsToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationEnterExits.Remove(databaseEnterExit);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        public void DeleteDatabasePreviewImage(int destinationLayerId)
+        {
+            var databasePreviewImageToDelete = _phillyZooDatabaseEntities.DestinationPreview.Where(m => m.destinationLayerId == destinationLayerId);
+            if (databasePreviewImageToDelete != null)
+            {
+                foreach (var databasePreview in databasePreviewImageToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationPreview.Remove(databasePreview);
+                }
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+        public void DeleteDatabaseThumbImage(int destinationLayerId)
+        {
+            var databaseThumbnailToDelete = _phillyZooDatabaseEntities.DestinationThumb.Where(m => m.destinationLayerId == destinationLayerId);
+            if (databaseThumbnailToDelete != null)
+            {
+                foreach (var databaseThumb in databaseThumbnailToDelete)
+                {
+                    _phillyZooDatabaseEntities.DestinationThumb.Remove(databaseThumb);
                 }
                 _phillyZooDatabaseEntities.SaveChanges();
             }
