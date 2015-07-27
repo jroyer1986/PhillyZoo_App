@@ -1,0 +1,24 @@
+﻿@model PhillyZoo_App.DestinationLayer.Models.DestinationPhotosModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+<br />
+    <fieldset>
+        <legend>DestinationPhotosModel</legend>
+
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.DestinationLayerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImagePath)
+        </div>
+        <div class="editor-field">
+            <input name="destinationPhoto[]" type="file" id="destinationPhoto" value="Upload Picture" multiple />
+        </div>
+
+    </fieldset>
+

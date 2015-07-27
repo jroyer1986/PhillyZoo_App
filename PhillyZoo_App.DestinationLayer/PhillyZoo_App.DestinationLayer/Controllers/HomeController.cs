@@ -80,18 +80,16 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             int dbInt = _destinationRepository.SaveDatabaseDestination(newDestination);
             var thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
             var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
-
             var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
             var previewSuffix = Path.GetExtension(previewPhotoFileName);
+            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
+            var previewPhotoPath = dbInt.ToString() + "_preview" + previewSuffix.ToString();
 
-            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail_" + thumbnailSuffix.ToString();
-            var previewPhotoPath = dbInt.ToString() + "_preview_" + previewSuffix.ToString();
-
-            //declare local folder for storing Previews and Thumbs  **May Change Later**
+            //create standardized name for preview and thumb...
             var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoPath);
             var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoPath);
 
-            //check to see if it already exists.  If so, delete the existing one and replace it
+            //check to see if it already exists.  If so, overwrite existing
             
 
             thumbnailPhoto.SaveAs(pathForThumb);
@@ -133,11 +131,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel destination = _destinationRepository.GetDestinationByID(id);
             if (destination != null)
             {
-                
-                var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_thumbnail_");
-                var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_preview_");
-                ViewBag.DestinationPreviewImage = pathForPreview;
-                ViewBag.DestinationThumbnailImage = pathForThumb;
                 return View(destination);
             }
             else

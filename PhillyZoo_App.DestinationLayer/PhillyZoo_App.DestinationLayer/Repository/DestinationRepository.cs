@@ -37,12 +37,18 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public DestinationModel GetDestinationByID(int id)
         {
-            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == id);
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
+                                                                                                .Include("DestinationPhotos")
+                                                                                                .Include("DestinationMenu")
+                                                                                                .Include("DestinationEnterExits")
+                                                                                                .Include("DestinationPreview")
+                                                                                                .Include("DestinationThumb").FirstOrDefault(m => m.id == id);
 
             if (destination != null)
             {
                 DestinationModel destinationModel = _DestinationModelFactory.createDestination(destination);
-                
+                destinationModel.PreviewPhoto = destination.DestinationPreview.FirstOrDefault(m => m.destinationLayerId == destination.id).previewPath;
+                destinationModel.ThumbnailPhoto = destination.DestinationThumb.FirstOrDefault(m => m.destinationLayerId == destination.id).thumbnailPath;
                 return destinationModel;
             }
             else
@@ -124,7 +130,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public void SavePreviewPathToDatabase(int destinationLayerId, string path)
         {
-            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == destinationLayerId);
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
+                                                                                                    .Include("DestinationPhotos")
+                                                                                                    .Include("DestinationMenu")
+                                                                                                    .Include("DestinationEnterExits")
+                                                                                                    .Include("DestinationPreview")
+                                                                                                    .Include("DestinationThumb").FirstOrDefault(m => m.id == destinationLayerId);
 
             if (destination != null)
             {
@@ -186,7 +197,15 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public void EditDatabaseDestination(DestinationModel editedDestination)
         {
-            DestinationObjectLayer destinationToEdit = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint").Include("MapPointStatusType").FirstOrDefault(m => m.id == editedDestination.ID);
+            DestinationObjectLayer destinationToEdit = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint")
+                                                                                                        .Include("MapPointStatusType")
+                                                                                                        .Include("DestinationMenu")
+                                                                                                        .Include("DestinationAdditionalFees")
+                                                                                                        .Include("DestinationPhotos")
+                                                                                                        .Include("DestinationEnterExits")
+                                                                                                        .Include("DestinationPreview")
+                                                                                                        .Include("DestinationThumb")
+                                                                                                        .FirstOrDefault(m => m.id == editedDestination.ID);
 
             if (destinationToEdit != null)
             {
@@ -196,6 +215,8 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 destinationToEdit.longDescription = editedDestination.LongDescription;
                 destinationToEdit.openingTime = editedDestination.OpeningTime;
                 destinationToEdit.closingTime = editedDestination.ClosingTime;
+
+                
 
                 _phillyZooDatabaseEntities.SaveChanges();
             }
@@ -392,7 +413,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
             return enterExitsList;
         }
-        public List<DestinationMenuModel> CreateMenu(DestinationObjectLayer destination)
+        public List<DestinationMenuModel> CreateMenuList(DestinationObjectLayer destination)
         {
             List<DestinationMenuModel> menuList = new List<DestinationMenuModel>();
             foreach (DestinationMenu menuItem in destination.DestinationMenu)
@@ -402,7 +423,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             }
             return menuList;
         }
-        public List<DestinationAdditionalFeesModel> CreateAdditionalFees(DestinationObjectLayer destination)
+        public List<DestinationAdditionalFeesModel> CreateAdditionalFeesList(DestinationObjectLayer destination)
         {
             List<DestinationAdditionalFeesModel> feesList = new List<DestinationAdditionalFeesModel>();
             foreach (DestinationAdditionalFees fee in destination.DestinationAdditionalFees)
@@ -411,6 +432,26 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 feesList.Add(feeForList);
             }
             return feesList;
+        }
+        public List<DestinationPreviewModel> CreateDestinationPreviewList(DestinationObjectLayer destination)
+        {
+            List<DestinationPreviewModel> listOfDestinationPreviews = new List<DestinationPreviewModel>();
+            foreach(DestinationPreview preview in destination.DestinationPreview)
+            {
+                DestinationPreviewModel previewForList = new DestinationPreviewModel(preview.destinationPreviewId, preview.destinationLayerId, preview.previewPath);
+                listOfDestinationPreviews.Add(previewForList);
+            }
+            return listOfDestinationPreviews;
+        }
+        public List<DestinationThumbModel> CreateDestinationThumbList(DestinationObjectLayer destination)
+        {
+            List<DestinationThumbModel> listOfDestinationThumbs = new List<DestinationThumbModel>();
+            foreach(DestinationThumb thumb in destination.DestinationThumb)
+            {
+                DestinationThumbModel thumbForList = new DestinationThumbModel(thumb.destinationThumbId, thumb.destinationLayerId, thumb.thumbnailPath);
+                listOfDestinationThumbs.Add(thumbForList);
+            }
+            return listOfDestinationThumbs;
         }
         #endregion
 

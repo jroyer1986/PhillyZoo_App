@@ -1,0 +1,95 @@
+﻿@model PhillyZoo_App.DestinationLayer.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".confirmAction").click(function (e) {
+            if (!confirm('Are you sure you want to delete this Destination?')) { e.preventDefault() }
+        });
+    });
+</script>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateDestination")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().MapPointID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().StatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().MapPointTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().ShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().LongDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().OpeningTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DestinationsList.FirstOrDefault().ClosingTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.DestinationsList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MapPointID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MapPointTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LongDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpeningTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosingTime)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "EditDestination", new { id=item.ID }) |*@
+            @Html.ActionLink("Details", "DetailDestination", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "DeleteDestination", "Home", new { id = item.ID }, new { @class = "confirmAction" })
+        </td>
+    </tr>
+}
+
+</table>

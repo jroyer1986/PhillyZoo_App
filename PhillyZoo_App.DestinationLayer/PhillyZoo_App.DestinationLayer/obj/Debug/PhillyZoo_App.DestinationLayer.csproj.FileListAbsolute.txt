@@ -22,21 +22,31 @@ C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\Phi
 C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.WebPages.Razor.xml
 C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.dll
 C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.pdb
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
+C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\PhillyZoo_App.DestinationLayer.dll.config
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\PhillyZoo_App.DestinationLayer.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\PhillyZoo_App.DestinationLayer.pdb
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\EntityFramework.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Microsoft.Web.Infrastructure.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Newtonsoft.Json.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Helpers.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Mvc.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Razor.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.WebPages.Deployment.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.WebPages.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.WebPages.Razor.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\EntityFramework.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Newtonsoft.Json.xml
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Helpers.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Mvc.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Razor.xml
@@ -45,14 +55,10 @@ C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.Destinati
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.WebPages.Razor.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.dll
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.pdb
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Net.Http.Formatting.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Http.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Http.WebHost.dll
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Net.Http.Formatting.xml
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Http.xml
+C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Http.WebHost.xml
 C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\obj\Debug\PhillyZoo_App.DestinationLayer.csprojResolveAssemblyReference.cache
-C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
-C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb
-C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.dll
-C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\Antlr3.Runtime.pdb
-C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
-C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
-C:\Projects\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml
-C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.dll
-C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\WebGrease.dll
-C:\vsprojects\Vanik Interactive\PhillyZoo_App\PhillyZoo_App.DestinationLayer\PhillyZoo_App.DestinationLayer\bin\System.Web.Optimization.xml
