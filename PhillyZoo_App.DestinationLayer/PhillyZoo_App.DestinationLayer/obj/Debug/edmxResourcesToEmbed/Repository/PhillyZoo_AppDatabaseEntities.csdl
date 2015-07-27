@@ -318,6 +318,16 @@
       <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
     </AssociationSet>
+    <EntitySet Name="DestinationPreview" EntityType="phillyzoo_newModel.DestinationPreview" />
+    <EntitySet Name="DestinationThumb" EntityType="phillyzoo_newModel.DestinationThumb" />
+    <AssociationSet Name="FK_DestinationPreview_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+      <End Role="DestinationPreview" EntitySet="DestinationPreview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationThumb_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+      <End Role="DestinationThumb" EntitySet="DestinationThumb" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="DestinationEnterExitType">
     <Key>
@@ -470,6 +480,8 @@
     <NavigationProperty Name="DestinationPhotos" Relationship="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer" FromRole="DestinationObjectLayer" ToRole="DestinationPhotos" />
     <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_DestinationObjectLayer_MapPoint" FromRole="DestinationObjectLayer" ToRole="MapPoint" />
     <NavigationProperty Name="MapPointStatusType" Relationship="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType" FromRole="DestinationObjectLayer" ToRole="MapPointStatusType" />
+    <NavigationProperty Name="DestinationPreview" Relationship="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationPreview" />
+    <NavigationProperty Name="DestinationThumb" Relationship="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationThumb" />
   </EntityType>
   <EntityType Name="MapPoint">
     <Key>
@@ -614,6 +626,48 @@
       </Principal>
       <Dependent Role="DestinationObjectLayer">
         <PropertyRef Name="statusTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DestinationPreview">
+    <Key>
+      <PropertyRef Name="destinationPreviewId" />
+    </Key>
+    <Property Name="destinationPreviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="previewPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer" FromRole="DestinationPreview" ToRole="DestinationObjectLayer" />
+  </EntityType>
+  <EntityType Name="DestinationThumb">
+    <Key>
+      <PropertyRef Name="destinationThumbId" />
+    </Key>
+    <Property Name="destinationThumbId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="thumbnailPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer" FromRole="DestinationThumb" ToRole="DestinationObjectLayer" />
+  </EntityType>
+  <Association Name="FK_DestinationPreview_DestinationObjectLayer">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationPreview" Role="DestinationPreview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationPreview">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationThumb_DestinationObjectLayer">
+    <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
+    <End Type="phillyzoo_newModel.DestinationThumb" Role="DestinationThumb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationThumb">
+        <PropertyRef Name="destinationLayerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -265,5 +265,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DestinationPreview">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationPreview">
+        <MappingFragment StoreEntitySet="DestinationPreview">
+          <ScalarProperty Name="previewPath" ColumnName="previewPath" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="destinationPreviewId" ColumnName="destinationPreviewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationThumb">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationThumb">
+        <MappingFragment StoreEntitySet="DestinationThumb">
+          <ScalarProperty Name="thumbnailPath" ColumnName="thumbnailPath" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="destinationThumbId" ColumnName="destinationThumbId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

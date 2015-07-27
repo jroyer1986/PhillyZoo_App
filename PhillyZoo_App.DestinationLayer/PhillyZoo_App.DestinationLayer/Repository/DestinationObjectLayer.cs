@@ -20,6 +20,8 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             this.DestinationEnterExits = new HashSet<DestinationEnterExits>();
             this.DestinationMenu = new HashSet<DestinationMenu>();
             this.DestinationPhotos = new HashSet<DestinationPhotos>();
+            this.DestinationPreview = new HashSet<DestinationPreview>();
+            this.DestinationThumb = new HashSet<DestinationThumb>();
         }
     
         public int id { get; set; }
@@ -37,5 +39,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public virtual ICollection<DestinationPhotos> DestinationPhotos { get; set; }
         public virtual MapPoint MapPoint { get; set; }
         public virtual MapPointStatusType MapPointStatusType { get; set; }
+        public virtual ICollection<DestinationPreview> DestinationPreview { get; set; }
+        public virtual ICollection<DestinationThumb> DestinationThumb { get; set; }
     }
 }

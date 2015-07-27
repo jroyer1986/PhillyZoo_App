@@ -49,5 +49,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public DbSet<DestinationObjectLayer> DestinationObjectLayer { get; set; }
         public DbSet<MapPoint> MapPoint { get; set; }
         public DbSet<MapPointStatusType> MapPointStatusType { get; set; }
+        public DbSet<DestinationPreview> DestinationPreview { get; set; }
+        public DbSet<DestinationThumb> DestinationThumb { get; set; }
     }
 }

@@ -75,13 +75,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbMapPoint.latitude = newDestination.Latitude;
             dbMapPoint.longitude = newDestination.Longitude;
             dbMapPoint.mapPointTypeId = newDestination.MapPointTypeID;
-
-            string targetFolder = HttpContext.Current.Server.MapPath("~/TempPreviewThumbs");
-            string targetPath1 = Path.Combine(targetFolder, newDestination.PreviewPhoto);
-            string targetPath2 = Path.Combine(targetFolder, newDestination.ThumbnailPhoto);
-            
-
-            //obsolete columns
+            //obsolete columns//
             dbMapPoint.imageX = 1;
             dbMapPoint.imageY = 1;
 
@@ -97,7 +91,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbDestination.longDescription = dbMapPoint.description;
             dbDestination.openingTime = newDestination.OpeningTime;
             dbDestination.closingTime = newDestination.ClosingTime;
-
+            
             if(newDestination is IMenu)
             {
                 IMenu menuItem = (IMenu)newDestination;
@@ -119,6 +113,35 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
             return dbDestination.id;
+        }
+
+        public void SavePreviewPathToDatabase(int destinationLayerId, string path)
+        {
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == destinationLayerId);
+
+            if (destination != null)
+            {
+                DestinationPreview newPreview = new DestinationPreview();
+                newPreview.destinationLayerId = destinationLayerId;
+                newPreview.previewPath = path;
+                
+                _phillyZooDatabaseEntities.DestinationPreview.Add(newPreview);
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+        public void SaveThumbnailPathToDatabase(int destinationLayerId, string path)
+        {
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == destinationLayerId);
+
+            if (destination != null)
+            {
+                DestinationThumb newThumb = new DestinationThumb();
+                newThumb.destinationLayerId = destinationLayerId;
+                newThumb.thumbnailPath = path;
+                _phillyZooDatabaseEntities.DestinationThumb.Add(newThumb);
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
         }
 
         public void DeleteDatabaseDestination(int id)

@@ -130,6 +130,8 @@
     <Compile Include="Models\DestinationLayer\DestinationAdditionalFeesModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationEnterExitsModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationMenuModel.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationPreviewModel.cs" />
+    <Compile Include="Models\DestinationLayer\DestinationThumbModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationAttractionsModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationDiningModel.cs" />
     <Compile Include="Models\DestinationLayer\DestinationTypes\DestinationExhibitsModel.cs" />
@@ -177,6 +179,12 @@
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\DestinationPhotos.cs">
+      <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\DestinationPreview.cs">
+      <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\DestinationThumb.cs">
       <DependentUpon>PhillyZoo_AppDatabaseEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\FakeDestinationRepository.cs" />
