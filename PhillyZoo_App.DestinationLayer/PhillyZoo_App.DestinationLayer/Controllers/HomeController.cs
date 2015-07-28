@@ -89,7 +89,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
             var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
 
-
             thumbnailPhoto.SaveAs(pathForThumb);
             previewPhoto.SaveAs(pathForPreview);
             _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb);
@@ -151,6 +150,13 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(photos);
         }
 
+        [HttpPost]
+        public ActionResult CreatePhotos(DestinationPhotosModel newPhotoModel)
+        {
+            _destinationRepository.SaveDatabasePhotos(newPhotoModel);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult CreateMenu(int destinationLayerId)
         {
@@ -158,6 +164,13 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             menus.DestinationLayerID = destinationLayerId;
 
             return View(menus);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMenu(DestinationMenuModel newMenuModel)
+        {
+            _destinationRepository.SaveDatabaseMenu(newMenuModel);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -169,6 +182,13 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(additionalFees);
         }
 
+        [HttpPost]
+        public ActionResult CreateAdditionalFees(DestinationAdditionalFeesModel newAdditionalFeeModel)
+        {
+            _destinationRepository.SaveDatabaseAdditionalFees(newAdditionalFeeModel);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult CreateEnterExits(int destinationLayerId)
         {
@@ -178,5 +198,11 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             return View(enterExit);
         }
 
+        [HttpPost]
+        public ActionResult CreateEnterExits(DestinationEnterExitsModel newEnterExitModel)
+        {
+            _destinationRepository.SaveDatabaseEnterExits(newEnterExitModel);
+            return RedirectToAction("Index");
+        }
     }
 }

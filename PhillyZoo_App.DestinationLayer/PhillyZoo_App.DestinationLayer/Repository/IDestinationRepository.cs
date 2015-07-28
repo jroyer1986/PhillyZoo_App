@@ -15,5 +15,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         List<MapPointStatusType> ListOfMapPointStatusTypes();
         void SavePreviewPathToDatabase(int destinationLayerId, string path);
         void SaveThumbnailPathToDatabase(int destinationLayerId, string path);
+        void SaveDatabasePhotos(DestinationPhotosModel photoList);
+        void SaveDatabaseMenu(DestinationMenuModel menuList);
+        void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFeesList);
+        void SaveDatabaseEnterExits(DestinationEnterExitsModel enterExitsList);
     }
 }

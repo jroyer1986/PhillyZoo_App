@@ -98,29 +98,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbDestination.openingTime = newDestination.OpeningTime;
             dbDestination.closingTime = newDestination.ClosingTime;
 
-            
-
-            
-
-//MOVE THIS STUFF AND HAVE IT CHECK THE NEWLY SAVED DESTINATION
-            if(newDestination is IMenu)
-            {
-                IMenu menuItem = (IMenu)newDestination;
-                SaveDatabaseMenu(menuItem);
-            }
-
-            if(newDestination is IPhotos)
-            {
-                IPhotos photoItem = (IPhotos)newDestination;
-                SaveDatabasePhotos(photoItem);
-            }
-
-            if(newDestination is IAdditionalFees)
-            {
-                IAdditionalFees additionalFeesItem = (IAdditionalFees)newDestination;
-                SaveDatabaseAdditionalFees(additionalFeesItem);
-            }
-
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
             return dbDestination.id;
@@ -322,54 +299,64 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         #endregion
 
         #region Saving Helpers
-        public void SaveDatabasePhotos(IPhotos photoList)
+        public void SaveDatabasePhotos(DestinationPhotosModel photo)
         {
-            if(photoList != null)
-            {
-                foreach (DestinationPhotosModel photoModel in photoList.Photos)
-                {
-                    DestinationPhotos dbPhoto = new DestinationPhotos();
-                    dbPhoto.id = photoModel.ID;
-                    dbPhoto.destinationLayerId = photoModel.DestinationLayerID;
-                    dbPhoto.imagePath = photoModel.ImagePath;
+            if(photo != null)
+            {  
+                DestinationPhotos dbPhoto = new DestinationPhotos();
+                dbPhoto.id = photo.ID;
+                dbPhoto.destinationLayerId = photo.DestinationLayerID;
+                dbPhoto.imagePath = photo.ImagePath;
 
-                    _phillyZooDatabaseEntities.DestinationPhotos.Add(dbPhoto);
-                }
+                _phillyZooDatabaseEntities.DestinationPhotos.Add(dbPhoto);
+                
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
 
-        public void SaveDatabaseMenu(IMenu menuList)
+        public void SaveDatabaseMenu(DestinationMenuModel menu)
         {
-            if (menuList != null)
+            if (menu != null)
             {
-                foreach (DestinationMenuModel menuModel in menuList.Menu)
-                {
-                    DestinationMenu dbMenu = new DestinationMenu();
-                    dbMenu.id = menuModel.ID;
-                    dbMenu.destinationLayerId = menuModel.DestinationLayerID;
-                    dbMenu.menu = menuModel.Menu;
+                DestinationMenu dbMenu = new DestinationMenu();
+                dbMenu.id = menu.ID;
+                dbMenu.destinationLayerId = menu.DestinationLayerID;
+                dbMenu.menu = menu.Menu;
 
-                    _phillyZooDatabaseEntities.DestinationMenu.Add(dbMenu);
-                }
+                _phillyZooDatabaseEntities.DestinationMenu.Add(dbMenu);
+                
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
 
-        public void SaveDatabaseAdditionalFees(IAdditionalFees additionalFeesList)
+        public void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFees)
         {
-            if(additionalFeesList != null)
-            {
-                foreach(DestinationAdditionalFeesModel feesModel in additionalFeesList.AdditionalFees)
-                {
-                    DestinationAdditionalFees dbFee = new DestinationAdditionalFees();
-                    dbFee.additionalFeesId = feesModel.ID;
-                    dbFee.destinationLayerId = feesModel.DestinationLayerID;
-                    dbFee.fee = feesModel.Fee;
-                    dbFee.feeName = feesModel.FeeName;
+            if(additionalFees != null)
+            {                
+                DestinationAdditionalFees dbFee = new DestinationAdditionalFees();
+                dbFee.additionalFeesId = additionalFees.ID;
+                dbFee.destinationLayerId = additionalFees.DestinationLayerID;
+                dbFee.fee = additionalFees.Fee;
+                dbFee.feeName = additionalFees.FeeName;
 
-                    _phillyZooDatabaseEntities.DestinationAdditionalFees.Add(dbFee);
-                }
+                _phillyZooDatabaseEntities.DestinationAdditionalFees.Add(dbFee);               
+                _phillyZooDatabaseEntities.SaveChanges();
+            }
+        }
+
+        public void SaveDatabaseEnterExits(DestinationEnterExitsModel enterExits)
+        {
+            if(enterExits != null)
+            {
+                DestinationEnterExits dbEnterExit = new DestinationEnterExits();
+                dbEnterExit.id = enterExits.ID;
+                dbEnterExit.destinationLayerId = enterExits.DestinationLayerID;
+                dbEnterExit.typeId = enterExits.TypeID;
+                dbEnterExit.latitude = enterExits.Latitude;
+                dbEnterExit.longitude = enterExits.Longitude;
+                dbEnterExit.hadicapAccessible = enterExits.IsHandicapAccessible;
+
+                _phillyZooDatabaseEntities.DestinationEnterExits.Add(dbEnterExit);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }

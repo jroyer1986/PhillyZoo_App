@@ -118,5 +118,25 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         {
             
         }
+
+        void IDestinationRepository.SaveDatabasePhotos(DestinationPhotosModel photo)
+        {
+
+        }
+
+        void IDestinationRepository.SaveDatabaseMenu(DestinationMenuModel menu)
+        {
+
+        }
+
+        void IDestinationRepository.SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFees)
+        {
+
+        }
+
+        void IDestinationRepository.SaveDatabaseEnterExits(DestinationEnterExitsModel enterExit)
+        {
+
+        }
     }
 }
