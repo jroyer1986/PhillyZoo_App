@@ -1,0 +1,113 @@
+﻿@using PhillyZoo_App.DestinationLayer.Models;
+@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
+
+<fieldset>
+    <legend>DestinationModel</legend>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.StatusID)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.StatusID)
+        @Html.ValidationMessageFor(model => model.StatusID)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ShortDescription)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ShortDescription)
+        @Html.ValidationMessageFor(model => model.ShortDescription)
+    </div>
+
+    <div class="editor-field">
+        @Html.HiddenFor(m => m.MapPointTypeID)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.LongDescription)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.LongDescription)
+        @Html.ValidationMessageFor(model => model.LongDescription)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Latitude)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Latitude)
+        @Html.ValidationMessageFor(model => model.Latitude)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Longitude)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Longitude)
+        @Html.ValidationMessageFor(model => model.Longitude)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.OpeningTime)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.OpeningTime)
+        @Html.ValidationMessageFor(model => model.OpeningTime)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ClosingTime)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ClosingTime)
+        @Html.ValidationMessageFor(model => model.ClosingTime)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.PreviewPhoto)
+    </div>
+    <div class="editor-field">
+        <input name="previewPhoto" type="file" id="previewPhoto" value="Upload Picture" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ThumbnailPhoto)
+    </div>
+    <div class="editor-field">
+        <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
+    </div>
+
+    @*@{if (Model is IPhotos) {
+            <div id="addPhotos" class="optionalForms">
+                @Html.Partial("CreatePhotos", new DestinationPhotosModel() {DestinationLayerID = Model.ID });
+            </div>
+        }
+        if (Model is IMenu){
+            <div id="addMenus" class="optionalForms">
+                Menu Addition Here
+            </div>
+        }
+        if (Model is IAdditionalFees){
+            <div id="addAdditionalFees" class="optionalForms">
+                Additional Fees Here
+            </div>
+        }
+        if (Model is IEnterExits){
+            <div id="addEnterExits" class="optionalForms">
+                Enter/Exit Here
+            </div>
+        }
+        }*@
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</fieldset>

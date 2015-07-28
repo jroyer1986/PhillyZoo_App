@@ -17,7 +17,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public IEnumerable<DestinationModel> GetDestinations()
         {
-            var destinations = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").AsEnumerable();
+            var destinations = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationAdditionalFees").AsEnumerable();
 
             if (destinations != null)
             {

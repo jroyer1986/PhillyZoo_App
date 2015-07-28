@@ -267,6 +267,7 @@
     <Content Include="Views\Home\CreateAdditionalFees.cshtml" />
     <Content Include="Views\Home\EditDestination.cshtml" />
     <Content Include="Views\Home\DetailDestination.cshtml" />
+    <Content Include="Views\Home\CreateEditDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
