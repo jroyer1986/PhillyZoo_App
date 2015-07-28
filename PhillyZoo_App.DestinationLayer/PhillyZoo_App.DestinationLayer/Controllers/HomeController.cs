@@ -30,22 +30,22 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel model = null;
             switch (postedType.MapPointTypeID)
             {
-                case 252:
+                case 2:
                     model =  new DestinationExhibitsModel();
                     break;
-                case 253:
+                case 3:
                     model = new DestinationExhibitsModel();
                     break;
-                case 254:
+                case 4:
                     model = new DestinationAttractionsModel();
                     break;
-                case 255:
+                case 5:
                     model = new DestinationGiftSouvenirsModel();
                     break;
-                case 256:
+                case 6:
                     model = new DestinationDiningModel();
                     break;
-                case 257:
+                case 7:
                     model = new DestinationModel();
                     break;
                 default:
@@ -78,12 +78,22 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         public ActionResult CreateDestination(DestinationModel newDestination, HttpPostedFileBase thumbnailPhoto, HttpPostedFileBase previewPhoto)
         {
             int dbInt = _destinationRepository.SaveDatabaseDestination(newDestination);
-            var thumbnailPhotoFileName = dbInt.ToString() + "_thumbnail_" + Path.GetFileName(thumbnailPhoto.FileName);
-            var previewPhotoFileName = dbInt.ToString() + "_preview_" + Path.GetFileName(previewPhoto.FileName);
-            var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoFileName);
-            var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoFileName);
+            var thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
+            var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
+            var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
+            var previewSuffix = Path.GetExtension(previewPhotoFileName);
+            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
+            var previewPhotoPath = dbInt.ToString() + "_preview" + previewSuffix.ToString();
+
+            //create standardized name for preview and thumb...
+            var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoPath);
+            var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoPath);
+
+
             thumbnailPhoto.SaveAs(pathForThumb);
             previewPhoto.SaveAs(pathForPreview);
+            _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb);
+            _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForPreview);
 
             return RedirectToAction("Index");
         }
@@ -157,6 +167,15 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             additionalFees.DestinationLayerID = destinationLayerId;
 
             return View(additionalFees);
+        }
+
+        [HttpGet]
+        public ActionResult CreateEnterExits(int destinationLayerId)
+        {
+            DestinationEnterExitsModel enterExit = new DestinationEnterExitsModel();
+            enterExit.DestinationLayerID = destinationLayerId;
+
+            return View(enterExit);
         }
 
     }

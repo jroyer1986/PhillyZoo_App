@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a5a836d7284b4234a06365b47bfcb492" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="phillyzoo_newModel.C__MigrationHistory" Width="1.5" PointX="3.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.AspNetUserLogins" Width="1.5" PointX="5.125" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.AspNetUsers" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.Feed" Width="1.5" PointX="1.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.Itinerary" Width="1.5" PointX="5.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.JWTToken" Width="1.5" PointX="7.125" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.PushMessage" Width="1.5" PointX="7.125" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.Sessions" Width="1.5" PointX="5.125" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.Users" Width="1.5" PointX="5.125" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_Users_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_JWTToken_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_PushMessage_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_Sessions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_MapPoint_MapPoint" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationEnterExitType" Width="1.5" PointX="13.625" PointY="12.5" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationMenu" Width="1.5" PointX="13.625" PointY="7.125" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationPhotos" Width="1.5" PointX="13.625" PointY="10.5" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.MapPointEdges" Width="1.5" PointX="13.625" PointY="3.875" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.MapPointType" Width="1.5" PointX="9.5" PointY="3.875" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.PushType" Width="1.5" PointX="7.125" PointY="16.125" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.User_PushType" Width="1.5" PointX="7.125" PointY="13.5" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_User_PushType_PushType" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_User_PushType_Users" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationEnterExits" Width="1.5" PointX="11.5" PointY="12.375" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.sysdiagrams" Width="1.5" PointX="3.875" PointY="2.5" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationEnterExitType1" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationAdditionalFees" Width="1.5" PointX="15.625" PointY="8.75" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.DestinationObjectLayer" Width="1.5" PointX="11.5" PointY="8.125" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.MapPoint" Width="1.5" PointX="11.5" PointY="3.875" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationEnterExists_DestinationLayer" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationMenu_DestinationLayer" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationPhotos_DestinationLayer" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_Itinerary_MapPoint" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_MapPoint_MapPointType" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_MapPointEdges_MapPoint" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_MapPointEdges_MapPoint1" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationObjectLayer_MapPoint" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.MapPointStatusType" Width="1.5" PointX="9.375" PointY="8.125" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

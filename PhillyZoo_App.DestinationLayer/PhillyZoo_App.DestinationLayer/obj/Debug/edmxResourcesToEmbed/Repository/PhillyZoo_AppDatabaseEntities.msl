@@ -74,6 +74,8 @@
     <EntitySetMapping Name="Itinerary">
       <EntityTypeMapping TypeName="phillyzoo_newModel.Itinerary">
         <MappingFragment StoreEntitySet="Itinerary">
+          <ScalarProperty Name="Itinerary_dttm" ColumnName="Itinerary_dttm" />
+          <ScalarProperty Name="itineraryId" ColumnName="itineraryId" />
           <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
@@ -262,6 +264,24 @@
         <MappingFragment StoreEntitySet="MapPointStatusType">
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationPreview">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationPreview">
+        <MappingFragment StoreEntitySet="DestinationPreview">
+          <ScalarProperty Name="previewPath" ColumnName="previewPath" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="destinationPreviewId" ColumnName="destinationPreviewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DestinationThumb">
+      <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationThumb">
+        <MappingFragment StoreEntitySet="DestinationThumb">
+          <ScalarProperty Name="thumbPath" ColumnName="thumbPath" />
+          <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
+          <ScalarProperty Name="destinationThumbId" ColumnName="destinationThumbId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
