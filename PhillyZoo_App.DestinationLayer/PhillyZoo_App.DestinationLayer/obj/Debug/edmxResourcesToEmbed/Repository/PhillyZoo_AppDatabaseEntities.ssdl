@@ -153,7 +153,7 @@
       <PropertyRef Name="itineraryId" />
     </Key>
     <Property Name="itineraryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="mapPointId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="mapPointId" Type="int" Nullable="false" />
     <Property Name="userId" Type="int" Nullable="false" />
     <Property Name="sortOrder" Type="int" />
     <Property Name="Itinerary_dttm" Type="datetime" />

@@ -78,20 +78,6 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.ClosingTime)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PreviewPhoto)
-    </div>
-    <div class="display-field">
-        @ViewBag.DestinationPreviewImage;
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ThumbnailPhoto)
-    </div>
-    <div class="display-field">
-        @ViewBag.DestinationThumbnailImage;
-    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |

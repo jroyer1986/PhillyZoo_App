@@ -85,8 +85,8 @@
             @Html.DisplayFor(modelItem => item.ClosingTime)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "EditDestination", "Home", new { id=item.ID }) |
-            @Html.ActionLink("Details", "DetailDestination", "Home", new { id=item.ID }) |*@
+            @Html.ActionLink("Edit", "EditDestination", new { id=item.ID }) |
+            @Html.ActionLink("Details", "DetailDestination", new { id=item.ID }) |
             @Html.ActionLink("Delete", "DeleteDestination", "Home", new { id = item.ID }, new { @class = "confirmAction" })
         </td>
     </tr>

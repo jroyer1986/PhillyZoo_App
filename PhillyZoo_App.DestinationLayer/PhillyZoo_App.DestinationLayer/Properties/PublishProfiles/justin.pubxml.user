@@ -25,7 +25,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2015 09:14:04</publishTime>
     </File>
     <File Include="bin/PhillyZoo_App.DestinationLayer.dll">
-      <publishTime>07/28/2015 11:38:00</publishTime>
+      <publishTime>07/28/2015 16:14:03</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/20/2015 10:09:22</publishTime>
@@ -58,7 +58,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2015 09:14:02</publishTime>
     </File>
     <File Include="Repository/PhillyZoo_AppDatabaseEntities.edmx.diagram">
-      <publishTime>07/28/2015 09:14:02</publishTime>
+      <publishTime>07/28/2015 15:55:49</publishTime>
     </File>
     <File Include="Scripts/jquery-2.1.4.js">
       <publishTime>07/22/2015 12:36:55</publishTime>
@@ -88,22 +88,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2015 11:37:19</publishTime>
     </File>
     <File Include="Views/Home/CreateEditDestination.cshtml">
-      <publishTime>07/28/2015 11:37:19</publishTime>
+      <publishTime>07/28/2015 14:56:58</publishTime>
+    </File>
+    <File Include="Views/Home/CreateEnterExits.cshtml">
+      <publishTime>07/28/2015 13:34:39</publishTime>
     </File>
     <File Include="Views/Home/CreateMenu.cshtml">
       <publishTime>07/28/2015 09:14:02</publishTime>
     </File>
     <File Include="Views/Home/CreatePhotos.cshtml">
-      <publishTime>07/28/2015 09:14:02</publishTime>
+      <publishTime>07/28/2015 13:37:25</publishTime>
     </File>
     <File Include="Views/Home/DetailDestination.cshtml">
-      <publishTime>07/28/2015 09:14:02</publishTime>
+      <publishTime>07/28/2015 16:21:37</publishTime>
     </File>
     <File Include="Views/Home/EditDestination.cshtml">
       <publishTime>07/28/2015 11:37:19</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/28/2015 11:37:37</publishTime>
+      <publishTime>07/28/2015 12:22:20</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/24/2015 15:51:37</publishTime>

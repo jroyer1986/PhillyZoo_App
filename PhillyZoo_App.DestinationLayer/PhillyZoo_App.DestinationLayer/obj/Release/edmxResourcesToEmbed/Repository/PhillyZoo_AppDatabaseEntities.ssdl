@@ -110,7 +110,7 @@
     <Property Name="statusTypeId" Type="int" Nullable="false" />
     <Property Name="destinationName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shortDescription" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="longDescription" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="longDescription" Type="varchar(max)" Nullable="false" />
     <Property Name="openingTime" Type="datetime" Nullable="false" />
     <Property Name="closingTime" Type="datetime" Nullable="false" />
   </EntityType>
@@ -121,6 +121,22 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="destinationLayerId" Type="int" Nullable="false" />
     <Property Name="imagePath" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DestinationPreview">
+    <Key>
+      <PropertyRef Name="destinationPreviewId" />
+    </Key>
+    <Property Name="destinationPreviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="destinationLayerId" Type="int" Nullable="false" />
+    <Property Name="previewPath" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DestinationThumb">
+    <Key>
+      <PropertyRef Name="destinationThumbId" />
+    </Key>
+    <Property Name="destinationThumbId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="destinationLayerId" Type="int" Nullable="false" />
+    <Property Name="thumbPath" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Feed">
     <Key>
@@ -134,11 +150,13 @@
   </EntityType>
   <EntityType Name="Itinerary">
     <Key>
-      <PropertyRef Name="mapPointId" />
+      <PropertyRef Name="itineraryId" />
     </Key>
-    <Property Name="mapPointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itineraryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mapPointId" Type="int" Nullable="false" />
     <Property Name="userId" Type="int" Nullable="false" />
     <Property Name="sortOrder" Type="int" />
+    <Property Name="Itinerary_dttm" Type="datetime" />
   </EntityType>
   <EntityType Name="JWTToken">
     <Key>
@@ -158,9 +176,9 @@
     <Property Name="description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="latitude" Type="decimal" Precision="8" Scale="6" Nullable="false" />
     <Property Name="longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
-    <Property Name="imageX" Type="int" Nullable="false" />
-    <Property Name="imageY" Type="int" Nullable="false" />
     <Property Name="mapPointTypeId" Type="int" Nullable="false" />
+    <Property Name="imageX" Type="int" />
+    <Property Name="imageY" Type="int" />
   </EntityType>
   <EntityType Name="MapPointEdges">
     <Key>
@@ -311,18 +329,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DestinationEnterExists_DestinationEnterExitType">
-    <End Role="DestinationEnterExitType" Type="Self.DestinationEnterExitType" Multiplicity="1" />
-    <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DestinationEnterExitType">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="DestinationEnterExits">
-        <PropertyRef Name="typeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DestinationEnterExists_DestinationLayer">
     <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="1" />
     <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
@@ -335,15 +341,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DestinationLayer_MapPointStatusType">
-    <End Role="MapPointStatusType" Type="Self.MapPointStatusType" Multiplicity="1" />
-    <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="*" />
+  <Association Name="FK_DestinationEnterExits_DestinationEnterExitType">
+    <End Role="DestinationEnterExitType" Type="Self.DestinationEnterExitType" Multiplicity="1" />
+    <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="MapPointStatusType">
+      <Principal Role="DestinationEnterExitType">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="DestinationObjectLayer">
-        <PropertyRef Name="statusTypeId" />
+      <Dependent Role="DestinationEnterExits">
+        <PropertyRef Name="typeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -371,6 +377,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DestinationObjectLayer_MapPointStatusType">
+    <End Role="MapPointStatusType" Type="Self.MapPointStatusType" Multiplicity="1" />
+    <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapPointStatusType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationObjectLayer">
+        <PropertyRef Name="statusTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DestinationPhotos_DestinationLayer">
     <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="1" />
     <End Role="DestinationPhotos" Type="Self.DestinationPhotos" Multiplicity="*" />
@@ -383,15 +401,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DestinationPreview_DestinationObjectLayer">
+    <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="1" />
+    <End Role="DestinationPreview" Type="Self.DestinationPreview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationPreview">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DestinationThumb_DestinationObjectLayer">
+    <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="1" />
+    <End Role="DestinationThumb" Type="Self.DestinationThumb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DestinationObjectLayer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DestinationThumb">
+        <PropertyRef Name="destinationLayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Itinerary_MapPoint">
     <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
-    <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="0..1" />
+    <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapPoint">
         <PropertyRef Name="mapPointId" />
       </Principal>
       <Dependent Role="Itinerary">
         <PropertyRef Name="mapPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Itinerary_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Itinerary">
+        <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -416,18 +470,6 @@
       </Principal>
       <Dependent Role="MapPoint">
         <PropertyRef Name="mapPointTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MapPointEdges_MapPoint">
-    <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
-    <End Role="MapPointEdges" Type="Self.MapPointEdges" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MapPoint">
-        <PropertyRef Name="mapPointId" />
-      </Principal>
-      <Dependent Role="MapPointEdges">
-        <PropertyRef Name="mapPointIdA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -516,6 +558,8 @@
     <EntitySet Name="DestinationMenu" EntityType="Self.DestinationMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DestinationObjectLayer" EntityType="Self.DestinationObjectLayer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DestinationPhotos" EntityType="Self.DestinationPhotos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DestinationPreview" EntityType="Self.DestinationPreview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DestinationThumb" EntityType="Self.DestinationThumb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Feed" EntityType="Self.Feed" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Itinerary" EntityType="Self.Itinerary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JWTToken" EntityType="Self.JWTToken" Schema="dbo" store:Type="Tables" />
@@ -549,17 +593,13 @@
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
       <End Role="DestinationAdditionalFees" EntitySet="DestinationAdditionalFees" />
     </AssociationSet>
-    <AssociationSet Name="FK_DestinationEnterExists_DestinationEnterExitType" Association="Self.FK_DestinationEnterExists_DestinationEnterExitType">
-      <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
-      <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
-    </AssociationSet>
     <AssociationSet Name="FK_DestinationEnterExists_DestinationLayer" Association="Self.FK_DestinationEnterExists_DestinationLayer">
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
       <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
     </AssociationSet>
-    <AssociationSet Name="FK_DestinationLayer_MapPointStatusType" Association="Self.FK_DestinationLayer_MapPointStatusType">
-      <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
-      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+    <AssociationSet Name="FK_DestinationEnterExits_DestinationEnterExitType" Association="Self.FK_DestinationEnterExits_DestinationEnterExitType">
+      <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
+      <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
     </AssociationSet>
     <AssociationSet Name="FK_DestinationMenu_DestinationLayer" Association="Self.FK_DestinationMenu_DestinationLayer">
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
@@ -569,12 +609,28 @@
       <End Role="MapPoint" EntitySet="MapPoint" />
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
     </AssociationSet>
+    <AssociationSet Name="FK_DestinationObjectLayer_MapPointStatusType" Association="Self.FK_DestinationObjectLayer_MapPointStatusType">
+      <End Role="MapPointStatusType" EntitySet="MapPointStatusType" />
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+    </AssociationSet>
     <AssociationSet Name="FK_DestinationPhotos_DestinationLayer" Association="Self.FK_DestinationPhotos_DestinationLayer">
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
       <End Role="DestinationPhotos" EntitySet="DestinationPhotos" />
     </AssociationSet>
+    <AssociationSet Name="FK_DestinationPreview_DestinationObjectLayer" Association="Self.FK_DestinationPreview_DestinationObjectLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+      <End Role="DestinationPreview" EntitySet="DestinationPreview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DestinationThumb_DestinationObjectLayer" Association="Self.FK_DestinationThumb_DestinationObjectLayer">
+      <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+      <End Role="DestinationThumb" EntitySet="DestinationThumb" />
+    </AssociationSet>
     <AssociationSet Name="FK_Itinerary_MapPoint" Association="Self.FK_Itinerary_MapPoint">
       <End Role="MapPoint" EntitySet="MapPoint" />
+      <End Role="Itinerary" EntitySet="Itinerary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Itinerary_Users" Association="Self.FK_Itinerary_Users">
+      <End Role="Users" EntitySet="Users" />
       <End Role="Itinerary" EntitySet="Itinerary" />
     </AssociationSet>
     <AssociationSet Name="FK_JWTToken_Users" Association="Self.FK_JWTToken_Users">
@@ -584,10 +640,6 @@
     <AssociationSet Name="FK_MapPoint_MapPointType" Association="Self.FK_MapPoint_MapPointType">
       <End Role="MapPointType" EntitySet="MapPointType" />
       <End Role="MapPoint" EntitySet="MapPoint" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MapPointEdges_MapPoint" Association="Self.FK_MapPointEdges_MapPoint">
-      <End Role="MapPoint" EntitySet="MapPoint" />
-      <End Role="MapPointEdges" EntitySet="MapPointEdges" />
     </AssociationSet>
     <AssociationSet Name="FK_MapPointEdges_MapPoint1" Association="Self.FK_MapPointEdges_MapPoint1">
       <End Role="MapPoint" EntitySet="MapPoint" />

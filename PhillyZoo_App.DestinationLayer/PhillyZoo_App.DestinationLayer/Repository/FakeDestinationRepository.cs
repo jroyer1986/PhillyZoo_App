@@ -108,5 +108,15 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             list.Add(mapPointType3);
             return list;
         }
+
+        void IDestinationRepository.SavePreviewPathToDatabase(int destinationLayerId, string path)
+        {
+            
+        }
+
+        void IDestinationRepository.SaveThumbnailPathToDatabase(int destinationLayerId, string path)
+        {
+            
+        }
     }
 }

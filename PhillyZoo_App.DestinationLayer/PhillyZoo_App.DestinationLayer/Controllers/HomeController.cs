@@ -83,11 +83,11 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
             var previewSuffix = Path.GetExtension(previewPhotoFileName);
             var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
-            var previewPhotoPath = dbInt.ToString() + "_preview" + previewSuffix.ToString();
+            var previewPhotoPath = dbInt.ToString() + previewSuffix.ToString();
 
             //create standardized name for preview and thumb...
-            var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), thumbnailPhotoPath);
-            var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), previewPhotoPath);
+            var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
+            var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
 
 
             thumbnailPhoto.SaveAs(pathForThumb);
