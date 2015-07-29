@@ -115,9 +115,21 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             }
         }
 
-        public ActionResult EditDestination(DestinationModel updatedDestination)
+        [HttpPost]
+        public ActionResult EditDestination(DestinationModel updatedDestination, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
-            _destinationRepository.EditDatabaseDestination(updatedDestination);
+            var thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
+            var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
+            var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
+            var previewSuffix = Path.GetExtension(previewPhotoFileName);
+            var thumbnailPhotoPath = updatedDestination.ID.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
+            var previewPhotoPath = updatedDestination.ID.ToString() + previewSuffix.ToString();
+
+            //create standardized name for preview and thumb...
+            var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
+            var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
+
+            _destinationRepository.EditDatabaseDestination(updatedDestination, pathForPreview, pathForThumb, previewPhoto, thumbnailPhoto);
             return RedirectToAction("DetailDestination", new { id = updatedDestination.ID });
         }
 

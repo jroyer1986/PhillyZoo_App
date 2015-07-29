@@ -199,7 +199,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             _phillyZooDatabaseEntities.SaveChanges();
         }
 
-        public void EditDatabaseDestination(DestinationModel editedDestination)
+        public void EditDatabaseDestination(DestinationModel editedDestination, string previewPath, string thumbnailPath, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
             DestinationObjectLayer destinationToEdit = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint")
                                                                                                         .Include("MapPointStatusType")
@@ -220,6 +220,8 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 destinationToEdit.openingTime = editedDestination.OpeningTime;
                 destinationToEdit.closingTime = editedDestination.ClosingTime;
 
+                SavePreviewPathToDatabase(editedDestination.ID, previewPath, previewPhoto);
+                SaveThumbnailPathToDatabase(editedDestination.ID, thumbnailPath, thumbnailPhoto);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }

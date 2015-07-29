@@ -52,7 +52,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             Console.WriteLine("deleted!");
         }
 
-        void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination)
+        void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination, string previewPath, string thumbnailPath, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
             throw new NotImplementedException();
         }
