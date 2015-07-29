@@ -76,11 +76,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbMapPoint.longitude = newDestination.Longitude;
             dbMapPoint.mapPointTypeId = newDestination.MapPointTypeID;
 
-            string targetFolder = HttpContext.Current.Server.MapPath("~/TempPreviewThumbs");
-            string targetPath1 = Path.Combine(targetFolder, newDestination.PreviewPhoto);
-            string targetPath2 = Path.Combine(targetFolder, newDestination.ThumbnailPhoto);
-            
-
             //obsolete columns
             dbMapPoint.imageX = 1;
             dbMapPoint.imageY = 1;

@@ -71,21 +71,20 @@
         @Html.EditorFor(model => model.ClosingTime)
         @Html.ValidationMessageFor(model => model.ClosingTime)
     </div>
-
+    <br />
+    
+    @*Perhaps add an if statement to check if these are null(for a new destination) or not null(for the edit page).  Not null could show previews instead of "File Not Chosen" link?*@
     <div class="editor-label">
         @Html.LabelFor(model => model.PreviewPhoto)
     </div>
     <div class="editor-field">
         <input name="previewPhoto" type="file" id="previewPhoto" value="Upload Picture" />
     </div>
-
+    <br />
     <div class="editor-label">
         @Html.LabelFor(model => model.ThumbnailPhoto)
     </div>
     <div class="editor-field">
         <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
     </div>
-    <p>
-        <input type="submit" value="Save" />
-    </p>
 </fieldset>

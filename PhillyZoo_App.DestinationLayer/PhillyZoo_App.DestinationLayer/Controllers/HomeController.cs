@@ -122,7 +122,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         public ActionResult EditDestination(DestinationModel updatedDestination)
         {
             _destinationRepository.EditDatabaseDestination(updatedDestination);
-            return RedirectToAction("DestinationDetails", new { id = updatedDestination.ID });
+            return RedirectToAction("DetailDestination", new { id = updatedDestination.ID });
         }
 
         public ActionResult DetailDestination(int id)

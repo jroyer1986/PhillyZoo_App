@@ -24,6 +24,9 @@
         using (Html.BeginForm("CreateDestination", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             Html.RenderPartial("CreateEditDestination", Model);
+            <p>
+                <input type="submit" value="Create" />
+            </p>
         }
     }
 <div>
