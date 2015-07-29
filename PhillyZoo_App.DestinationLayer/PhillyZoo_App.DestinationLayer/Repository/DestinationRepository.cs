@@ -100,6 +100,31 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
+
+            //if (newDestination is IMenu)
+            //{
+            //    IMenu menuItem = (IMenu)newDestination;
+            //    SaveDatabaseMenu(menuItem);
+            //}
+
+            //if (newDestination is IPhotos)
+            //{
+            //    IPhotos photoItem = (IPhotos)newDestination;
+            //    SaveDatabasePhotos(photoItem);
+            //}
+
+            //if (newDestination is IAdditionalFees)
+            //{
+            //    IAdditionalFees additionalFeesItem = (IAdditionalFees)newDestination;
+            //    SaveDatabaseAdditionalFees(additionalFeesItem);
+            //}
+
+            //if (newDestination is IEnterExits)
+            //{
+            //    IEnterExits enterExits = (IEnterExits)newDestination;
+            //    SaveDatabaseEnterExits(enterExits);
+            //}
+
             return dbDestination.id;
         }
 

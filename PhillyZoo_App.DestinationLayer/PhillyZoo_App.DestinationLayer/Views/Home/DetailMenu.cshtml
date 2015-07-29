@@ -1,0 +1,27 @@
+﻿@using System.Collections.Generic;
+@model List<PhillyZoo_App.DestinationLayer.Models.DestinationMenuModel>
+
+<fieldset>
+    <legend>DestinationMenuModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstOrDefault().DestinationLayerID)
+    </div>
+    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstOrDefault().Menu)
+    </div>
+    
+
+    @{foreach (var menu in Model)
+        {
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == menu.ID).DestinationLayerID)
+            </div>
+
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == menu.ID).Menu)
+            </div>
+        }
+    }
+</fieldset>

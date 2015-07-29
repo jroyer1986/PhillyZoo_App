@@ -94,6 +94,8 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb);
             _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForPreview);
 
+ 
+
             return RedirectToAction("Index");
         }
 

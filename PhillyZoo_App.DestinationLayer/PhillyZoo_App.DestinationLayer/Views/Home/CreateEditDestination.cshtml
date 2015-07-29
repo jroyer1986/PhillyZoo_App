@@ -85,28 +85,6 @@
     <div class="editor-field">
         <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />
     </div>
-
-    @{if (Model is IPhotos) {
-            <div id="addPhotos" class="optionalForms">
-                @Html.Partial("CreatePhotos", new DestinationPhotosModel() {DestinationLayerID = Model.ID })
-            </div>
-        }
-        if (Model is IMenu){
-            <div id="addMenus" class="optionalForms">
-                @Html.Partial("CreateMenu", new DestinationMenuModel() { DestinationLayerID = Model.ID })
-            </div>
-        }
-        if (Model is IAdditionalFees){
-            <div id="addAdditionalFees" class="optionalForms">
-                @Html.Partial("CreateAdditionalFees", new DestinationAdditionalFeesModel() { DestinationLayerID = Model.ID })
-            </div>
-        }
-        if (Model is IEnterExits){
-            <div id="addEnterExits" class="optionalForms">
-                @Html.Partial("CreateEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
-            </div>
-        }
-        }
     <p>
         <input type="submit" value="Save" />
     </p>
