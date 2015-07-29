@@ -1,6 +1,7 @@
 ﻿using PhillyZoo_App.DestinationLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.Web;
 namespace PhillyZoo_App.DestinationLayer.Repository
 {
     interface IDestinationRepository
@@ -13,8 +14,8 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         void EditDatabaseDestination(DestinationModel editedDestination);
         List<MapPointType> ListOfMapPointTypes();
         List<MapPointStatusType> ListOfMapPointStatusTypes();
-        void SavePreviewPathToDatabase(int destinationLayerId, string path);
-        void SaveThumbnailPathToDatabase(int destinationLayerId, string path);
+        void SavePreviewPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase previewPhoto);
+        void SaveThumbnailPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase thumbnailPhoto);
         void SaveDatabasePhotos(DestinationPhotosModel photoList);
         void SaveDatabaseMenu(DestinationMenuModel menuList);
         void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFeesList);

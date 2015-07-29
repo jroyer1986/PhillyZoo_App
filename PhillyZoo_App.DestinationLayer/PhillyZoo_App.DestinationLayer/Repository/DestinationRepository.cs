@@ -123,8 +123,9 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return dbDestination.id;
         }
 
-        public void SavePreviewPathToDatabase(int destinationLayerId, string path)
+        public void SavePreviewPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase previewPhoto)
         {
+
             DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
                                                                                                     .Include("DestinationPhotos")
                                                                                                     .Include("DestinationMenu")
@@ -138,12 +139,13 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 newPreview.destinationLayerId = destinationLayerId;
                 newPreview.previewPath = path;
 
+                previewPhoto.SaveAs(path);
                 _phillyZooDatabaseEntities.DestinationPreview.Add(newPreview);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
 
-        public void SaveThumbnailPathToDatabase(int destinationLayerId, string path)
+        public void SaveThumbnailPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase thumbnailPhoto)
         {
             DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
                                                                                                     .Include("DestinationPhotos")
@@ -158,6 +160,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 DestinationThumb newThumb = new DestinationThumb();
                 newThumb.destinationLayerId = destinationLayerId;
                 newThumb.thumbPath = path;
+                thumbnailPhoto.SaveAs(path);
                 _phillyZooDatabaseEntities.DestinationThumb.Add(newThumb);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
@@ -216,8 +219,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 destinationToEdit.longDescription = editedDestination.LongDescription;
                 destinationToEdit.openingTime = editedDestination.OpeningTime;
                 destinationToEdit.closingTime = editedDestination.ClosingTime;
-
-
 
                 _phillyZooDatabaseEntities.SaveChanges();
             }

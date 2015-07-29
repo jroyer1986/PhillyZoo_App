@@ -88,13 +88,9 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             //create standardized name for preview and thumb...
             var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
             var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
-
-            thumbnailPhoto.SaveAs(pathForThumb);
-            previewPhoto.SaveAs(pathForPreview);
-            _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb);
-            _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForPreview);
-
- 
+            
+            _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb, thumbnailPhoto);
+            _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForPreview, previewPhoto);
 
             return RedirectToAction("Index");
         }
