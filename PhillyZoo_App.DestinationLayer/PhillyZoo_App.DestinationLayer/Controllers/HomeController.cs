@@ -167,10 +167,9 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel destination = _destinationRepository.GetDestinationByID(id);
             if (destination != null)
             {
-                var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_thumbnail_");
-                var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_preview_");
-                ViewBag.DestinationPreviewImage = pathForPreview;
-                ViewBag.DestinationThumbnailImage = pathForThumb;
+                ViewBag.rootPathForPreview = Path.Combine(ConfigurationManager.AppSettings["destinationPreviewDir"], _destinationRepository.GetDestinationByID(id).PreviewPhoto);
+                ViewBag.rootPathForThumbnail = Path.Combine(ConfigurationManager.AppSettings["destinationThumbnailDir"], _destinationRepository.GetDestinationByID(id).ThumbnailPhoto);
+
                 return View(destination);
             }
             else

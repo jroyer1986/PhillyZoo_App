@@ -133,16 +133,18 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                                                                                                     .Include("DestinationEnterExits")
                                                                                                     .Include("DestinationPreview")
                                                                                                     .Include("DestinationThumb").FirstOrDefault(m => m.id == destinationLayerId);
-
-            if (destination != null)
+            if(_phillyZooDatabaseEntities.DestinationPreview.FirstOrDefault(m => m.destinationLayerId == destinationLayerId) == null)
             {
-                DestinationPreview newPreview = new DestinationPreview();
-                newPreview.destinationLayerId = destinationLayerId;
-                newPreview.previewPath = dbPath;
+                if (destination != null)
+                {
+                    DestinationPreview newPreview = new DestinationPreview();
+                    newPreview.destinationLayerId = destinationLayerId;
+                    newPreview.previewPath = dbPath;
 
-                _phillyZooDatabaseEntities.DestinationPreview.Add(newPreview);
-                _phillyZooDatabaseEntities.SaveChanges();
-            }
+                    _phillyZooDatabaseEntities.DestinationPreview.Add(newPreview);
+                    _phillyZooDatabaseEntities.SaveChanges();
+                }
+            }        
         }
 
         public void SaveThumbnailPathToDatabase(int destinationLayerId, string dbPath)
@@ -154,16 +156,18 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                                                                                                     .Include("DestinationPreview")
                                                                                                     .Include("DestinationThumb")
                                                                                                     .FirstOrDefault(m => m.id == destinationLayerId);
-
-            if (destination != null)
+            if (_phillyZooDatabaseEntities.DestinationPreview.FirstOrDefault(m => m.destinationLayerId == destinationLayerId) == null)
             {
-                DestinationThumb newThumb = new DestinationThumb();
-                newThumb.destinationLayerId = destinationLayerId;
-                newThumb.thumbPath = dbPath;
+                if (destination != null)
+                {
+                    DestinationThumb newThumb = new DestinationThumb();
+                    newThumb.destinationLayerId = destinationLayerId;
+                    newThumb.thumbPath = dbPath;
 
-                _phillyZooDatabaseEntities.DestinationThumb.Add(newThumb);
-                _phillyZooDatabaseEntities.SaveChanges();
-            }
+                    _phillyZooDatabaseEntities.DestinationThumb.Add(newThumb);
+                    _phillyZooDatabaseEntities.SaveChanges();
+                }
+            }           
         }
 
         public void EditDatabaseDestination(DestinationModel editedDestination, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
