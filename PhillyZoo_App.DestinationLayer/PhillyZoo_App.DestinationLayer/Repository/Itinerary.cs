@@ -14,13 +14,10 @@ namespace PhillyZoo_App.DestinationLayer.Repository
     
     public partial class Itinerary
     {
-        public int itineraryId { get; set; }
         public int mapPointId { get; set; }
         public int userId { get; set; }
         public Nullable<int> sortOrder { get; set; }
-        public Nullable<System.DateTime> Itinerary_dttm { get; set; }
     
         public virtual MapPoint MapPoint { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

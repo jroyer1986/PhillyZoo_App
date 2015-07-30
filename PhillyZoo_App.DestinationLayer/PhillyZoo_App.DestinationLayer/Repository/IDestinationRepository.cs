@@ -11,11 +11,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         IEnumerable<DestinationModel> GetDestinations();
         int SaveDatabaseDestination(DestinationModel newDestination);
         IEnumerable<DestinationModel> SearchDestinations(string name);
-        void EditDatabaseDestination(DestinationModel editedDestination, string previewPath, string thumbnailPath, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto);
+        void EditDatabaseDestination(DestinationModel editedDestination, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto);
         List<MapPointType> ListOfMapPointTypes();
         List<MapPointStatusType> ListOfMapPointStatusTypes();
-        void SavePreviewPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase previewPhoto);
-        void SaveThumbnailPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase thumbnailPhoto);
+        void SavePreviewPathToDatabase(int destinationLayerId, string rootPathForPreview);
+        void SaveThumbnailPathToDatabase(int destinationLayerId, string rootPathForThumb);
         void SaveDatabasePhotos(DestinationPhotosModel photoList);
         void SaveDatabaseMenu(DestinationMenuModel menuList);
         void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFeesList);

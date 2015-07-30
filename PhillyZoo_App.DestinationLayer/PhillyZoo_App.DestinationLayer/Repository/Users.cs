@@ -20,7 +20,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             this.PushMessage = new HashSet<PushMessage>();
             this.Sessions = new HashSet<Sessions>();
             this.User_PushType = new HashSet<User_PushType>();
-            this.Itinerary = new HashSet<Itinerary>();
         }
     
         public int userID { get; set; }
@@ -36,6 +35,5 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public virtual ICollection<PushMessage> PushMessage { get; set; }
         public virtual ICollection<Sessions> Sessions { get; set; }
         public virtual ICollection<User_PushType> User_PushType { get; set; }
-        public virtual ICollection<Itinerary> Itinerary { get; set; }
     }
 }
