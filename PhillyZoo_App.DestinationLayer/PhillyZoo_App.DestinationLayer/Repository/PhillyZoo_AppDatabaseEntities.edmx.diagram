@@ -50,10 +50,11 @@
         <AssociationConnector Association="phillyzoo_newModel.FK_DestinationLayer_MapPointStatusType" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationPreview" Width="1.5" PointX="9.375" PointY="11.625" />
         <AssociationConnector Association="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer" />
-        <EntityTypeShape EntityType="phillyzoo_newModel.Itinerary" Width="1.5" PointX="13.75" PointY="0.75" />
-        <AssociationConnector Association="phillyzoo_newModel.FK_Itinerary_MapPoint" />
         <EntityTypeShape EntityType="phillyzoo_newModel.DestinationThumb" Width="1.5" PointX="9.375" PointY="9.5" />
         <AssociationConnector Association="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer" />
+        <EntityTypeShape EntityType="phillyzoo_newModel.Itinerary" Width="1.5" PointX="6.625" PointY="4.375" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_Itinerary_MapPoint" />
+        <AssociationConnector Association="phillyzoo_newModel.FK_Itinerary_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

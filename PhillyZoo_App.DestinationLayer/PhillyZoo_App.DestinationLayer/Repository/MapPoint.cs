@@ -19,6 +19,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             this.MapPointEdges = new HashSet<MapPointEdges>();
             this.MapPointEdges1 = new HashSet<MapPointEdges>();
             this.DestinationObjectLayer = new HashSet<DestinationObjectLayer>();
+            this.Itinerary = new HashSet<Itinerary>();
         }
     
         public int mapPointId { get; set; }
@@ -26,14 +27,14 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         public string description { get; set; }
         public decimal latitude { get; set; }
         public decimal longitude { get; set; }
-        public int imageX { get; set; }
-        public int imageY { get; set; }
+        public Nullable<int> imageX { get; set; }
+        public Nullable<int> imageY { get; set; }
         public int mapPointTypeId { get; set; }
     
         public virtual MapPointType MapPointType { get; set; }
         public virtual ICollection<MapPointEdges> MapPointEdges { get; set; }
         public virtual ICollection<MapPointEdges> MapPointEdges1 { get; set; }
         public virtual ICollection<DestinationObjectLayer> DestinationObjectLayer { get; set; }
-        public virtual Itinerary Itinerary { get; set; }
+        public virtual ICollection<Itinerary> Itinerary { get; set; }
     }
 }

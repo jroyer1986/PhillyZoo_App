@@ -115,7 +115,7 @@
           <Property Name="statusTypeId" Type="int" Nullable="false" />
           <Property Name="destinationName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="shortDescription" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="longDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="longDescription" Type="varchar(max)" Nullable="false" />
           <Property Name="openingTime" Type="datetime" Nullable="false" />
           <Property Name="closingTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -155,11 +155,13 @@
         </EntityType>
         <EntityType Name="Itinerary">
           <Key>
-            <PropertyRef Name="mapPointId" />
+            <PropertyRef Name="itineraryId" />
           </Key>
-          <Property Name="mapPointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itineraryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mapPointId" Type="int" Nullable="false" />
           <Property Name="userId" Type="int" Nullable="false" />
           <Property Name="sortOrder" Type="int" />
+          <Property Name="Itinerary_dttm" Type="datetime" />
         </EntityType>
         <EntityType Name="JWTToken">
           <Key>
@@ -179,9 +181,9 @@
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="latitude" Type="decimal" Precision="8" Scale="6" Nullable="false" />
           <Property Name="longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="imageX" Type="int" Nullable="false" />
-          <Property Name="imageY" Type="int" Nullable="false" />
           <Property Name="mapPointTypeId" Type="int" Nullable="false" />
+          <Property Name="imageX" Type="int" />
+          <Property Name="imageY" Type="int" />
         </EntityType>
         <EntityType Name="MapPointEdges">
           <Key>
@@ -332,18 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DestinationEnterExists_DestinationEnterExitType">
-          <End Role="DestinationEnterExitType" Type="Self.DestinationEnterExitType" Multiplicity="1" />
-          <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DestinationEnterExitType">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DestinationEnterExits">
-              <PropertyRef Name="typeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DestinationEnterExists_DestinationLayer">
           <End Role="DestinationObjectLayer" Type="Self.DestinationObjectLayer" Multiplicity="1" />
           <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
@@ -353,6 +343,18 @@
             </Principal>
             <Dependent Role="DestinationEnterExits">
               <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DestinationEnterExits_DestinationEnterExitType">
+          <End Role="DestinationEnterExitType" Type="Self.DestinationEnterExitType" Multiplicity="1" />
+          <End Role="DestinationEnterExits" Type="Self.DestinationEnterExits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DestinationEnterExitType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DestinationEnterExits">
+              <PropertyRef Name="typeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -430,13 +432,25 @@
         </Association>
         <Association Name="FK_Itinerary_MapPoint">
           <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
-          <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="0..1" />
+          <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MapPoint">
               <PropertyRef Name="mapPointId" />
             </Principal>
             <Dependent Role="Itinerary">
               <PropertyRef Name="mapPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itinerary_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Itinerary" Type="Self.Itinerary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Itinerary">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -584,12 +598,12 @@
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
             <End Role="DestinationAdditionalFees" EntitySet="DestinationAdditionalFees" />
           </AssociationSet>
-          <AssociationSet Name="FK_DestinationEnterExists_DestinationEnterExitType" Association="Self.FK_DestinationEnterExists_DestinationEnterExitType">
-            <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
-            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
-          </AssociationSet>
           <AssociationSet Name="FK_DestinationEnterExists_DestinationLayer" Association="Self.FK_DestinationEnterExists_DestinationLayer">
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DestinationEnterExits_DestinationEnterExitType" Association="Self.FK_DestinationEnterExits_DestinationEnterExitType">
+            <End Role="DestinationEnterExitType" EntitySet="DestinationEnterExitType" />
             <End Role="DestinationEnterExits" EntitySet="DestinationEnterExits" />
           </AssociationSet>
           <AssociationSet Name="FK_DestinationMenu_DestinationLayer" Association="Self.FK_DestinationMenu_DestinationLayer">
@@ -618,6 +632,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Itinerary_MapPoint" Association="Self.FK_Itinerary_MapPoint">
             <End Role="MapPoint" EntitySet="MapPoint" />
+            <End Role="Itinerary" EntitySet="Itinerary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Itinerary_Users" Association="Self.FK_Itinerary_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Itinerary" EntitySet="Itinerary" />
           </AssociationSet>
           <AssociationSet Name="FK_JWTToken_Users" Association="Self.FK_JWTToken_Users">
@@ -780,6 +798,7 @@
           <NavigationProperty Name="PushMessage" Relationship="Self.FK_PushMessage_Users" FromRole="Users" ToRole="PushMessage" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Users" FromRole="Users" ToRole="Sessions" />
           <NavigationProperty Name="User_PushType" Relationship="phillyzoo_newModel.FK_User_PushType_Users" FromRole="Users" ToRole="User_PushType" />
+          <NavigationProperty Name="Itinerary" Relationship="phillyzoo_newModel.FK_Itinerary_Users" FromRole="Users" ToRole="Itinerary" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -966,15 +985,19 @@
             <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
             <End Role="DestinationPreview" EntitySet="DestinationPreview" />
           </AssociationSet>
+          <EntitySet Name="DestinationThumb" EntityType="phillyzoo_newModel.DestinationThumb" />
+          <AssociationSet Name="FK_DestinationThumb_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer">
+            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
+            <End Role="DestinationThumb" EntitySet="DestinationThumb" />
+          </AssociationSet>
           <EntitySet Name="Itinerary" EntityType="phillyzoo_newModel.Itinerary" />
           <AssociationSet Name="FK_Itinerary_MapPoint" Association="phillyzoo_newModel.FK_Itinerary_MapPoint">
             <End Role="MapPoint" EntitySet="MapPoint" />
             <End Role="Itinerary" EntitySet="Itinerary" />
           </AssociationSet>
-          <EntitySet Name="DestinationThumb" EntityType="phillyzoo_newModel.DestinationThumb" />
-          <AssociationSet Name="FK_DestinationThumb_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer">
-            <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
-            <End Role="DestinationThumb" EntitySet="DestinationThumb" />
+          <AssociationSet Name="FK_Itinerary_Users" Association="phillyzoo_newModel.FK_Itinerary_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Itinerary" EntitySet="Itinerary" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="DestinationEnterExitType">
@@ -1119,7 +1142,7 @@
           <Property Name="statusTypeId" Type="Int32" Nullable="false" />
           <Property Name="destinationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="shortDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="longDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="openingTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="closingTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="DestinationAdditionalFees" Relationship="phillyzoo_newModel.FK_DestinationAdditionalFees_DestinationObjectLayer" FromRole="DestinationObjectLayer" ToRole="DestinationAdditionalFees" />
@@ -1140,8 +1163,8 @@
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
           <Property Name="longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
-          <Property Name="imageX" Type="Int32" Nullable="false" />
-          <Property Name="imageY" Type="Int32" Nullable="false" />
+          <Property Name="imageX" Type="Int32" />
+          <Property Name="imageY" Type="Int32" />
           <Property Name="mapPointTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MapPointType" Relationship="phillyzoo_newModel.FK_MapPoint_MapPointType" FromRole="MapPoint" ToRole="MapPointType" />
           <NavigationProperty Name="MapPointEdges" Relationship="phillyzoo_newModel.FK_MapPointEdges_MapPoint" FromRole="MapPoint" ToRole="MapPointEdges" />
@@ -1286,27 +1309,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Itinerary">
-          <Key>
-            <PropertyRef Name="mapPointId" />
-          </Key>
-          <Property Name="mapPointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="sortOrder" Type="Int32" />
-          <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="Itinerary" ToRole="MapPoint" />
-        </EntityType>
-        <Association Name="FK_Itinerary_MapPoint">
-          <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
-          <End Type="phillyzoo_newModel.Itinerary" Role="Itinerary" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MapPoint">
-              <PropertyRef Name="mapPointId" />
-            </Principal>
-            <Dependent Role="Itinerary">
-              <PropertyRef Name="mapPointId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DestinationThumb">
           <Key>
             <PropertyRef Name="destinationThumbId" />
@@ -1325,6 +1327,42 @@
             </Principal>
             <Dependent Role="DestinationThumb">
               <PropertyRef Name="destinationLayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Itinerary">
+          <Key>
+            <PropertyRef Name="itineraryId" />
+          </Key>
+          <Property Name="itineraryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mapPointId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" />
+          <Property Name="Itinerary_dttm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MapPoint" Relationship="phillyzoo_newModel.FK_Itinerary_MapPoint" FromRole="Itinerary" ToRole="MapPoint" />
+          <NavigationProperty Name="Users" Relationship="phillyzoo_newModel.FK_Itinerary_Users" FromRole="Itinerary" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Itinerary_MapPoint">
+          <End Type="phillyzoo_newModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.Itinerary" Role="Itinerary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoint">
+              <PropertyRef Name="mapPointId" />
+            </Principal>
+            <Dependent Role="Itinerary">
+              <PropertyRef Name="mapPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itinerary_Users">
+          <End Type="phillyzoo_newModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="phillyzoo_newModel.Itinerary" Role="Itinerary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Itinerary">
+              <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1598,21 +1636,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Itinerary">
-            <EntityTypeMapping TypeName="phillyzoo_newModel.Itinerary">
-              <MappingFragment StoreEntitySet="Itinerary">
-                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DestinationThumb">
             <EntityTypeMapping TypeName="phillyzoo_newModel.DestinationThumb">
               <MappingFragment StoreEntitySet="DestinationThumb">
                 <ScalarProperty Name="thumbPath" ColumnName="thumbPath" />
                 <ScalarProperty Name="destinationLayerId" ColumnName="destinationLayerId" />
                 <ScalarProperty Name="destinationThumbId" ColumnName="destinationThumbId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Itinerary">
+            <EntityTypeMapping TypeName="phillyzoo_newModel.Itinerary">
+              <MappingFragment StoreEntitySet="Itinerary">
+                <ScalarProperty Name="Itinerary_dttm" ColumnName="Itinerary_dttm" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="mapPointId" ColumnName="mapPointId" />
+                <ScalarProperty Name="itineraryId" ColumnName="itineraryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
