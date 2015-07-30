@@ -4,26 +4,25 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("CreatePhotos", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>DestinationPhotosModel</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DestinationLayerID)
-        </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DestinationLayerID)
-            @Html.ValidationMessageFor(model => model.DestinationLayerID)
+            @Html.HiddenFor(model => model.DestinationLayerID)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ImagePath)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ImagePath)
+            <div class="editor-field">
+                <input name="libraryPhoto" type="file" id="libraryPhoto" value="Upload Picture" />
+            </div>
             @Html.ValidationMessageFor(model => model.ImagePath)
         </div>
 

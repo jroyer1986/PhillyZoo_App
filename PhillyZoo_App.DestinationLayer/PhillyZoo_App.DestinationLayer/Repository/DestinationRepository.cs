@@ -341,6 +341,10 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         {
             if(photo != null)
             {  
+                //check to see if a photo with this name already exists in the db!! If it does we have to delete from the db and the directory before saving again
+
+
+
                 DestinationPhotos dbPhoto = new DestinationPhotos();
                 dbPhoto.id = photo.ID;
                 dbPhoto.destinationLayerId = photo.DestinationLayerID;

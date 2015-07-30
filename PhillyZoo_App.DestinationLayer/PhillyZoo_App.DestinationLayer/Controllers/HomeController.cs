@@ -169,6 +169,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             {
                 ViewBag.rootPathForPreview = Path.Combine(ConfigurationManager.AppSettings["destinationPreviewDir"], _destinationRepository.GetDestinationByID(id).PreviewPhoto);
                 ViewBag.rootPathForThumbnail = Path.Combine(ConfigurationManager.AppSettings["destinationThumbnailDir"], _destinationRepository.GetDestinationByID(id).ThumbnailPhoto);
+                ViewBag.destinationPhotoLibraryDir = ConfigurationManager.AppSettings["destinationPhotoLibraryDir"];
 
                 return View(destination);
             }
@@ -189,8 +190,17 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePhotos(DestinationPhotosModel newPhotoModel)
+        public ActionResult CreatePhotos(DestinationPhotosModel newPhotoModel, HttpPostedFileBase libraryPhoto)
         {
+            var dbInt = _destinationRepository.GetDestinationByID(newPhotoModel.DestinationLayerID).ID;
+
+            string addedPhotoName = Path.GetFileName(libraryPhoto.FileName);
+            string pathForDatabase = dbInt + "_" + addedPhotoName;
+            string fullPathForDir = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), pathForDatabase);
+            newPhotoModel.ImagePath = pathForDatabase;
+
+            libraryPhoto.SaveAs(fullPathForDir);
+
             _destinationRepository.SaveDatabasePhotos(newPhotoModel);
             return RedirectToAction("Index");
         }

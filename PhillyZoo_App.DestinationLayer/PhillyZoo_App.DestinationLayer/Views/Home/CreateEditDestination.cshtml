@@ -79,6 +79,7 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.PreviewPhoto)
+        @Html.EditorFor(model => model.PreviewPhoto)
     </div>
     <div class="editor-field">
         <input name="previewPhoto" type="file" id="previewPhoto" value="Upload Picture" />
@@ -89,6 +90,7 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ThumbnailPhoto)
+        @Html.EditorFor(model => model.ThumbnailPhoto)
     </div>
     <div class="editor-field">
         <input name="thumbnailPhoto" type="file" id="thumbnailPhoto" value="Upload Picture" />

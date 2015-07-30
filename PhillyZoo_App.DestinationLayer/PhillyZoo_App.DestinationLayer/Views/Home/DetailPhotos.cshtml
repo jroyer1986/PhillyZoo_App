@@ -3,10 +3,6 @@
 
 <fieldset>
     <legend>DestinationPhotosModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FirstOrDefault().DestinationLayerID)
-    </div>
     
     <div class="display-label">
          @Html.DisplayNameFor(model => model.FirstOrDefault().ImagePath)
@@ -14,13 +10,14 @@
     
 
     @{foreach (var photo in Model)
-        {
-            <div class="display-field">
-                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == photo.ID).DestinationLayerID)
+    {
+        var libraryImageName = photo.ImagePath;
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.FirstOrDefault(m => m.ID == photo.ID).DestinationLayerID)
             </div>
-        
+
             <div class="display-field">
-                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == photo.ID).ImagePath)
+                <img src="@ViewBag.destinationPhotoLibraryDir + libraryImageName" alt="Library Image" height="100" width="200" />
             </div>
         }
     }
