@@ -37,7 +37,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
         public DestinationModel GetDestinationByID(int id)
         {
-            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").FirstOrDefault(m => m.id == id);
+            DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType").Include("DestinationPhotos").Include("DestinationMenu").Include("DestinationEnterExits").Include("DestinationPreview").Include("DestinationThumb").FirstOrDefault(m => m.id == id);
 
             if (destination != null)
             {
@@ -76,11 +76,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             dbMapPoint.longitude = newDestination.Longitude;
             dbMapPoint.mapPointTypeId = newDestination.MapPointTypeID;
 
-            string targetFolder = HttpContext.Current.Server.MapPath("~/TempPreviewThumbs");
-            string targetPath1 = Path.Combine(targetFolder, newDestination.PreviewPhoto);
-            string targetPath2 = Path.Combine(targetFolder, newDestination.ThumbnailPhoto);
-            
-
             //obsolete columns
             dbMapPoint.imageX = 1;
             dbMapPoint.imageY = 1;
@@ -100,11 +95,37 @@ namespace PhillyZoo_App.DestinationLayer.Repository
 
             _phillyZooDatabaseEntities.DestinationObjectLayer.Add(dbDestination);
             _phillyZooDatabaseEntities.SaveChanges();
+
+            //if (newDestination is IMenu)
+            //{
+            //    IMenu menuItem = (IMenu)newDestination;
+            //    SaveDatabaseMenu(menuItem);
+            //}
+
+            //if (newDestination is IPhotos)
+            //{
+            //    IPhotos photoItem = (IPhotos)newDestination;
+            //    SaveDatabasePhotos(photoItem);
+            //}
+
+            //if (newDestination is IAdditionalFees)
+            //{
+            //    IAdditionalFees additionalFeesItem = (IAdditionalFees)newDestination;
+            //    SaveDatabaseAdditionalFees(additionalFeesItem);
+            //}
+
+            //if (newDestination is IEnterExits)
+            //{
+            //    IEnterExits enterExits = (IEnterExits)newDestination;
+            //    SaveDatabaseEnterExits(enterExits);
+            //}
+
             return dbDestination.id;
         }
 
-        public void SavePreviewPathToDatabase(int destinationLayerId, string path)
+        public void SavePreviewPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase previewPhoto)
         {
+
             DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
                                                                                                     .Include("DestinationPhotos")
                                                                                                     .Include("DestinationMenu")
@@ -118,12 +139,13 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 newPreview.destinationLayerId = destinationLayerId;
                 newPreview.previewPath = path;
 
+                previewPhoto.SaveAs(path);
                 _phillyZooDatabaseEntities.DestinationPreview.Add(newPreview);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
 
-        public void SaveThumbnailPathToDatabase(int destinationLayerId, string path)
+        public void SaveThumbnailPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase thumbnailPhoto)
         {
             DestinationObjectLayer destination = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPointStatusType")
                                                                                                     .Include("DestinationPhotos")
@@ -138,6 +160,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 DestinationThumb newThumb = new DestinationThumb();
                 newThumb.destinationLayerId = destinationLayerId;
                 newThumb.thumbPath = path;
+                thumbnailPhoto.SaveAs(path);
                 _phillyZooDatabaseEntities.DestinationThumb.Add(newThumb);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
@@ -176,7 +199,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             _phillyZooDatabaseEntities.SaveChanges();
         }
 
-        public void EditDatabaseDestination(DestinationModel editedDestination)
+        public void EditDatabaseDestination(DestinationModel editedDestination, string previewPath, string thumbnailPath, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
             DestinationObjectLayer destinationToEdit = _phillyZooDatabaseEntities.DestinationObjectLayer.Include("MapPoint")
                                                                                                         .Include("MapPointStatusType")
@@ -197,8 +220,8 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 destinationToEdit.openingTime = editedDestination.OpeningTime;
                 destinationToEdit.closingTime = editedDestination.ClosingTime;
 
-
-
+                SavePreviewPathToDatabase(editedDestination.ID, previewPath, previewPhoto);
+                SaveThumbnailPathToDatabase(editedDestination.ID, thumbnailPath, thumbnailPhoto);
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }

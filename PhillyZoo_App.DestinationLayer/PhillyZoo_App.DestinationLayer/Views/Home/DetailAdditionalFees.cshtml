@@ -1,0 +1,30 @@
+﻿@using System.Collections.Generic;
+@model List<PhillyZoo_App.DestinationLayer.Models.DestinationAdditionalFeesModel>
+
+<fieldset>
+    <legend>DestinationAdditionalFeesModel</legend>
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.FirstOrDefault().DestinationLayerID)
+        </div>
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Fee)
+        </div>
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.FirstOrDefault().FeeName)
+        </div>
+
+        @{foreach (var additionalFee in Model)
+        {
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == additionalFee.ID).DestinationLayerID)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == additionalFee.ID).Fee)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == additionalFee.ID).FeeName)
+            </div>
+        }
+    }
+</fieldset>
+

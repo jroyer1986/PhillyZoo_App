@@ -1,0 +1,27 @@
+﻿@using System.Collections.Generic;
+@model List<PhillyZoo_App.DestinationLayer.Models.DestinationPhotosModel>
+
+<fieldset>
+    <legend>DestinationPhotosModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstOrDefault().DestinationLayerID)
+    </div>
+    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FirstOrDefault().ImagePath)
+    </div>
+    
+
+    @{foreach (var photo in Model)
+        {
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == photo.ID).DestinationLayerID)
+            </div>
+        
+            <div class="display-field">
+                @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == photo.ID).ImagePath)
+            </div>
+        }
+    }
+</fieldset>

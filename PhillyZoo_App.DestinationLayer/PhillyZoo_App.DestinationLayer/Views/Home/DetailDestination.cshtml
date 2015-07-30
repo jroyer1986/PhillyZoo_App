@@ -1,4 +1,6 @@
-﻿@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
+﻿@using PhillyZoo_App.DestinationLayer.Models;
+@using System.Collections.Generic;
+@model PhillyZoo_App.DestinationLayer.Models.DestinationModel
 
 @{
     ViewBag.Title = "DetailDestination";
@@ -92,8 +94,64 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.PreviewPhoto)
     </div>
+    <br />
+    @{if (Model is IPhotos)
+        {
+            IPhotos myModel = Model as IPhotos;
+            if(myModel.Photos != null)
+            {
+                <div>
+                    @Html.Partial("DetailPhotos", myModel.Photos)
+                </div>
+            }
+            <div id="addPhotos" class="optionalForms">
+                @Html.ActionLink("Edit Photos", "CreatePhotos", new DestinationPhotosModel() { DestinationLayerID = Model.ID })
+            </div>
+        }
+        <br />
+        if (Model is IMenu)
+        {
+            IMenu myModel = Model as IMenu;
+            if(myModel.Menu != null)
+            {
+                <div>
+                    @Html.Partial("DetailMenu", myModel.Menu)
+                </div>
+            }
+            <div id="addMenus" class="optionalForms">
+                @Html.ActionLink("Edit Menu", "CreateMenu", new DestinationMenuModel() { DestinationLayerID = Model.ID })
+            </div>
+        }
+        <br />
+        if (Model is IAdditionalFees)
+        {
+            IAdditionalFees myModel = Model as IAdditionalFees;
+            if(myModel.AdditionalFees != null)
+            {
+                <div>
+                    @Html.Partial("DetailAdditionalFees", myModel.AdditionalFees)
+                </div>
+            }     
+            <div id="addAdditionalFees" class="optionalForms">
+                @Html.ActionLink("Edit Additional Fees", "CreateAdditionalFees", new DestinationAdditionalFeesModel() { DestinationLayerID = Model.ID })
+            </div>
+        }
+        <br />
+        if (Model is IEnterExits)
+        {
+            IEnterExits myModel = Model as IEnterExits;
+            if(myModel.EnterExits != null)
+            {
+                @Html.Partial("DetailEnterExits", myModel.EnterExits)
+            }
+            <div id="addEnterExits" class="optionalForms">
+                @Html.ActionLink("Edit Enter/Exits", "CreateEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
+            </div>
+        }
+    }
+
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Edit", "EditDestination", new { id=Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

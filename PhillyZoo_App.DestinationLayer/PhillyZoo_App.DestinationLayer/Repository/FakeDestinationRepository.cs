@@ -52,7 +52,7 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             Console.WriteLine("deleted!");
         }
 
-        void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination)
+        void IDestinationRepository.EditDatabaseDestination(DestinationModel editedDestination, string previewPath, string thumbnailPath, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
             throw new NotImplementedException();
         }
@@ -109,12 +109,12 @@ namespace PhillyZoo_App.DestinationLayer.Repository
             return list;
         }
 
-        void IDestinationRepository.SavePreviewPathToDatabase(int destinationLayerId, string path)
+        void IDestinationRepository.SavePreviewPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase previewPhoto)
         {
             
         }
 
-        void IDestinationRepository.SaveThumbnailPathToDatabase(int destinationLayerId, string path)
+        void IDestinationRepository.SaveThumbnailPathToDatabase(int destinationLayerId, string path, HttpPostedFileBase thumbnailPhoto)
         {
             
         }
