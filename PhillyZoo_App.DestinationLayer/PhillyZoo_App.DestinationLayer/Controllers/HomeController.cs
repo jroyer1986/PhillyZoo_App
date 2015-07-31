@@ -91,6 +91,8 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             string fullPathForThumb = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationThumbnailDir"]), pathForDatabaseThumb);
             string fullPathForPreview = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPreviewDir"]), pathForDatabasePreview);
 
+            System.IO.Directory.CreateDirectory(Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), "_" + dbInt.ToString()));
+
             thumbnailPhoto.SaveAs(fullPathForThumb);
             previewPhoto.SaveAs(fullPathForPreview);
             
@@ -104,7 +106,9 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         {
             string fullPathForThumb = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationThumbnailDir"]), _destinationRepository.GetDestinationByID(id).ThumbnailPhoto.ToString());
             string fullPathForPreview = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPreviewDir"]), _destinationRepository.GetDestinationByID(id).PreviewPhoto.ToString());
+            string fullPathLibrary = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), "_" + _destinationRepository.GetDestinationByID(id).ID.ToString() + "/");
 
+            //Images in the Directory are deleted here.  Remove checks if we are going to save old images even after destination is deleted
             if (System.IO.File.Exists(fullPathForThumb))
             {
                 System.IO.File.Delete(fullPathForThumb);
@@ -112,6 +116,10 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             if (System.IO.File.Exists(fullPathForPreview))
             {
                 System.IO.File.Delete(fullPathForPreview);
+            }
+            if (System.IO.Directory.Exists(fullPathLibrary))
+            {
+                System.IO.Directory.Delete(fullPathLibrary, true);
             }
 
             _destinationRepository.DeleteDatabaseDestination(id);
@@ -196,7 +204,7 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
 
             string addedPhotoName = Path.GetFileName(libraryPhoto.FileName);
             string pathForDatabase = dbInt + "_" + addedPhotoName;
-            string fullPathForDir = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), pathForDatabase);
+            string fullPathForDir = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), "_" + dbInt.ToString(), pathForDatabase);
             newPhotoModel.ImagePath = pathForDatabase;
 
             libraryPhoto.SaveAs(fullPathForDir);
