@@ -14,8 +14,6 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
     public class HomeController : Controller
     {
         IDestinationRepository _destinationRepository = new DestinationRepository();
-        //
-        // GET: /Home/
 
         public ActionResult Index()
         {

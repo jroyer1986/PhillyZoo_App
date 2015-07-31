@@ -306,11 +306,11 @@
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
     </AssociationSet>
     <EntitySet Name="DestinationPreview" EntityType="phillyzoo_newModel.DestinationPreview" />
-    <EntitySet Name="DestinationThumb" EntityType="phillyzoo_newModel.DestinationThumb" />
     <AssociationSet Name="FK_DestinationPreview_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer">
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
       <End Role="DestinationPreview" EntitySet="DestinationPreview" />
     </AssociationSet>
+    <EntitySet Name="DestinationThumb" EntityType="phillyzoo_newModel.DestinationThumb" />
     <AssociationSet Name="FK_DestinationThumb_DestinationObjectLayer" Association="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer">
       <End Role="DestinationObjectLayer" EntitySet="DestinationObjectLayer" />
       <End Role="DestinationThumb" EntitySet="DestinationThumb" />
@@ -622,15 +622,6 @@
     <Property Name="previewPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationPreview_DestinationObjectLayer" FromRole="DestinationPreview" ToRole="DestinationObjectLayer" />
   </EntityType>
-  <EntityType Name="DestinationThumb">
-    <Key>
-      <PropertyRef Name="destinationThumbId" />
-    </Key>
-    <Property Name="destinationThumbId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
-    <Property Name="thumbPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer" FromRole="DestinationThumb" ToRole="DestinationObjectLayer" />
-  </EntityType>
   <Association Name="FK_DestinationPreview_DestinationObjectLayer">
     <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
     <End Type="phillyzoo_newModel.DestinationPreview" Role="DestinationPreview" Multiplicity="*" />
@@ -643,6 +634,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="DestinationThumb">
+    <Key>
+      <PropertyRef Name="destinationThumbId" />
+    </Key>
+    <Property Name="destinationThumbId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="destinationLayerId" Type="Int32" Nullable="false" />
+    <Property Name="thumbPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DestinationObjectLayer" Relationship="phillyzoo_newModel.FK_DestinationThumb_DestinationObjectLayer" FromRole="DestinationThumb" ToRole="DestinationObjectLayer" />
+  </EntityType>
   <Association Name="FK_DestinationThumb_DestinationObjectLayer">
     <End Type="phillyzoo_newModel.DestinationObjectLayer" Role="DestinationObjectLayer" Multiplicity="1" />
     <End Type="phillyzoo_newModel.DestinationThumb" Role="DestinationThumb" Multiplicity="*" />

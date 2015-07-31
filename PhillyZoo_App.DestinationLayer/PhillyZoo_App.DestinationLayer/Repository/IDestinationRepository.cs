@@ -20,5 +20,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         void SaveDatabaseMenu(DestinationMenuModel menuList);
         void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFeesList);
         void SaveDatabaseEnterExits(DestinationEnterExitsModel enterExitsList);
+        List<DestinationEnterExitsModel> CreateEnterExitsList(DestinationObjectLayer destination);
     }
 }

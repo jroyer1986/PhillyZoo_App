@@ -392,7 +392,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
-
         public void SaveDatabaseMenu(DestinationMenuModel menu)
         {
             if (menu != null)
@@ -407,7 +406,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
-
         public void SaveDatabaseAdditionalFees(DestinationAdditionalFeesModel additionalFees)
         {
             if(additionalFees != null)
@@ -422,7 +420,6 @@ namespace PhillyZoo_App.DestinationLayer.Repository
                 _phillyZooDatabaseEntities.SaveChanges();
             }
         }
-
         public void SaveDatabaseEnterExits(DestinationEnterExitsModel enterExits)
         {
             if(enterExits != null)

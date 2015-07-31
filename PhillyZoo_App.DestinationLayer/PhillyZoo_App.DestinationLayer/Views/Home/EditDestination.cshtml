@@ -24,7 +24,10 @@
             </div>
         }
         <div id="addPhotos" class="optionalForms">
-            @Html.ActionLink("Edit Photos", "CreatePhotos", new DestinationPhotosModel() { DestinationLayerID = Model.ID })
+            @Html.ActionLink("Add Photos", "CreatePhotos", new DestinationPhotosModel() { DestinationLayerID = Model.ID })
+        </div>
+        <div id="editPhotos" class="optionalForms">
+            @Html.ActionLink("Edit Photos", "EditPhotos", new DestinationPhotosModel() { DestinationLayerID = Model.ID })
         </div>
     }
     <br />
@@ -38,7 +41,10 @@
             </div>
         }
         <div id="addMenus" class="optionalForms">
-            @Html.ActionLink("Edit Menu", "CreateMenu", new DestinationMenuModel() { DestinationLayerID = Model.ID })
+            @Html.ActionLink("Add Menu", "CreateMenu", new DestinationMenuModel() { DestinationLayerID = Model.ID })
+        </div>
+        <div id="editMenus" class="optionalForms">
+            @Html.ActionLink("Edit Menu", "EditMenu", new DestinationMenuModel() { DestinationLayerID = Model.ID })
         </div>
     }
     <br />
@@ -52,7 +58,10 @@
             </div>
         }
         <div id="addAdditionalFees" class="optionalForms">
-            @Html.ActionLink("Edit Additional Fees", "CreateAdditionalFees", new DestinationAdditionalFeesModel() { DestinationLayerID = Model.ID })
+            @Html.ActionLink("Add Additional Fees", "CreateAdditionalFees", new DestinationAdditionalFeesModel() { DestinationLayerID = Model.ID })
+        </div>
+        <div id="editAdditionalFees" class="optionalForms">
+            @Html.ActionLink("Edit Additional Fees", "EditAdditionalFees", new DestinationAdditionalFeesModel() { DestinationLayerID = Model.ID })
         </div>
     }
     <br />
@@ -64,10 +73,13 @@
             @Html.Partial("DetailEnterExits", myModel.EnterExits)
         }
         <div id="addEnterExits" class="optionalForms">
-            @Html.ActionLink("Edit Enter/Exits", "CreateEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
+            @Html.ActionLink("Add Enter/Exits", "CreateEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
+        </div>
+        <div id="editEnterExits" class="optionalForms">
+            @Html.ActionLink("Edit Enter/Exits", "EditEnterExits", new DestinationEnterExitsModel() { DestinationLayerID = Model.ID })
         </div>
     }
-    
+
     <p>
         <input type="submit" value="Save" />
     </p>

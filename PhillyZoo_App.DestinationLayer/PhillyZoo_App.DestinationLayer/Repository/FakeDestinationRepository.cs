@@ -138,5 +138,11 @@ namespace PhillyZoo_App.DestinationLayer.Repository
         {
 
         }
+
+        List<DestinationEnterExitsModel> IDestinationRepository.CreateEnterExitsList(DestinationObjectLayer destination)
+        {
+            List<DestinationEnterExitsModel> listToReturn = new List<DestinationEnterExitsModel>();
+            return listToReturn;
+        }
     }
 }
