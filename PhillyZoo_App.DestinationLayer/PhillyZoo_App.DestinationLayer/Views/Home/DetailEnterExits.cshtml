@@ -3,10 +3,6 @@
 
 <fieldset>
     <legend>DestinationEnterExitsModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FirstOrDefault().DestinationLayerID)
-    </div>
     
     <div class="display-label">
          @Html.DisplayNameFor(model => model.FirstOrDefault().TypeID)
@@ -27,8 +23,8 @@
 
     @{foreach (var enterExit in Model)
     {
-        <div class="display-field">
-            @Html.DisplayFor(model => model.FirstOrDefault(m => m.ID == enterExit.ID).DestinationLayerID)
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.FirstOrDefault(m => m.ID == enterExit.ID).DestinationLayerID)
         </div>
 
         <div class="display-field">

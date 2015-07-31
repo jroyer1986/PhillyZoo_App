@@ -3,6 +3,7 @@ using PhillyZoo_App.DestinationLayer.Repository;
 using PhillyZoo_App.DestinationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -78,25 +79,41 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         public ActionResult CreateDestination(DestinationModel newDestination, HttpPostedFileBase thumbnailPhoto, HttpPostedFileBase previewPhoto)
         {
             int dbInt = _destinationRepository.SaveDatabaseDestination(newDestination);
-            var thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
-            var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
-            var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
-            var previewSuffix = Path.GetExtension(previewPhotoFileName);
-            var thumbnailPhotoPath = dbInt.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
-            var previewPhotoPath = dbInt.ToString() + previewSuffix.ToString();
 
-            //create standardized name for preview and thumb...
-            var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
-            var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
+            string thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
+            string thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
+            string pathForDatabaseThumb = dbInt + "_thumbnail" + thumbnailSuffix.ToString();
+
+            string previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
+            string previewSuffix = Path.GetExtension(previewPhotoFileName);
+            string pathForDatabasePreview = dbInt + previewSuffix.ToString();
+          
+            string fullPathForThumb = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationThumbnailDir"]), pathForDatabaseThumb);
+            string fullPathForPreview = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPreviewDir"]), pathForDatabasePreview);
+
+            thumbnailPhoto.SaveAs(fullPathForThumb);
+            previewPhoto.SaveAs(fullPathForPreview);
             
-            _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForThumb, thumbnailPhoto);
-            _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForPreview, previewPhoto);
+            _destinationRepository.SaveThumbnailPathToDatabase(dbInt, pathForDatabaseThumb);
+            _destinationRepository.SavePreviewPathToDatabase(dbInt, pathForDatabasePreview);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult DeleteDestination(int id)
         {
+            string fullPathForThumb = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationThumbnailDir"]), _destinationRepository.GetDestinationByID(id).ThumbnailPhoto.ToString());
+            string fullPathForPreview = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPreviewDir"]), _destinationRepository.GetDestinationByID(id).PreviewPhoto.ToString());
+
+            if (System.IO.File.Exists(fullPathForThumb))
+            {
+                System.IO.File.Delete(fullPathForThumb);
+            }
+            if (System.IO.File.Exists(fullPathForPreview))
+            {
+                System.IO.File.Delete(fullPathForPreview);
+            }
+
             _destinationRepository.DeleteDatabaseDestination(id);
             return RedirectToAction("Index");
         }
@@ -119,17 +136,29 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         public ActionResult EditDestination(DestinationModel updatedDestination, HttpPostedFileBase previewPhoto, HttpPostedFileBase thumbnailPhoto)
         {
             var thumbnailPhotoFileName = Path.GetFileName(thumbnailPhoto.FileName);
-            var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
             var thumbnailSuffix = Path.GetExtension(thumbnailPhotoFileName);
+            var pathForDatabaseThumb = updatedDestination.ID + "_thumbnail" + thumbnailSuffix.ToString();
+
+            var previewPhotoFileName = Path.GetFileName(previewPhoto.FileName);
             var previewSuffix = Path.GetExtension(previewPhotoFileName);
-            var thumbnailPhotoPath = updatedDestination.ID.ToString() + "_thumbnail" + thumbnailSuffix.ToString();
-            var previewPhotoPath = updatedDestination.ID.ToString() + previewSuffix.ToString();
+            var pathForDatabasePreview = updatedDestination.ID + previewSuffix.ToString();
 
-            //create standardized name for preview and thumb...
-            var pathForThumb = Path.Combine(Server.MapPath("~/Data/Images/Thumbnail"), thumbnailPhotoPath);
-            var pathForPreview = Path.Combine(Server.MapPath("~/Data/Images/Detail"), previewPhotoPath);
+            var fullPathForThumb = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationThumbnailDir"]), pathForDatabaseThumb);
+            var fullPathForPreview = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPreviewDir"]), pathForDatabasePreview);
 
-            _destinationRepository.EditDatabaseDestination(updatedDestination, pathForPreview, pathForThumb, previewPhoto, thumbnailPhoto);
+            if(System.IO.File.Exists(fullPathForThumb))
+            {
+                System.IO.File.Delete(fullPathForThumb);
+            }
+            if(System.IO.File.Exists(fullPathForPreview))
+            {
+                System.IO.File.Delete(fullPathForPreview);
+            }
+
+            thumbnailPhoto.SaveAs(fullPathForThumb);
+            previewPhoto.SaveAs(fullPathForPreview);
+
+            _destinationRepository.EditDatabaseDestination(updatedDestination, previewPhoto, thumbnailPhoto);
             return RedirectToAction("DetailDestination", new { id = updatedDestination.ID });
         }
 
@@ -138,10 +167,10 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
             DestinationModel destination = _destinationRepository.GetDestinationByID(id);
             if (destination != null)
             {
-                var pathForThumb = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_thumbnail_");
-                var pathForPreview = Path.Combine(Server.MapPath("~/TempPreviewThumbs"), destination.ID.ToString() + "_preview_");
-                ViewBag.DestinationPreviewImage = pathForPreview;
-                ViewBag.DestinationThumbnailImage = pathForThumb;
+                ViewBag.rootPathForPreview = Path.Combine(ConfigurationManager.AppSettings["destinationPreviewDir"], _destinationRepository.GetDestinationByID(id).PreviewPhoto);
+                ViewBag.rootPathForThumbnail = Path.Combine(ConfigurationManager.AppSettings["destinationThumbnailDir"], _destinationRepository.GetDestinationByID(id).ThumbnailPhoto);
+                ViewBag.destinationPhotoLibraryDir = ConfigurationManager.AppSettings["destinationPhotoLibraryDir"];
+
                 return View(destination);
             }
             else
@@ -161,8 +190,17 @@ namespace PhillyZoo_App.DestinationLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePhotos(DestinationPhotosModel newPhotoModel)
+        public ActionResult CreatePhotos(DestinationPhotosModel newPhotoModel, HttpPostedFileBase libraryPhoto)
         {
+            var dbInt = _destinationRepository.GetDestinationByID(newPhotoModel.DestinationLayerID).ID;
+
+            string addedPhotoName = Path.GetFileName(libraryPhoto.FileName);
+            string pathForDatabase = dbInt + "_" + addedPhotoName;
+            string fullPathForDir = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["destinationPhotoLibraryDir"]), pathForDatabase);
+            newPhotoModel.ImagePath = pathForDatabase;
+
+            libraryPhoto.SaveAs(fullPathForDir);
+
             _destinationRepository.SaveDatabasePhotos(newPhotoModel);
             return RedirectToAction("Index");
         }
